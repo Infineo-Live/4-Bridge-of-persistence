@@ -11,51 +11,32 @@
 </head>
 
 <body>
-  <img
-  src="assets/Infineo-logo.webp"
-  alt="logo"
-  class="company-logo"
-/>
+  <img src="assets/Infineo-logo.webp" alt="logo" class="company-logo" />
   <!-- SCREEN 1 - WELCOME -->
   <section id="welcome-screen" class="screen active">
-    <!-- <div class="overlay"></div> -->
-
     <div class="welcome-content">
-
       <h1 class="game-title">
         THE BRIDGE <br />
         OF PERSISTENCE
       </h1>
-
       <p class="moral">
         When people are mean, we don't stop.
         <br />
         We build a bridge of patience to move forward.
       </p>
-
       <button id="start-btn" class="main-btn">
         START GAME
       </button>
-
     </div>
   </section>
 
-  <!-- ========================= -->
   <!-- SCREEN 2 - GAME -->
-  <!-- ========================= -->
-
   <section id="game-screen" class="screen">
-
-    <!-- Instruction Popup -->
-
     <div id="instruction-popup" class="popup active-popup">
-
       <h2>How To Play</h2>
-
       <p>
         Mean comments create gaps in the path.
       </p>
-
       <p>
         Choose the best action
         to help the boy move forward.
@@ -63,72 +44,45 @@
         Only patience builds the bridge.
         Wrong choices may break it.
       </p>
-
       <button id="play-btn" class="main-btn">
         LET'S GO
       </button>
-
     </div>
-
-    <!-- TOP UI -->
-
     <div class="top-ui">
-      
-
       <div class="progress-wrapper">
-
-  <span class="progress-label">
-    Bridge Progress
-  </span>
-
-  <div class="progress-bar">
-    <div id="progress-fill"></div>
-  </div>
-
-</div>
-
+        <span class="progress-label">
+          Bridge Progress
+        </span>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+      </div>
     </div>
-
-    <!-- COMMENT CLOUD -->
 
     <div class="comment-cloud" id="mean-comment">
       "Go Away!"
     </div>
 
-    <!-- GAME AREA -->
-
     <div class="game-area">
-
       <!-- Character -->
-
       <div id="character">
-        <img src="../assets/boy.png" alt="boy" />
+        <img src="../assets/boy.webp" alt="boy" />
       </div>
-
       <!-- Bridge -->
-
       <div class="bridge-container">
-
         <div id="bridge">
-
           <!-- bricks added dynamically -->
-
         </div>
-
       </div>
-
       <!-- House -->
-
       <div class="house">
-        <img src="/assets/hut.png" alt="house">
+        <img src="/assets/hut.webp" alt="house">
       </div>
-
     </div>
 
     <!-- POSITIVE WORDS -->
 
     <div class="word-list">
-
       <div class="word">Hope</div>
       <div class="word">Patience</div>
       <div class="word">Smile</div>
@@ -138,11 +92,7 @@
     </div>
 
     <!-- ACTION BUTTON -->
-
-    <!-- ACTION BUTTONS -->
-
     <div class="action-buttons">
-
       <button id="patient-btn" class="main-btn good-btn">
         😊 STAY PATIENT
       </button>
@@ -154,13 +104,9 @@
       <button id="giveup-btn" class="main-btn bad-btn">
         🙁 GIVE UP
       </button>
-
     </div>
-
   </section>
-
   <!-- SCREEN 3 - SUCCESS -->
-
   <section id="success-screen" class="screen">
     <div class="success-content">
       <h1>GREAT JOB!</h1>
