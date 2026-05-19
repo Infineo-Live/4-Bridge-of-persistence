@@ -246,7 +246,7 @@ img {
   box-shadow: 0 0 10px rgba(46,204,113,0.6);
 }
 
-/* COMMENT CLOUD             */
+/* COMMENT CLOUD */
 .comment-cloud {
   position: absolute;
   top: clamp(14px, 4vh, 60px);
@@ -254,47 +254,33 @@ img {
   transform: translateX(-50%);
   z-index: 15;
 
-  background: var(--clr-white);
-  padding: clamp(10px, 1.8vh, 18px) clamp(20px, 4vw, 36px);
-  border-radius: var(--radius-pill);
+  /* Let the image size the element naturally */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Cloud image as the background */
+  background: url("../assets/cloud.png") center center / 100% 100% no-repeat;
+
+  /* Enough padding so text never touches the cloud edges */
+  padding: 18px 48px;
+
+  /* Minimum size so the cloud never shrinks too small */
+  min-width: 400px;
+  min-height: 200px;
+
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 700;
+  font-size: clamp(0.9rem, 2.2vw, 1.3rem);
   color: var(--clr-text);
   text-align: center;
-  box-shadow: var(--shadow-md);
   white-space: nowrap;
-  max-width: 90vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
   animation: floatCloud 3s ease-in-out infinite;
-}
-
-.comment-cloud::before {
-  content: '';
-  position: absolute;
-  background: var(--clr-white);
-  border-radius: 50%;
-  width: clamp(36px, 5vw, 60px);
-  height: clamp(36px, 5vw, 60px);
-  top: clamp(-18px, -3vw, -30px);
-  left: 22%;
-}
-
-.comment-cloud::after {
-  content: '';
-  position: absolute;
-  background: var(--clr-white);
-  border-radius: 50%;
-  width: clamp(26px, 3.5vw, 42px);
-  height: clamp(26px, 3.5vw, 42px);
-  top: clamp(-14px, -2.5vw, -22px);
-  left: 50%;
 }
 
 @keyframes floatCloud {
   0%, 100% { transform: translateX(-50%) translateY(0);   }
-  50%       { transform: translateX(-50%) translateY(-5px); }
+  50%       { transform: translateX(-50%) translateY(-6px); }
 }
 
 /* GAME AREA                 */
@@ -314,7 +300,7 @@ img {
 /* CHARACTER                 */
 #character {
   position: absolute;
-  left: clamp(4%, 10vw, 15%);
+  left: clamp(10%, 24vw, 20%);
   bottom: clamp(190px, 28vh, 215px);
   z-index: 10;
 }
@@ -350,6 +336,7 @@ img {
   justify-content: center;
   align-items: flex-end;
   z-index: 8;
+  overflow: visible;        /* ← lets bricks animate in from outside */
 }
 
 #bridge {
@@ -376,6 +363,29 @@ img {
     inset 0 1px 0 rgba(255,255,255,0.25);
   text-shadow: 0 1px 3px rgba(0,0,0,0.3);
   letter-spacing: 0.02em;
+}
+
+.brick-slots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(380px, 39vh, 380px);
+  width: clamp(240px, 55vw, 620px);
+  height: clamp(50px, 8vh, 70px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(3px, 0.5vw, 6px);         /* same gap as #bridge */
+  z-index: 7;                           
+  margin-bottom: 0;
+}
+
+.brick-slot {
+  width: clamp(30px, 7vw, 82px);       /* exactly matches .brick width */
+  height: clamp(24px, 4vh, 42px);      /* exactly matches .brick height */
+  border-radius: 8px 8px 3px 3px;      /* matches .brick */
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* WORD LIST*/
@@ -473,7 +483,7 @@ img {
 
 /* SUCCESS SCREEN */
 #success-screen {
-  background: url("../assets/bg2.png") center / cover no-repeat;
+  background: url("../assets/end-screen-bg.png") center / cover no-repeat;
   justify-content: center;
   align-items: center;
 }
@@ -516,11 +526,6 @@ img {
   letter-spacing: 0.03em;
 }
 
-.success-content p {
-  font-size: clamp(0.95rem, 2vw, 1.25rem);
-  line-height: 1.75;
-  color: var(--clr-text-soft);
-}
 
 /* BRICK POP ANIMATION */
 @keyframes pop {
@@ -664,4 +669,48 @@ img {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.floating-word {
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  pointer-events: none;
+  z-index: 999;
+}
+
+.brick-tray {
+  position: absolute;
+  bottom: 120px; /* above buttons */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.tray-brick {
+  width: 80px;
+  height: 45px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.18);
+  transition: transform .2s;
+}
+
+.tray-brick:hover {
+  transform: translateY(-5px);
+}
+
+#bridge {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
 }

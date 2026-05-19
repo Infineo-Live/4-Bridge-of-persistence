@@ -16,11 +16,6 @@
   <section id="welcome-screen" class="screen active">
     <div class="welcome-content">
       <img src="assets/title.png" alt="title">
-      <p class="moral">
-        Sometimes people are mean to us, we do not stop.
-        <br />
-        We build a bridge of patience to move ahead.
-      </p>
       <button id="start-btn" class="main-btn">
         START GAME
       </button>
@@ -29,6 +24,12 @@
 
   <!-- SCREEN 2 - GAME -->
   <section id="game-screen" class="screen">
+    <!-- Drifting sky clouds -->
+    <div class="sky-cloud"></div>
+    <div class="sky-cloud"></div>
+    <div class="sky-cloud"></div>
+    <div class="sky-cloud"></div>
+    <div class="sky-cloud"></div>
     <div id="instruction-popup" class="popup active-popup">
       <h2>How To Play</h2>
       <p>
@@ -76,17 +77,21 @@
         <img src="/assets/hut.webp" alt="house">
       </div>
     </div>
-
-    <!-- POSITIVE WORDS -->
-
-    <div class="word-list">
-      <div class="word">Hope</div>
-      <div class="word">Patience</div>
-      <div class="word">Smile</div>
-      <div class="word">Kindness</div>
-      <div class="word">Courage</div>
+    <div class="brick-slots">
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+    </div>
 
     </div>
+    <div class="brick-tray" id="brick-tray">
+  <!-- Bricks generated dynamically -->
+</div>
+
 
     <!-- ACTION BUTTON -->
     <div class="action-buttons">
@@ -106,12 +111,8 @@
   <!-- SCREEN 3 - SUCCESS -->
   <section id="success-screen" class="screen">
     <div class="success-content">
-      <h1>GREAT JOB!</h1>
+      <h1>Persistence Builds Bridges</h1>
     </div>
-    <p>
-      Positive words and patience help us move
-      forward even when others are unkind.
-    </p>
   </section>
 
   <script src="js/script.js"></script>

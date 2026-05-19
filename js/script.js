@@ -6,7 +6,6 @@ const gameScreen = document.getElementById("game-screen");
 const successScreen = document.getElementById("success-screen");
 
 // BUTTONS
-
 const startBtn = document.getElementById("start-btn");
 
 const playBtn = document.getElementById("play-btn");
@@ -24,6 +23,8 @@ const bridge = document.getElementById("bridge");
 const character = document.getElementById("character");
 
 const meanComment = document.getElementById("mean-comment");
+
+const brickTray = document.getElementById("brick-tray");  
 
 // GAME DATA
 
@@ -63,6 +64,20 @@ let progress = 0;
 const bridgeGoal = 7;
 let gameCompleted = false;
 
+// ── CHARACTER MOVEMENT 
+// Total horizontal distance the character walks across the bridge.
+// Adjust this value to match how wide your bridge grows in CSS.
+const TOTAL_WALK_PX = 336; // 7 bricks × ~48px each
+
+function moveCharacter() {
+  const targetX = (progress / bridgeGoal) * TOTAL_WALK_PX;
+  gsap.to(character, {
+    x: targetX,
+    duration: 0.45,
+    ease: "power2.out"
+  });
+}
+
 
 function showScreen(screenEl) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -70,17 +85,14 @@ function showScreen(screenEl) {
 }
 
 // START GAME
-
 startBtn.addEventListener("click", () => {
   showScreen(gameScreen);
-
   popup.classList.add("active-popup");
-
+  renderBrickTray();
   updateComment();
 });
 
 // CLOSE POPUP
-
 playBtn.addEventListener("click", () => {
   popup.classList.remove("active-popup");
 });
@@ -94,6 +106,7 @@ patientBtn.addEventListener("click", () => {
   createBrick();
   progress++;
   updateProgress();
+  moveCharacter(); // move forward
   happyBounce();
   if (progress < bridgeGoal) {
     updateComment();
@@ -113,9 +126,7 @@ giveupBtn.addEventListener("click", wrongChoice);
 // WRONG CHOICE LOGIC
 
 function wrongChoice() {
-
   if (gameCompleted) return;
-
   if (progress === 0) {
     meanComment.innerText = "Think rationally. Try staying patient.";
     sadBounce();
@@ -124,13 +135,12 @@ function wrongChoice() {
     }, 1800);
     return;
   }
-
   breakBrick();
 
   progress--;
 
   updateProgress();
-
+  moveCharacter(); // step back
   sadBounce();
 
   updateComment();
@@ -138,57 +148,120 @@ function wrongChoice() {
 
 // CREATE BRICK
 
+// CREATE BRICK — slides up from below into its pre-rendered slot position
+
 function createBrick() {
 
-  const brick = document.createElement("div");
-  brick.classList.add("brick");
-  brick.innerText = positiveWords[progress];
-  brick.style.background = brickColors[progress];
+  const trayBrick =
+    document.querySelector(
+      `.tray-brick[data-index="${progress}"]`
+    );
 
-  bridge.appendChild(brick);
+  if (!trayBrick) return;
 
-  gsap.fromTo(
-    brick,
-    { scale: 0, opacity: 0 },
-    { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }
-  );
-}
+  const trayRect =
+    trayBrick.getBoundingClientRect();
 
-// BREAK LAST BRICK
+  // create moving clone
+  const flyingBrick =
+    trayBrick.cloneNode(true);
 
-function breakBrick() {
+  document.body.appendChild(flyingBrick);
 
-  const bricks = document.querySelectorAll(".brick");
-  const lastBrick = bricks[bricks.length - 1];
+  flyingBrick.style.position = "fixed";
+  flyingBrick.style.left =
+    `${trayRect.left}px`;
 
-  if (!lastBrick) return;
+  flyingBrick.style.top =
+    `${trayRect.top}px`;
 
-  gsap.to(lastBrick, {
-    y: 50,
-    opacity: 0,
-    rotation: 20,
-    duration: 0.4,
+  flyingBrick.style.zIndex = "999";
+  flyingBrick.style.margin = "0";
+
+  // hide original brick
+  trayBrick.style.visibility = "hidden";
+
+  // create target bridge brick
+  const bridgeBrick =
+    document.createElement("div");
+
+  bridgeBrick.classList.add("brick");
+
+  bridgeBrick.innerText =
+    positiveWords[progress];
+
+  bridgeBrick.style.background =
+    brickColors[progress];
+
+  bridgeBrick.style.opacity = "0";
+
+  bridge.appendChild(bridgeBrick);
+
+  const bridgeRect =
+    bridgeBrick.getBoundingClientRect();
+
+  // animate tray → slot
+  gsap.to(flyingBrick, {
+    left: bridgeRect.left,
+    top: bridgeRect.top,
+    scale: 1.05,
+    duration: 0.75,
+    ease: "power3.out",
+
     onComplete: () => {
-      lastBrick.remove();
+
+      bridgeBrick.style.opacity = "1";
+
+      flyingBrick.remove();
+
+      gsap.fromTo(
+        bridgeBrick,
+        {
+          scale: 0.7
+        },
+        {
+          scale: 1,
+          duration: 0.25,
+          ease: "back.out(2)"
+        }
+      );
     }
   });
 }
 
-// UPDATE COMMENT
+function renderBrickTray() {
+
+  brickTray.innerHTML = "";
+
+  positiveWords.forEach((word, index) => {
+
+    const brick = document.createElement("div");
+
+    brick.classList.add("tray-brick");
+
+    brick.innerText = word;
+
+    brick.style.background = brickColors[index];
+
+    brick.dataset.index = index;
+
+    brickTray.appendChild(brick);
+  });
+}
 
 function updateComment() {
   const randomComment = comments[Math.floor(Math.random() * comments.length)];
   meanComment.innerText = randomComment;
 }
-
+ 
 function updateProgress() {
   const fill = document.getElementById("progress-fill");
   const percent = (progress / bridgeGoal) * 100;
   fill.style.width = `${percent}%`;
 }
-
+ 
 // CHARACTER ANIMATIONS
-
+ 
 function happyBounce() {
   gsap.fromTo(
     character,
@@ -196,7 +269,7 @@ function happyBounce() {
     { y: -12, duration: 0.18, repeat: 1, yoyo: true }
   );
 }
-
+ 
 function sadBounce() {
   gsap.fromTo(
     character,
@@ -204,29 +277,29 @@ function sadBounce() {
     { rotation: -10, duration: 0.15, repeat: 3, yoyo: true }
   );
 }
-
+ 
 // WALK TO HOUSE
-
+ 
 function walkCharacter() {
-
+ 
   patientBtn.disabled = true;
   angryBtn.disabled = true;
   giveupBtn.disabled = true;
-
+ 
   const house = document.querySelector(".house");
   const characterRect = character.getBoundingClientRect();
   const houseRect = house.getBoundingClientRect();
-
+ 
   const moveDistance = houseRect.left - characterRect.left - 120;
-
+ 
   gsap.killTweensOf(character);
   gsap.set(character, { rotation: 0 });
-
+ 
   gsap.to(character, {
     x: moveDistance,
     duration: 3,
     ease: "power1.inOut",
-
+ 
     onUpdate: () => {
       gsap.to(character, {
         y: -4,
@@ -235,7 +308,7 @@ function walkCharacter() {
         yoyo: true
       });
     },
-
+ 
     onComplete: () => {
       meanComment.innerText = "Great job!";
       setTimeout(() => {
@@ -244,3 +317,4 @@ function walkCharacter() {
     }
   });
 }
+ 
