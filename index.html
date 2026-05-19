@@ -24,89 +24,137 @@
 
   <!-- SCREEN 2 - GAME -->
   <section id="game-screen" class="screen">
-    <!-- Drifting sky clouds -->
-    <div class="sky-cloud"></div>
-    <div class="sky-cloud"></div>
-    <div class="sky-cloud"></div>
-    <div class="sky-cloud"></div>
-    <div class="sky-cloud"></div>
+
+
+    <!-- HOW TO PLAY POPUP -->
     <div id="instruction-popup" class="popup active-popup">
       <h2>How To Play</h2>
-      <p>
-        Mean comments create gaps in the path.
-      </p>
-      <p>
-        Choose the best action
-        to help the boy move forward.
 
-        Only patience builds the bridge.
-        Wrong choices may break it.
+      <p>
+        Villagers may say negative things to stop the boy.
       </p>
+
+      <p>
+        Help him stay positive and keep moving
+        toward his dream of making kheer.
+      </p>
+
+      <p>
+        Every good choice builds part of the bridge.
+        Persistence helps us reach our goals!
+      </p>
+
       <button id="play-btn" class="main-btn">
         LET'S GO
       </button>
     </div>
+
+    <!-- TOP UI -->
     <div class="top-ui">
       <div class="progress-wrapper">
         <span class="progress-label">
-          Bridge Progress
+          Bridge of Persistence
         </span>
+
         <div class="progress-bar">
           <div id="progress-fill"></div>
         </div>
       </div>
     </div>
 
-    <div class="comment-cloud" id="mean-comment">
-      "Go Away!"
-    </div>
+   <!-- ENCOUNTER AREA -->
+<div class="encounter-area">
 
-    <div class="game-area">
-      <!-- Character -->
-      <div id="character">
-        <img src="../assets/boy.webp" alt="boy" />
-      </div>
-      <!-- Bridge -->
-      <div class="bridge-container">
-        <div id="bridge">
-          <!-- bricks added dynamically -->
-        </div>
-      </div>
-      <!-- House -->
-      <div class="house">
-        <img src="/assets/hut.webp" alt="house">
-      </div>
-    </div>
-    <div class="brick-slots">
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-    </div>
+  <!-- Villager -->
+  <div id="villager" class="villager-container">
+    <img
+      id="villager-img"
+      src="assets/uncle.png"
+      alt="villager"
+    />
+  </div>
 
-    </div>
-    <div class="brick-tray" id="brick-tray">
-  <!-- Bricks generated dynamically -->
+  <!-- Speech Bubble -->
+  <div
+  id="speech-bubble"
+  class="speech-bubble"
+>
+  <span id="mean-comment"></span>
 </div>
 
+</div>
 
-    <!-- ACTION BUTTON -->
-    <div class="action-buttons">
-      <button id="patient-btn" class="main-btn good-btn">
-        😊 STAY PATIENT
-      </button>
+<!-- GAME AREA -->
+<div class="game-area">
 
-      <button id="angry-btn" class="main-btn bad-btn">
-        😠 GET ANGRY
-      </button>
+  <!-- Character -->
+  <div id="character">
+    <img
+      id="boy-img"
+      src="assets/boy.webp"
+      alt="boy"
+    />
+  </div>
 
-      <button id="giveup-btn" class="main-btn bad-btn">
-        🙁 GIVE UP
-      </button>
+  <!-- Bridge -->
+  <div class="bridge-container">
+    <div id="bridge">
+
+      <!-- PRE-RENDERED SLOTS -->
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+      <div class="brick-slot"></div>
+
     </div>
+  </div>
+
+  <!-- Destination -->
+  <div class="house">
+    <img
+      src="assets/hut.webp"
+      alt="home"
+    />
+  </div>
+
+</div>
+
+<!-- VALUES BRICKS -->
+<div
+  class="brick-tray"
+  id="brick-tray"
+>
+  <!-- Generated dynamically -->
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="action-buttons">
+
+  <button
+    id="choice-1-btn"
+    class="main-btn option-btn"
+  >
+    Option 1
+  </button>
+
+  <button
+    id="choice-2-btn"
+    class="main-btn option-btn"
+  >
+    Option 2
+  </button>
+
+  <button
+    id="choice-3-btn"
+    class="main-btn option-btn"
+  >
+    Option 3
+  </button>
+
+</div>
   </section>
   <!-- SCREEN 3 - SUCCESS -->
   <section id="success-screen" class="screen">
