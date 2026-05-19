@@ -528,32 +528,70 @@ function sadBounce() {
 // ==========================
 
 function walkCharacter() {
+
   disableChoices(true);
 
-  const house = document.querySelector(".house");
-  const characterRect = character.getBoundingClientRect();
-  const houseRect = house.getBoundingClientRect();
-  const moveDistance = houseRect.left - characterRect.left - 120;
+  const house =
+    document.querySelector(".house");
+
+  const characterRect =
+    character.getBoundingClientRect();
+
+  const houseRect =
+    house.getBoundingClientRect();
+
+  const moveDistance =
+    houseRect.left -
+    characterRect.left -
+    90;
+
+  // walking bounce animation
+  const bounceTween =
+    gsap.to(character, {
+      y: -6,
+      duration: 0.18,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+      paused: true
+    });
 
   gsap.to(character, {
-    x: moveDistance,
-    duration: 3,
+
+    x: `+=${moveDistance}`,
+
+    duration: 2.5,
     ease: "power1.inOut",
 
-    onUpdate: () => {
-      gsap.to(character, {
-        y: -4,
-        duration: 0.15,
-        repeat: 1,
-        yoyo: true
-      });
+    onStart: () => {
+      bounceTween.play();
     },
 
     onComplete: () => {
+
+      // STOP bouncing
+      bounceTween.kill();
+
+      // reset feet to ground
+      gsap.set(character, {
+        y: 0
+      });
+
+      // tiny happy finish bounce
+      gsap.fromTo(
+        character,
+        { scale: 1 },
+        {
+          scale: 1.08,
+          duration: 0.18,
+          repeat: 1,
+          yoyo: true
+        }
+      );
+
       setTimeout(() => {
         showScreen(successScreen);
-      }, 800);
+      }, 700);
     }
   });
 }
-
