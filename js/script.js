@@ -1,45 +1,29 @@
 // SCREEN REFERENCES
-const welcomeScreen =
-  document.getElementById("welcome-screen");
+const welcomeScreen = document.getElementById("welcome-screen");
 
-const gameScreen =
-  document.getElementById("game-screen");
+const gameScreen = document.getElementById("game-screen");
 
-const successScreen =
-  document.getElementById("success-screen");
+const successScreen = document.getElementById("success-screen");
 
 // BUTTONS
 
-const startBtn =
-  document.getElementById("start-btn");
+const startBtn = document.getElementById("start-btn");
 
-const playBtn =
-  document.getElementById("play-btn");
+const playBtn = document.getElementById("play-btn");
 
-const patientBtn =
-  document.getElementById("patient-btn");
+const patientBtn = document.getElementById("patient-btn");
 
-const angryBtn =
-  document.getElementById("angry-btn");
+const angryBtn = document.getElementById("angry-btn");
 
-const giveupBtn =
-  document.getElementById("giveup-btn");
+const giveupBtn = document.getElementById("giveup-btn");
 
-// GAME ELEMENTS
+const popup = document.getElementById("instruction-popup");
 
-// BUG FIX 1: Popup should NOT have "active-popup" in HTML by default.
-// Remove it from HTML so it only shows after startBtn is clicked.
-const popup =
-  document.getElementById("instruction-popup");
+const bridge = document.getElementById("bridge");
 
-const bridge =
-  document.getElementById("bridge");
+const character = document.getElementById("character");
 
-const character =
-  document.getElementById("character");
-
-const meanComment =
-  document.getElementById("mean-comment");
+const meanComment = document.getElementById("mean-comment");
 
 // GAME DATA
 
@@ -107,19 +91,13 @@ patientBtn.addEventListener("click", () => {
 
   if (gameCompleted) return;
   if (progress >= bridgeGoal) return;
-
   createBrick();
-
   progress++;
-
   updateProgress();
-
   happyBounce();
-
   if (progress < bridgeGoal) {
     updateComment();
   }
-
   if (progress === bridgeGoal) {
     gameCompleted = true;
     meanComment.innerText = "You Did It!";
