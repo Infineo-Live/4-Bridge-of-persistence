@@ -50,6 +50,7 @@
     </div>
 
     <!-- TOP UI -->
+     <div id="game-content" class="hidden-game">
     <div class="top-ui">
       <div class="progress-wrapper">
         <span class="progress-label">
@@ -62,107 +63,94 @@
       </div>
     </div>
 
-   <!-- ENCOUNTER AREA -->
-<div class="encounter-area">
+    <!-- ENCOUNTER AREA -->
+    <div class="encounter-area">
 
-  <!-- Villager -->
-  <div id="villager" class="villager-container">
-    <img
-      id="villager-img"
-      src="assets/uncle.png"
-      alt="villager"
-    />
-  </div>
+      <!-- Villager -->
+      <div id="villager" class="villager-container">
+        <img id="villager-img" src="assets/uncle.png" alt="villager" />
+      </div>
 
-  <!-- Speech Bubble -->
-  <div
-  id="speech-bubble"
-  class="speech-bubble"
->
-  <span id="mean-comment"></span>
-</div>
-
-</div>
-
-<!-- GAME AREA -->
-<div class="game-area">
-
-  <!-- Character -->
-  <div id="character">
-    <img
-      id="boy-img"
-      src="assets/boy.webp"
-      alt="boy"
-    />
-  </div>
-
-  <!-- Bridge -->
-  <div class="bridge-container">
-    <div id="bridge">
-
-      <!-- PRE-RENDERED SLOTS -->
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
-      <div class="brick-slot"></div>
+      <!-- Speech Bubble -->
+      <div id="speech-bubble" class="speech-bubble">
+        <span id="mean-comment"></span>
+      </div>
 
     </div>
-  </div>
 
-  <!-- Destination -->
-  <div class="house">
-    <img
-      src="assets/hut.webp"
-      alt="home"
-    />
-  </div>
+    <!-- GAME AREA -->
+    <div class="game-area">
 
-</div>
+      <!-- Character -->
+      <div id="character">
+        <img id="boy-img" src="assets/boy.webp" alt="boy" />
+      </div>
 
-<!-- VALUES BRICKS -->
-<div
-  class="brick-tray"
-  id="brick-tray"
->
-  <!-- Generated dynamically -->
-</div>
+      <!-- Bridge -->
+      <div class="bridge-container">
+        <div id="bridge">
 
-<!-- ACTION BUTTONS -->
-<div class="action-buttons">
+          <!-- PRE-RENDERED SLOTS -->
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
+          <div class="brick-slot"></div>
 
-  <button
-    id="choice-1-btn"
-    class="main-btn option-btn"
-  >
-    Option 1
-  </button>
+        </div>
+      </div>
 
-  <button
-    id="choice-2-btn"
-    class="main-btn option-btn"
-  >
-    Option 2
-  </button>
+      <!-- Destination -->
+      <div class="house">
+        <img src="assets/hut.webp" alt="home" />
+      </div>
 
-  <button
-    id="choice-3-btn"
-    class="main-btn option-btn"
-  >
-    Option 3
-  </button>
+    </div>
 
-</div>
+    <!-- VALUES BRICKS -->
+    <div class="brick-tray" id="brick-tray">
+      <!-- Generated dynamically -->
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-buttons">
+
+      <button id="choice-1-btn" class="main-btn option-btn">
+        Option 1
+      </button>
+
+      <button id="choice-2-btn" class="main-btn option-btn">
+        Option 2
+      </button>
+
+      <button id="choice-3-btn" class="main-btn option-btn">
+        Option 3
+      </button>
+
+    </div>
+    </div>
   </section>
   <!-- SCREEN 3 - SUCCESS -->
   <section id="success-screen" class="screen">
-    <div class="success-content">
-      <h1>Persistence Builds Bridges</h1>
-    </div>
+      <img src="assets/end-screen-title2.png" alt="" class="end-screen-image">
   </section>
+  <!-- AUDIO -->
+  <!-- Background Music -->
+  <audio id="bg-music" src="assets/audio/bg-audio.mp3" loop></audio>
 
+  <!-- Button Click -->
+  <!-- <audio id="click-sound" src="assets/audio/click.mp3"></audio> -->
+
+  <!-- Correct Choice -->
+  <!-- <audio id="correct-sound" src="assets/audio/correct.mp3"></audio> -->
+
+  <!-- Wrong Choice -->
+  <!-- <audio id="wrong-sound" src="assets/audio/wrong.mp3"></audio> -->
+
+  <!-- Success Sound -->
+  <!-- <audio id="success-sound" src="assets/audio/success.mp3"></audio> -->
   <script src="js/script.js"></script>
 
 </body>
