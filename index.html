@@ -26,120 +26,127 @@
   <!-- SCREEN 2 - GAME -->
   <section id="game-screen" class="screen">
     <!-- HOW TO PLAY POPUP -->
-     <div>
-    <div id="instruction-popup" class="popup active-popup">
-      <img src="assets/instruction-title.png" alt="instructions" class="popup-title">
+    <div>
+      <div id="instruction-popup" class="popup active-popup">
+        <img src="assets/instruction-title.png" alt="instructions" class="popup-title">
 
-      <button id="play-btn" class="main-btn">
-        LET'S GO
-      </button>
-    </div>
+        <button id="play-btn" class="main-btn">
+          LET'S GO
+        </button>
+      </div>
     </div>
 
     <!-- TOP UI -->
-     <div id="game-content" class="hidden-game">
-    <div class="top-ui">
-      <div class="progress-wrapper">
-        <span class="progress-label">
-          Bridge of Persistence
-        </span>
+    <div id="game-content" class="hidden-game">
+      <div class="top-ui">
+        <div class="progress-wrapper">
+          <span class="progress-label">
+            Bridge of Persistence
+          </span>
 
-        <div class="progress-bar">
-          <div id="progress-fill"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ENCOUNTER AREA -->
-    <div class="encounter-area">
-
-      <!-- Villager -->
-      <div id="villager" class="villager-container">
-        <img id="villager-img" src="assets/uncle.png" alt="villager" />
-      </div>
-
-      <!-- Speech Bubble -->
-      <div id="speech-bubble" class="speech-bubble">
-        <span id="mean-comment"></span>
-      </div>
-
-    </div>
-
-    <!-- GAME AREA -->
-    <div class="game-area">
-
-      <!-- Character -->
-      <div id="character">
-        <img id="boy-img" src="assets/boy.webp" alt="boy" />
-      </div>
-
-      <!-- Bridge -->
-      <div class="bridge-container">
-        <div id="bridge">
-
-          <!-- PRE-RENDERED SLOTS -->
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-          <div class="brick-slot"></div>
-
+          <div class="progress-bar">
+            <div id="progress-fill"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Destination -->
-      <div class="house">
-        <img src="assets/hut.webp" alt="home" />
+      <!-- ENCOUNTER AREA -->
+      <div class="encounter-area">
+        <div id="speech-bubble" class="speech-bubble">
+          <span id="mean-comment"></span>
+        </div>
+
+        <!-- Villager -->
+        <div id="villager" class="villager-container">
+          <img id="villager-img" src="assets/uncle.png" alt="villager" />
+        </div>
+
       </div>
 
-    </div>
+      <!-- GAME AREA -->
+      <div class="game-area">
 
-    <!-- VALUES BRICKS -->
-    <div class="brick-tray" id="brick-tray">
-      <!-- Generated dynamically -->
-    </div>
+        <!-- Character -->
+        <div id="character">
+          <img id="boy-img" src="assets/boy.webp" alt="boy" />
+        </div>
 
-    <!-- ACTION BUTTONS -->
-    <div class="action-buttons">
+        <!-- Bridge -->
+        <div class="bridge-container">
+          <div id="bridge">
 
-      <button id="choice-1-btn" class="main-btn option-btn">
-        Option 1
-      </button>
+            <!-- PRE-RENDERED SLOTS -->
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
+            <div class="brick-slot"></div>
 
-      <button id="choice-2-btn" class="main-btn option-btn">
-        Option 2
-      </button>
+          </div>
+        </div>
 
-      <button id="choice-3-btn" class="main-btn option-btn">
-        Option 3
-      </button>
+        <!-- Destination -->
+        <div class="house">
+          <img src="assets/hut.webp" alt="home" />
+        </div>
 
-    </div>
+      </div>
+
+      <!-- VALUES BRICKS -->
+      <div class="brick-tray" id="brick-tray">
+        <!-- Generated dynamically -->
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="action-buttons">
+
+        <button id="choice-1-btn" class="main-btn option-btn">
+          Option 1
+        </button>
+
+        <button id="choice-2-btn" class="main-btn option-btn">
+          Option 2
+        </button>
+
+        <button id="choice-3-btn" class="main-btn option-btn">
+          Option 3
+        </button>
+
+      </div>
     </div>
   </section>
   <!-- SCREEN 3 - SUCCESS -->
   <section id="success-screen" class="screen">
-      <img src="assets/end-screen-title2.png" alt="" class="end-screen-image">
+    <img src="assets/end-game-title2.png" alt="" class="end-screen-image">
   </section>
   <!-- AUDIO -->
   <!-- Background Music -->
   <audio id="bg-music" src="assets/audio/bg-audio.mp3" loop></audio>
 
-  <!-- Button Click -->
-  <!-- <audio id="click-sound" src="assets/audio/click.mp3"></audio> -->
+  <audio id="click-audio" preload="auto">
+    <source src="assets/audio/click-sound.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Correct Choice -->
-  <!-- <audio id="correct-sound" src="assets/audio/correct.mp3"></audio> -->
+  <audio id="correct-audio" preload="auto">
+    <source src="assets/audio/correct.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Wrong Choice -->
-  <!-- <audio id="wrong-sound" src="assets/audio/wrong.mp3"></audio> -->
+  <audio id="wrong-audio" preload="auto">
+    <source src="assets/audio/wrong.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Success Sound -->
-  <!-- <audio id="success-sound" src="assets/audio/success.mp3"></audio> -->
-   <script src="js/fireflies.js"></script>
+  <audio id="yay-audio" preload="auto">
+    <source src="assets/audio/yayy.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="wood-audio" preload="auto">
+    <source src="assets/audio/wooden-thud.mp3" type="audio/mpeg">
+  </audio>
   <script src="js/script.js"></script>
+  <script src="js/fireflies.js"></script>
+
 
 </body>
 

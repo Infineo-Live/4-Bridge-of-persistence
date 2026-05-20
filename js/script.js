@@ -1,27 +1,32 @@
 // ─── SCREEN REFERENCES ───────────────────────────────────────────────────────
 const welcomeScreen  = document.getElementById("welcome-screen");
-const gameScreen     = document.getElementById("game-screen");
-const successScreen  = document.getElementById("success-screen");
+const gameScreen = document.getElementById("game-screen");
+const successScreen = document.getElementById("success-screen");
 
 // ─── AUDIO ───────────────────────────────────────────────────────────────────
 const bgMusic = document.getElementById("bg-music");
+const clickSound = document.getElementById("click-audio");
+const correctSound = document.getElementById("correct-audio");
+const wrongSound = document.getElementById("wrong-audio");
+const yaySound = document.getElementById("yay-audio");
+const woodenSound = document.getElementById("wood-audio");
 
 // ─── BUTTONS ─────────────────────────────────────────────────────────────────
 const gameContent = document.getElementById("game-content");
-const startBtn    = document.getElementById("start-btn");
-const playBtn     = document.getElementById("play-btn");
-const choice1Btn  = document.getElementById("choice-1-btn");
-const choice2Btn  = document.getElementById("choice-2-btn");
-const choice3Btn  = document.getElementById("choice-3-btn");
+const startBtn = document.getElementById("start-btn");
+const playBtn = document.getElementById("play-btn");
+const choice1Btn = document.getElementById("choice-1-btn");
+const choice2Btn = document.getElementById("choice-2-btn");
+const choice3Btn = document.getElementById("choice-3-btn");
 
 // ─── ELEMENTS ────────────────────────────────────────────────────────────────
-const popup        = document.getElementById("instruction-popup");
-const bridge       = document.getElementById("bridge");
-const character    = document.getElementById("character");
-const brickTray    = document.getElementById("brick-tray");
-const villagerImg  = document.getElementById("villager-img");
+const popup = document.getElementById("instruction-popup");
+const bridge = document.getElementById("bridge");
+const character = document.getElementById("character");
+const brickTray = document.getElementById("brick-tray");
+const villagerImg = document.getElementById("villager-img");
 const encounterText = document.getElementById("mean-comment");
-const villager     = document.getElementById("villager");
+const villager = document.getElementById("villager");
 const speechBubble = document.getElementById("speech-bubble");
 
 // ─── GAME DATA ────────────────────────────────────────────────────────────────
@@ -102,6 +107,7 @@ function showScreen(screenEl) {
 
 // ─── START GAME ───────────────────────────────────────────────────────────────
 startBtn.addEventListener("click", () => {
+  playSound(clickSound, 0.5);
   showScreen(gameScreen);
   popup.classList.add("active-popup");
   gameContent.classList.remove("show-game");
@@ -110,6 +116,7 @@ startBtn.addEventListener("click", () => {
 
 // ─── CLOSE POPUP & BEGIN ──────────────────────────────────────────────────────
 playBtn.addEventListener("click", () => {
+   playSound(clickSound, 0.5);
   gsap.to(popup, {
     scale: 0.88, opacity: 0, duration: 0.28, ease: "back.in(1.4)",
     onComplete: () => {
@@ -178,6 +185,7 @@ choice3Btn.addEventListener("click", () => handleChoice(2));
 // ─── HANDLE CHOICE ────────────────────────────────────────────────────────────
 function handleChoice(choiceIndex) {
   if (gameCompleted) return;
+  playSound(clickSound, 0.45);
   const current = encounters[progress];
   if (choiceIndex === current.correct) {
     correctChoice(choiceIndex);
@@ -189,6 +197,7 @@ function handleChoice(choiceIndex) {
 // ─── CORRECT CHOICE ───────────────────────────────────────────────────────────
 function correctChoice(choiceIdx) {
   disableChoices(true);
+  playSound(correctSound, 0.7);
   const btns = [choice1Btn, choice2Btn, choice3Btn];
 
   // Flash correct btn green
@@ -238,6 +247,7 @@ function correctChoice(choiceIdx) {
 // ─── WRONG CHOICE ─────────────────────────────────────────────────────────────
 function wrongChoice(choiceIdx) {
   disableChoices(true);
+  playSound(wrongSound, 0.7);
   const btns = [choice1Btn, choice2Btn, choice3Btn];
 
   gsap.to(btns[choiceIdx], {
@@ -354,6 +364,7 @@ function createBrick(slotIndex) {
       duration: 0.65,
       ease: "power3.out",
       onComplete: () => {
+        playSound(woodenSound, 0.8);
         flyingBrick.remove();
         bridgeBrick.style.opacity = "1";
         gsap.fromTo(bridgeBrick,
@@ -489,6 +500,7 @@ function walkCharacter() {
   );
 
   tl.call(() => {
+    playSound(yaySound, 0.9);
     gsap.to(gameScreen, {
       opacity: 0, duration: 0.7, ease: "power2.in",
       onComplete: () => {
@@ -519,7 +531,13 @@ function spawnFloatingWord(text, anchorEl) {
     }
   );
 }
+function playSound(sound, volume = 1) {
+  sound.pause();
+  sound.currentTime = 0;
+  sound.volume = volume;
+  sound.playbackRate = 0.95 + Math.random() * 0.1;
+  sound.play().catch(() => {});
+}
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
 // Build enhanced progress UI as soon as DOM is ready
 buildProgressUI();
