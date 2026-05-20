@@ -1,7 +1,7 @@
 /* GOOGLE FONTS IMPORT */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
 
-/* ─── CSS VARIABLES ─────────────────────────────────────────────────────── */
+/*  CSS VARIABLES  */
 :root {
   --font-display: 'Baloo 2', cursive;
   --font-body: 'Nunito', sans-serif;
@@ -57,7 +57,7 @@ img {
   display: block;
 }
 
-/* ─── COMPANY LOGO ──────────────────────────────────────────────────────── */
+/*  COMPANY LOGO  */
 .company-logo {
   position: fixed;
   top: clamp(10px, 2vh, 18px);
@@ -70,7 +70,7 @@ img {
   pointer-events: none;
 }
 
-/* ─── SCREENS ───────────────────────────────────────────────────────────── */
+/*  SCREENS  */
 .screen {
   width: 100vw;
   height: 100vh;
@@ -85,7 +85,7 @@ img {
   display: flex;
 }
 
-/* ─── FIREFLIES ─────────────────────────────────────────────────────────── */
+/*  FIREFLIES  */
 .firefly-canvas {
   position: fixed;
   inset: 0;
@@ -98,7 +98,7 @@ img {
 
 /*  WELCOME SCREEN  */
 #welcome-screen {
-  background: url("../assets/bg2.png") center / cover no-repeat;
+  background: url("../assets/bg2.webp") center / cover no-repeat;
   justify-content: center;
   align-items: center;
 }
@@ -136,7 +136,7 @@ img {
   50%       { transform: translateY(-8px); }
 }
 
-/* ─── BUTTONS ───────────────────────────────────────────────────────────── */
+/*  BUTTONS  */
 .main-btn {
   font-family: var(--font-display);
   padding: clamp(11px, 1.5vh, 16px) clamp(24px, 4vw, 40px);
@@ -172,7 +172,7 @@ img {
   box-shadow: none;
 }
 
-/* ─── GAME SCREEN ───────────────────────────────────────────────────────── */
+/*  GAME SCREEN  */
 #game-screen {
   background: url("../assets/game-bg.webp") center center / cover no-repeat;
   flex-direction: column;
@@ -181,7 +181,7 @@ img {
   overflow: hidden;
 }
 
-/* ─── GAME CONTENT ──────────────────────────────────────────────────────── */
+/*  GAME CONTENT  */
 #game-content {
   position: absolute;
   inset: 0;
@@ -201,8 +201,8 @@ img {
   pointer-events: auto;
 }
 
-/* ─── PROGRESS BAR (top-right) — ENHANCED ──────────────────────────────── */
-/* ─── PROGRESS BAR — CENTERED TOP ──────────────────────────────────────── */
+/*  PROGRESS BAR (top-right) — ENHANCED  */
+/*  PROGRESS BAR — CENTERED TOP  */
 .top-ui {
   position: absolute;
   top: clamp(12px, 2vh, 20px);
@@ -223,15 +223,11 @@ img {
     rgba(15, 8, 2, 0.92),
     rgba(35, 18, 4, 0.88)
   );
-
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-
   border-radius: 24px;
   padding: clamp(12px, 1.8vh, 18px) clamp(18px, 2.8vw, 28px);
-
   border: 1.5px solid rgba(255, 200, 80, 0.28);
-
   box-shadow:
     0 8px 36px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(255, 255, 255, 0.04),
@@ -239,12 +235,12 @@ img {
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* ── top row: icon · title · count ── */
+/*  top row: icon · title · count  */
 .progress-label {
   font-family: var(--font-display);
   color: #ffd780;
   font-weight: 800;
-  font-size: clamp(0.68rem, 1.1vw, 0.88rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.4srem);
   letter-spacing: 0.10em;
   text-transform: uppercase;
   text-shadow: 0 1px 8px rgba(255, 160, 0, 0.55);
@@ -252,12 +248,6 @@ img {
   align-items: center;
   justify-content: center;
   gap: 7px;
-}
-
-.progress-label .prog-icon {
-  font-size: 1.15em;
-  flex-shrink: 0;
-  animation: iconPulse 2.6s ease-in-out infinite;
 }
 
 @keyframes iconPulse {
@@ -272,7 +262,7 @@ img {
 
 /* brick counter badge */
 .progress-label .prog-count {
-  font-size: clamp(0.62rem, 0.95vw, 0.80rem);
+  font-size: clamp(1rem, 1.2vw, 1rem);
   font-weight: 900;
   color: #ffe0a0;
   background: rgba(255, 180, 40, 0.18);
@@ -377,7 +367,7 @@ img {
   60%  { transform: scale(1.55); }
   100% { transform: scale(1.35); }
 }
-/* ─── ENCOUNTER AREA ────────────────────────────────────────────────────── */
+/*  ENCOUNTER AREA  */
 .encounter-area {
   position: absolute;
   top: clamp(290px, 32vh, 520px);
@@ -408,23 +398,25 @@ img {
 }
 
 /* SPEECH BUBBLE — sits above the villager */
+/* SPEECH BUBBLE */
 .speech-bubble {
   position: relative;
-  bottom: auto;
-  right: auto;
-  order: -1;                        /* renders above villager in column flex */
-  max-width: clamp(350px, 32vw, 450px);
-  min-width: 240px;
-  background: url("../assets/speech-bubble.png") center / 100% 100% no-repeat;
-  padding: clamp(12px, 2vh, 20px) clamp(16px, 2.4vw, 28px);
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  font-weight: 700;
-  color: #3a2800;
-  text-align: center;
-  line-height: 1.4;
-  margin-bottom: -8px;              /* slight overlap onto villager head */
+  order: -1;
+  width: clamp(380px, 34vw, 520px);
+  height: clamp(170px, 18vw, 240px);
+  background: url("../assets/speech-bubble.webp")
+    center center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:
+    clamp(18px, 2vw, 26px)
+    clamp(55px, 4vw, 75px)
+    clamp(35px, 3vw, 45px);
+  box-sizing: border-box;
+  margin-bottom: -18px;
   animation: bubbleFloat 3s ease-in-out infinite;
+  z-index: 3;
 }
 
 @keyframes bubbleFloat {
@@ -432,9 +424,26 @@ img {
   50%       { transform: translateY(-6px) rotate(1deg); }
 }
 
+#mean-comment {
+  width: 72%;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.4vw, 1.6rem);
+  font-weight: 800;
+  color: #3a2800;
+  text-align: center;
+  line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-6px);
+}
+
+
 .speech-bubble::after { display: none; }
 
-/* ─── GAME AREA ─────────────────────────────────────────────────────────── */
+/*  GAME AREA  */
 .game-area {
   position: absolute;
   left: 0;
@@ -532,7 +541,7 @@ img {
 
   letter-spacing: 0.02em;
 
-  background: url("../assets/rock.png") center / 100% 100% no-repeat !important;
+  background: url("../assets/rock.webp") center / 100% 100% no-repeat !important;
 
   border-radius: 4px;
   border: none;
@@ -569,37 +578,27 @@ img {
   bottom: clamp(105px, 13vh, 170px);
   left: 50%;
   transform: translateX(-50%);
-
   display: flex;
   gap: clamp(10px, 1vw, 16px);
-
   padding:
     clamp(12px, 1.5vh, 16px)
     clamp(18px, 2vw, 26px);
-
   border-radius: 30px;
-
   background:
     linear-gradient(
       to bottom,
       rgba(42, 24, 8, 0.82),
       rgba(15, 8, 2, 0.92)
     );
-
   backdrop-filter: blur(18px);
-
   border: 1px solid rgba(255, 220, 140, 0.22);
-
   box-shadow:
     0 12px 34px rgba(0,0,0,0.45),
     inset 0 1px 0 rgba(255,245,210,0.08),
     0 0 22px rgba(255,190,90,0.08);
-
   z-index: 20;
-
   max-width: 94vw;
   overflow-x: auto;
-
   scrollbar-width: none;
 }
 
@@ -612,30 +611,21 @@ img {
 .tray-brick {
   width: clamp(95px, 10.5vw, 135px);
   height: clamp(62px, 7vh, 84px);
-
   flex-shrink: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: relative;
-
   color: #fff9ea;
-
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(0.88rem, 1.25vw, 1.18rem);
-
   letter-spacing: 0.03em;
-
   background:
-    url("../assets/rock.png")
+    url("../assets/rock.webp")
     center / 100% 100%
     no-repeat;
-
   border: none;
-
   text-shadow:
     0 0 4px #000,
     0 2px 8px #000,
@@ -644,25 +634,21 @@ img {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     0 0 20px rgba(255,225,100,0.65);
-
   filter:
     drop-shadow(0 8px 16px rgba(0,0,0,0.6))
     drop-shadow(0 0 14px rgba(255,210,100,0.3))
     brightness(1.25)
     saturate(1.15);
-
   transition:
     transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
     filter 0.24s ease,
     opacity 0.24s ease;
-
   cursor: pointer;
   overflow: visible;
 }
 
 .tray-brick:hover {
   transform: translateY(-12px) scale(1.14);
-
   filter:
     drop-shadow(0 12px 22px rgba(0,0,0,0.65))
     drop-shadow(0 0 22px rgba(255,220,120,0.55))
@@ -672,42 +658,32 @@ img {
 /* magical glow */
 .tray-brick::before {
   content: "";
-
   position: absolute;
   inset: -8%;
-
   border-radius: 16px;
-
   background:
     radial-gradient(
       circle,
       rgba(255,220,120,0.22),
       transparent 72%
     );
-
   opacity: 0.9;
-
   z-index: -1;
-
   transition: opacity 0.25s ease;
 }
 
 /* inner shine */
 .tray-brick::after {
   content: "";
-
   position: absolute;
   inset: 14%;
-
   border-radius: 12px;
-
   background:
     linear-gradient(
       to bottom,
       rgba(255,255,255,0.18),
       transparent
     );
-
   pointer-events: none;
 }
 
@@ -727,11 +703,8 @@ img {
 /* used state */
 .tray-brick.used {
   opacity: 0.18;
-
   transform: scale(0.72);
-
   pointer-events: none;
-
   filter:
     grayscale(0.65)
     brightness(0.7);
@@ -749,7 +722,7 @@ img {
   }
 }
 
-/* ───────────────── ACTION BUTTONS ───────────────── */
+/*  ACTION BUTTONS  */
 .action-buttons {
   position: absolute;
   bottom: clamp(14px, 2vh, 30px);
@@ -780,7 +753,6 @@ img {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-
   /* layered 3-D look */
   background: linear-gradient(160deg, #ffcf6b, #ff8c00);
   box-shadow:
@@ -962,7 +934,7 @@ img {
 }
 /*  SUCCESS SCREEN  */
 #success-screen {
-  background: url("../assets/end-screen-bg.png") center / cover no-repeat;
+  background: url("../assets/end-screen-bg.webp") center / cover no-repeat;
   justify-content: center;
   align-items: center;
 }
@@ -1009,9 +981,7 @@ img {
 
   .bridge-container {
     width: 88vw;
-
   }
-
   .progress-wrapper {
     width: clamp(150px, 38vw, 230px);
   }
@@ -1021,26 +991,21 @@ img {
   #character img {
     width: clamp(55px, 16vw, 100px);
   }
-
   .house img {
     width: clamp(110px, 34vw, 200px);
   }
-
   /* FIX: hide text on bricks at tiny sizes instead of font-size:0 (which breaks layout) */
   .brick {
     font-size: clamp(0px, 1.8vw, 0.65rem);
   }
-
   .tray-brick {
     font-size: clamp(0px, 1.8vw, 0.7rem);
   }
-
   .action-buttons .option-btn {
     min-width: 90px;
     font-size: 0.7rem;
     min-height: 46px;
   }
-
   .popup {
     width: 94vw;
     padding: 22px 16px;
@@ -1051,19 +1016,15 @@ img {
   :root {
     --ground-bottom: 16vh;
   }
-
   .encounter-area {
     top: 8px;
   }
-
   .action-buttons {
     bottom: 4px;
   }
-
   .brick-tray {
     bottom: 62px;
   }
-
   .progress-milestones {
     display: none;
   }

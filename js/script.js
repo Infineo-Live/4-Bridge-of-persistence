@@ -1,9 +1,9 @@
-// ─── SCREEN REFERENCES ───────────────────────────────────────────────────────
+// SCREEN REFERENCES 
 const welcomeScreen  = document.getElementById("welcome-screen");
 const gameScreen = document.getElementById("game-screen");
 const successScreen = document.getElementById("success-screen");
 
-// ─── AUDIO ───────────────────────────────────────────────────────────────────
+// AUDIO 
 const bgMusic = document.getElementById("bg-music");
 const clickSound = document.getElementById("click-audio");
 const correctSound = document.getElementById("correct-audio");
@@ -11,7 +11,7 @@ const wrongSound = document.getElementById("wrong-audio");
 const yaySound = document.getElementById("yay-audio");
 const woodenSound = document.getElementById("wood-audio");
 
-// ─── BUTTONS ─────────────────────────────────────────────────────────────────
+// BUTTONS 
 const gameContent = document.getElementById("game-content");
 const startBtn = document.getElementById("start-btn");
 const playBtn = document.getElementById("play-btn");
@@ -19,7 +19,7 @@ const choice1Btn = document.getElementById("choice-1-btn");
 const choice2Btn = document.getElementById("choice-2-btn");
 const choice3Btn = document.getElementById("choice-3-btn");
 
-// ─── ELEMENTS ────────────────────────────────────────────────────────────────
+// ELEMENTS 
 const popup = document.getElementById("instruction-popup");
 const bridge = document.getElementById("bridge");
 const character = document.getElementById("character");
@@ -29,10 +29,10 @@ const encounterText = document.getElementById("mean-comment");
 const villager = document.getElementById("villager");
 const speechBubble = document.getElementById("speech-bubble");
 
-// ─── GAME DATA ────────────────────────────────────────────────────────────────
+// GAME DATA 
 const encounters = [
   {
-    villager: "assets/uncle.png",
+    villager: "assets/uncle.webp",
     comment: "You cannot achieve that!",
     choices: ["😞 Maybe I should stop", "😊 I will still try", "😠 Be rude back"],
     correct: 1,
@@ -40,7 +40,7 @@ const encounters = [
     color: "#3498db"
   },
   {
-    villager: "assets/cruel-kid.png",
+    villager: "assets/cruel-boy.webp",
     comment: "Nobody will like this!",
     choices: ["😔 Feel bad", "🌟 I will do my best", "😡 Argue"],
     correct: 1,
@@ -48,7 +48,7 @@ const encounters = [
     color: "#2ecc71"
   },
   {
-    villager: "assets/cruel-uncle.png",
+    villager: "assets/cruel-uncle.webp",
     comment: "You are too young!",
     choices: ["😊 I can still learn", "😞 Walk away", "😠 Get angry"],
     correct: 0,
@@ -56,7 +56,7 @@ const encounters = [
     color: "#f39c12"
   },
   {
-    villager: "assets/lady.png",
+    villager: "assets/lady.webp",
     comment: "This will never work!",
     choices: ["😡 Shout back", "😊 Keep going", "😞 Give up"],
     correct: 1,
@@ -64,7 +64,7 @@ const encounters = [
     color: "#e91e63"
   },
   {
-    villager: "assets/uncle-with-stick.png",
+    villager: "assets/uncle-with-stick.webp",
     comment: "Why are you\neven trying?",
     choices: ["🌟 I believe in myself", "😔 Stop trying", "😠 Fight"],
     correct: 0,
@@ -72,7 +72,7 @@ const encounters = [
     color: "#9b59b6"
   },
   {
-    villager: "assets/cruel-kid.png",
+    villager: "assets/rude-uncle.webp",
     comment: "You will\nfail anyway!",
     choices: ["😔 Feel upset", "😊 I will continue", "😡 Yell back"],
     correct: 1,
@@ -80,7 +80,7 @@ const encounters = [
     color: "#1abc9c"
   },
   {
-    villager: "assets/rude-girl.png",
+    villager: "assets/rude-girl.webp",
     comment: "Impossible!\nYou can't do it!",
     choices: ["🌟 I will keep trying", "😞 Quit", "😠 Get angry"],
     correct: 0,
@@ -89,12 +89,12 @@ const encounters = [
   }
 ];
 
-// ─── GAME STATE ───────────────────────────────────────────────────────────────
+// GAME STATE
 let progress = 0;
 let gameCompleted = false;
 const bridgeGoal = encounters.length;
 
-// ─── SCREEN SWITCH ────────────────────────────────────────────────────────────
+// SCREEN SWITCH 
 // FIX: explicitly set display:flex so flex screens are restored correctly
 function showScreen(screenEl) {
   document.querySelectorAll(".screen").forEach(s => {
@@ -105,7 +105,7 @@ function showScreen(screenEl) {
   screenEl.classList.add("active");
 }
 
-// ─── START GAME ───────────────────────────────────────────────────────────────
+//  START GAME 
 startBtn.addEventListener("click", () => {
   playSound(clickSound, 0.5);
   showScreen(gameScreen);
@@ -114,7 +114,7 @@ startBtn.addEventListener("click", () => {
   gameContent.classList.add("hidden-game");
 });
 
-// ─── CLOSE POPUP & BEGIN ──────────────────────────────────────────────────────
+//  CLOSE POPUP & BEGIN 
 playBtn.addEventListener("click", () => {
    playSound(clickSound, 0.5);
   gsap.to(popup, {
@@ -141,7 +141,7 @@ playBtn.addEventListener("click", () => {
   });
 });
 
-// ─── LOAD ENCOUNTER ───────────────────────────────────────────────────────────
+//  LOAD ENCOUNTER 
 function loadEncounter() {
   const current = encounters[progress];
   if (!current) return;
@@ -177,12 +177,12 @@ function loadEncounter() {
   );
 }
 
-// ─── BUTTON EVENTS ────────────────────────────────────────────────────────────
+// BUTTON EVENTS 
 choice1Btn.addEventListener("click", () => handleChoice(0));
 choice2Btn.addEventListener("click", () => handleChoice(1));
 choice3Btn.addEventListener("click", () => handleChoice(2));
 
-// ─── HANDLE CHOICE ────────────────────────────────────────────────────────────
+// HANDLE CHOICE 
 function handleChoice(choiceIndex) {
   if (gameCompleted) return;
   playSound(clickSound, 0.45);
@@ -194,7 +194,7 @@ function handleChoice(choiceIndex) {
   }
 }
 
-// ─── CORRECT CHOICE ───────────────────────────────────────────────────────────
+//  CORRECT CHOICE 
 function correctChoice(choiceIdx) {
   disableChoices(true);
   playSound(correctSound, 0.7);
@@ -244,7 +244,7 @@ function correctChoice(choiceIdx) {
   });
 }
 
-// ─── WRONG CHOICE ─────────────────────────────────────────────────────────────
+//  WRONG CHOICE 
 function wrongChoice(choiceIdx) {
   disableChoices(true);
   playSound(wrongSound, 0.7);
@@ -278,14 +278,14 @@ function wrongChoice(choiceIdx) {
   });
 }
 
-// ─── DISABLE / ENABLE ────────────────────────────────────────────────────────
+//  DISABLE / ENABLE 
 function disableChoices(disabled) {
   choice1Btn.disabled = disabled;
   choice2Btn.disabled = disabled;
   choice3Btn.disabled = disabled;
 }
 
-// ─── MOVE CHARACTER ───────────────────────────────────────────────────────────
+//  MOVE CHARACTER 
 // FIX: target the brick-slot by index from the bridge directly,
 //      since slots get a brick child appended but the slot element remains.
 function moveCharacter(slotIndex) {
@@ -315,7 +315,7 @@ function moveCharacter(slotIndex) {
   });
 }
 
-// ─── CREATE BRICK ─────────────────────────────────────────────────────────────
+//  CREATE BRICK 
 // FIX: brick is positioned absolute inside the slot (inset:0) so it
 //      fills it without disrupting bridge flex layout.
 function createBrick(slotIndex) {
@@ -386,7 +386,7 @@ function createBrick(slotIndex) {
   }
 }
 
-// ─── BRICK TRAY ───────────────────────────────────────────────────────────────
+// BRICK TRAY 
 function renderBrickTray() {
   brickTray.innerHTML = "";
   encounters.forEach((enc, i) => {
@@ -403,7 +403,7 @@ function renderBrickTray() {
   );
 }
 
-// ─── PROGRESS BAR (ENHANCED) ─────────────────────────────────────────────────
+//  PROGRESS BAR (ENHANCED) 
 function updateProgress() {
   const pct = (progress / bridgeGoal) * 100;
   document.getElementById("progress-fill").style.width = `${pct}%`;
@@ -418,13 +418,12 @@ function updateProgress() {
   });
 }
 
-// ─── BUILD PROGRESS UI ───────────────────────────────────────────────────────
+//  BUILD PROGRESS UI 
 // Inject count badge and milestone dots into the existing markup
 function buildProgressUI() {
   const label = document.querySelector(".progress-label");
   if (label) {
     label.innerHTML = `
-      <span class="prog-icon">🌉</span>
       <span class="prog-title">Bridge of Persistence</span>
       <span class="prog-count">0 / ${bridgeGoal}</span>
     `;
@@ -444,7 +443,7 @@ function buildProgressUI() {
   }
 }
 
-// ─── CHARACTER ANIMATIONS ─────────────────────────────────────────────────────
+//  CHARACTER ANIMATIONS 
 function happyBounce() {
   gsap.fromTo(character,
     { y: 0, rotation: 0 },
@@ -459,7 +458,7 @@ function sadBounce() {
   );
 }
 
-// ─── WALK TO HOUSE (WIN STATE) ────────────────────────────────────────────────
+//  WALK TO HOUSE (WIN STATE) 
 function walkCharacter() {
   disableChoices(true);
 
@@ -491,7 +490,7 @@ function walkCharacter() {
 
   tl.call(() => {
     const boyImg = document.getElementById("boy-img");
-    boyImg.src = "assets/celebrating-boy.png";
+    boyImg.src = "assets/celebrating-boy.webp";
   });
 
   tl.fromTo(character,
@@ -511,7 +510,7 @@ function walkCharacter() {
   }, null, "+=0.4");
 }
 
-// ─── FLOATING WORD PARTICLE ───────────────────────────────────────────────────
+//  FLOATING WORD PARTICLE 
 function spawnFloatingWord(text, anchorEl) {
   const rect = anchorEl.getBoundingClientRect();
   const el = document.createElement("div");
