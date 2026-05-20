@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <canvas id="firefly-canvas" class="firefly-canvas"></canvas>
   <img src="assets/Infineo-logo.webp" alt="logo" class="company-logo" />
   <!-- SCREEN 1 - WELCOME -->
   <section id="welcome-screen" class="screen active">
@@ -24,29 +25,15 @@
 
   <!-- SCREEN 2 - GAME -->
   <section id="game-screen" class="screen">
-
-
     <!-- HOW TO PLAY POPUP -->
+     <div>
     <div id="instruction-popup" class="popup active-popup">
-      <h2>How To Play</h2>
-
-      <p>
-        Villagers may say negative things to stop the boy.
-      </p>
-
-      <p>
-        Help him stay positive and keep moving
-        toward his dream of making kheer.
-      </p>
-
-      <p>
-        Every good choice builds part of the bridge.
-        Persistence helps us reach our goals!
-      </p>
+      <img src="assets/instruction-title.png" alt="instructions" class="popup-title">
 
       <button id="play-btn" class="main-btn">
         LET'S GO
       </button>
+    </div>
     </div>
 
     <!-- TOP UI -->
@@ -151,6 +138,7 @@
 
   <!-- Success Sound -->
   <!-- <audio id="success-sound" src="assets/audio/success.mp3"></audio> -->
+   <script src="js/fireflies.js"></script>
   <script src="js/script.js"></script>
 
 </body>

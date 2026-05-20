@@ -24,15 +24,10 @@
   --radius-card: 24px;
   --radius-btn: 50px;
 
-  /* Game layout anchors — all positions derive from these */
   --ground-bottom: 36vh;
-  /* where cliff tops / character feet sit  */
   --bridge-bottom: 26.5vh;
-  /* bridge sits just below ground level    */
   --char-bottom: 28vh;
-  /* character feet align to ground         */
   --house-bottom: 22vh;
-  /* hut base                               */
 }
 
 *,
@@ -67,7 +62,7 @@ img {
   position: fixed;
   top: clamp(10px, 2vh, 18px);
   left: clamp(12px, 2vw, 22px);
-  width: clamp(90px, 10vw, 160px);
+  width: clamp(70px, 8vw, 140px);
   height: auto;
   z-index: 9999;
   object-fit: contain;
@@ -79,16 +74,29 @@ img {
 .screen {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: none;
   position: relative;
   overflow: hidden;
 }
 
+/* FIX: use display:flex explicitly so showScreen restores flex correctly */
 .screen.active {
   display: flex;
 }
 
-/* ─── WELCOME SCREEN ────────────────────────────────────────────────────── */
+/* ─── FIREFLIES ─────────────────────────────────────────────────────────── */
+.firefly-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+}
+
+/*  WELCOME SCREEN  */
 #welcome-screen {
   background: url("../assets/bg2.png") center / cover no-repeat;
   justify-content: center;
@@ -99,7 +107,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.5) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -113,26 +121,19 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: clamp(14px, 2.5vh, 28px);
   max-width: min(90vw, 1040px);
 }
 
 .welcome-content img {
-  width: clamp(260px, 50vw, 620px);
-  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.6));
+  width: clamp(280px, 75vw, 920px);
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.6));
   animation: titleFloat 3s ease-in-out infinite;
 }
 
 @keyframes titleFloat {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 /* ─── BUTTONS ───────────────────────────────────────────────────────────── */
@@ -147,7 +148,7 @@ img {
   font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.04em;
-  box-shadow: 0 4px 18px rgba(255, 123, 0, 0.45);
+  box-shadow: 0 4px 18px rgba(255,123,0,0.45);
   transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -156,7 +157,7 @@ img {
 
 .main-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 28px rgba(255, 123, 0, 0.55);
+  box-shadow: 0 8px 28px rgba(255,123,0,0.55);
 }
 
 .main-btn:active {
@@ -180,7 +181,7 @@ img {
   overflow: hidden;
 }
 
-/* ─── GAME CONTENT (full-screen layer) ─────────────────────────────────── */
+/* ─── GAME CONTENT ──────────────────────────────────────────────────────── */
 #game-content {
   position: absolute;
   inset: 0;
@@ -200,7 +201,7 @@ img {
   pointer-events: auto;
 }
 
-/* ─── PROGRESS BAR (top-right) ──────────────────────────────────────────── */
+/* ─── PROGRESS BAR (top-right) — ENHANCED ──────────────────────────────── */
 .top-ui {
   position: absolute;
   top: clamp(12px, 2vh, 20px);
@@ -212,46 +213,134 @@ img {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: clamp(150px, 24vw, 240px);
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(16px);
-  border-radius: 18px;
-  padding: clamp(10px, 1.4vh, 14px) clamp(12px, 1.8vw, 18px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-md);
+  width: clamp(170px, 24vw, 270px);
+  background: linear-gradient(160deg, rgba(20,10,0,0.88), rgba(40,20,0,0.80));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: clamp(10px, 1.6vh, 16px) clamp(14px, 2vw, 20px);
+  border: 1.5px solid rgba(255,190,60,0.30);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,220,100,0.14);
 }
 
+/* Label row: icon + title + count */
 .progress-label {
   font-family: var(--font-display);
-  color: var(--clr-white);
-  font-weight: 700;
-  font-size: clamp(0.65rem, 1.1vw, 0.88rem);
-  letter-spacing: 0.06em;
+  color: #ffd780;
+  font-weight: 800;
+  font-size: clamp(0.6rem, 0.95vw, 0.82rem);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(255,160,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
+.progress-label .prog-icon {
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+.progress-label .prog-title {
+  flex: 1;
+}
+
+/* Brick counter badge */
+.progress-label .prog-count {
+  font-size: clamp(0.6rem, 0.9vw, 0.78rem);
+  font-weight: 900;
+  color: #ffe0a0;
+  background: rgba(255,180,40,0.18);
+  border: 1px solid rgba(255,200,60,0.28);
+  border-radius: 20px;
+  padding: 1px 7px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+/* Track */
 .progress-bar {
   width: 100%;
-  height: clamp(8px, 1.2vh, 12px);
-  background: rgba(255, 255, 255, 0.15);
+  height: clamp(11px, 1.6vh, 16px);
+  background: rgba(0,0,0,0.5);
   border-radius: var(--radius-pill);
   overflow: hidden;
+  border: 1px solid rgba(255,180,40,0.20);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.55);
+  position: relative;
 }
 
+/* Fill */
 #progress-fill {
   width: 0%;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #2ecc71, #f1c40f);
-  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 0 10px rgba(46, 204, 113, 0.65);
+  background: linear-gradient(90deg,
+    #f9a825 0%,
+    #ffee58 35%,
+    #69f0ae 68%,
+    #00e676 100%
+  );
+  transition: width 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 0 10px rgba(100,240,150,0.65),
+    0 0 22px rgba(255,200,50,0.35);
+  position: relative;
 }
 
-/* ─── ENCOUNTER AREA (villager + bubble, top-center) ───────────────────── */
+/* Shimmer sweep */
+#progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -60%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+@keyframes shimmer {
+  0%   { left: -60%; }
+  100% { left: 120%; }
+}
+
+/* Milestone dots row */
+.progress-milestones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px;
+  margin-top: -2px;
+}
+
+.milestone-dot {
+  width: clamp(6px, 0.9vw, 9px);
+  height: clamp(6px, 0.9vw, 9px);
+  border-radius: 50%;
+  background: rgba(255,210,100,0.22);
+  border: 1px solid rgba(255,210,100,0.35);
+  transition: background 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1), border-color 0.35s ease;
+  flex-shrink: 0;
+}
+
+.milestone-dot.filled {
+  background: #ffd060;
+  border-color: #ffe87a;
+  transform: scale(1.25);
+  box-shadow: 0 0 6px rgba(255,215,60,0.7);
+}
+
+/* ─── ENCOUNTER AREA ────────────────────────────────────────────────────── */
 .encounter-area {
   position: relative;
-  top: clamp(280px, 27vh, 360px);
-  right: clamp(100px, 15vw, 200px);
+  top: clamp(200px, 24vh, 360px);
+  right: clamp(80px, 12vw, 200px);
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-end;
@@ -259,19 +348,9 @@ img {
   z-index: 15;
 }
 
-/* VILLAGER */
+/* VILLAGER — single declaration (duplicate removed) */
 .villager-container {
-  width: clamp(100px, 16vw, 200px);
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  animation: villagerBob 2.8s ease-in-out infinite;
-  transform-origin: bottom center;
-}
-
-.villager-container {
-  width: clamp(80px, 16vw, 200px);
+  width: clamp(80px, 14vw, 200px);
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -281,30 +360,23 @@ img {
 }
 
 @keyframes villagerBob {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-7px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
 }
 
-/* SPEECH BUBBLE — appears to the left of the villager */
+/* SPEECH BUBBLE */
 .speech-bubble {
   position: absolute;
   bottom: 85%;
   right: 0;
-  max-width: clamp(180px, 28vw, 340px);
-  min-width: 160px;
+  max-width: clamp(160px, 26vw, 340px);
+  min-width: 140px;
   background: url("../assets/speech-bubble.png") center / 100% 100% no-repeat;
   border-radius: 0;
-  padding: clamp(16px, 2.5vh, 24px) clamp(20px, 3vw, 32px);
+  padding: clamp(14px, 2.2vh, 24px) clamp(18px, 2.8vw, 32px);
   box-shadow: none;
   font-family: var(--font-display);
-  font-size: clamp(0.82rem, 1.6vw, 1.1rem);
+  font-size: clamp(0.78rem, 1.5vw, 1.1rem);
   font-weight: 700;
   color: #3a2800;
   text-align: center;
@@ -315,32 +387,31 @@ img {
   display: none;
 }
 
-/* GAME AREA (character + bridge + house)*/
+/* ─── GAME AREA ─────────────────────────────────────────────────────────── */
 .game-area {
   position: absolute;
   left: 0;
   right: 0;
   bottom: var(--ground-bottom);
   height: 0;
-  /* children use absolute positioning from here */
   z-index: 5;
 }
 
-/* CHARACTER — starts on the left cliff */
+/* CHARACTER */
 #character {
   position: absolute;
-  left: clamp(200px, 15vw, 200px);
+  left: clamp(120px, 13vw, 200px);
   bottom: 100px;
   z-index: 10;
   transform-origin: bottom center;
 }
 
 #character img {
-  width: clamp(170px, 15vw, 360px);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+  width: clamp(100px, 13vw, 360px);
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
 }
 
-/* HOUSE — right side */
+/* HOUSE */
 .house {
   position: absolute;
   right: clamp(10px, 2vw, 40px);
@@ -349,142 +420,393 @@ img {
 }
 
 .house img {
-  width: clamp(240px, 30vw, 580px);
+  width: clamp(180px, 28vw, 580px);
   height: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
 
-/* BRIDGE — horizontally centered, resting on ground line */
+/* BRIDGE */
 .bridge-container {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: clamp(60px, 6vh, 60px);
-  width: clamp(250px, 50vw, 620px);
-  height: clamp(44px, 7vh, 64px);
+  width: clamp(240px, 50vw, 680px);
+  height: clamp(60px, 9vh, 100px);
   display: flex;
   align-items: flex-end;
   z-index: 8;
   overflow: visible;
+  pointer-events: none;
 }
 
 #bridge {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  gap: clamp(4px, 0.6vw, 8px);  
+  /* FIX: gap:0 + slight negative margin on bricks for seamless look */
+  gap: 0;
   width: 100%;
 }
 
+/* EMPTY SLOT */
 .brick-slot {
   flex: 1;
-  height: clamp(55px, 8vh, 90px);
-  border-radius: 4px;
-  border: 2px dashed rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.04);
+  height: clamp(60px, 8vh, 95px);
+  border-radius: 8px;
+  border: 2px dashed rgba(255,240,200,0.18);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(4px);
+  opacity: 0.55;
+  /* FIX: relative so placed brick can fill it properly */
+  position: relative;
+  overflow: visible;
 }
 
+/* PLACED BRICK */
 .brick {
-  flex: 1;
-  height: clamp(55px, 8vh, 90px);
+  /* FIX: fill the slot absolutely so layout doesn't shift */
+  position: absolute;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+
+  color: #fff8e8;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(0.75rem, 1.3vw, 1rem);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+  font-weight: 900;
+  font-size: clamp(0.62rem, 0.95vw, 0.92rem);
+
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.85),
+    0 0 8px rgba(255,220,120,0.3);
+
   letter-spacing: 0.02em;
+
   background: url("../assets/rock.png") center / 100% 100% no-repeat !important;
+
   border-radius: 0;
-  box-shadow: none;
+  border: none;
+
+  filter:
+    drop-shadow(0 4px 10px rgba(0,0,0,0.45))
+    drop-shadow(0 0 10px rgba(255,210,100,0.18));
+
+  animation: brickPop 0.35s ease both;
+}
+
+.brick::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 12px;
+  background: radial-gradient(circle, rgba(255,230,150,0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes brickPop {
+  0%   { transform: scale(0.5) translateY(20px); opacity: 0; }
+  70%  { transform: scale(1.08) translateY(-4px); }
+  100% { transform: scale(1);   opacity: 1; }
 }
 
 /* ─── BRICK TRAY ────────────────────────────────────────────────────────── */
+/* ───────────────── BRICK TRAY ───────────────── */
+
 .brick-tray {
   position: absolute;
-  bottom: clamp(100px, 14vh, 160px);
+  bottom: clamp(105px, 13vh, 170px);
   left: 50%;
   transform: translateX(-50%);
+
   display: flex;
-  gap: clamp(8px, 1.2vw, 14px);
-  padding: clamp(8px, 1.2vh, 12px) clamp(14px, 2vw, 20px);
-  border-radius: 24px;
-  background: rgba(10, 5, 0, 0.55);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 200, 80, 0.18);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  gap: clamp(10px, 1vw, 16px);
+
+  padding:
+    clamp(12px, 1.5vh, 16px)
+    clamp(18px, 2vw, 26px);
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(42, 24, 8, 0.82),
+      rgba(15, 8, 2, 0.92)
+    );
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 220, 140, 0.22);
+
+  box-shadow:
+    0 12px 34px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,245,210,0.08),
+    0 0 22px rgba(255,190,90,0.08);
+
   z-index: 20;
+
+  max-width: 94vw;
+  overflow-x: auto;
+
+  scrollbar-width: none;
 }
 
+.brick-tray::-webkit-scrollbar {
+  display: none;
+}
+
+/* ───────────────── TRAY BRICKS ───────────────── */
+
 .tray-brick {
-  width: clamp(52px, 7.5vw, 80px);
-  height: clamp(32px, 4.5vh, 46px);
-  border-radius: 12px;
+  width: clamp(70px, 8vw, 105px);
+  height: clamp(46px, 5.2vh, 64px);
+
+  flex-shrink: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+
+  position: relative;
+
+  color: #fff9ea;
+
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(0.6rem, 0.95vw, 0.85rem);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.22s ease;
-  cursor: default;
-  background: url("../assets/rock.png") center / cover no-repeat;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 900;
+  font-size: clamp(0.72rem, 0.95vw, 1rem);
+
+  letter-spacing: 0.03em;
+
+  background:
+    url("../assets/rock.png")
+    center / 100% 100%
+    no-repeat;
+
+  border: none;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,0.95),
+    0 0 12px rgba(255,225,120,0.55);
+
+  filter:
+    drop-shadow(0 6px 12px rgba(0,0,0,0.42))
+    drop-shadow(0 0 12px rgba(255,210,100,0.18));
+
+  transition:
+    transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+    filter 0.24s ease,
+    opacity 0.24s ease;
+
+  cursor: pointer;
+
+  overflow: visible;
 }
 
+/* magical glow */
+.tray-brick::before {
+  content: "";
+
+  position: absolute;
+  inset: -8%;
+
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,220,120,0.22),
+      transparent 72%
+    );
+
+  opacity: 0.9;
+
+  z-index: -1;
+
+  transition: opacity 0.25s ease;
+}
+
+/* inner shine */
+.tray-brick::after {
+  content: "";
+
+  position: absolute;
+  inset: 14%;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.18),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+/* hover */
 .tray-brick:hover {
-  transform: translateY(-6px) scale(1.06);
+  transform: translateY(-10px) scale(1.12);
+
+  filter:
+    drop-shadow(0 10px 20px rgba(0,0,0,0.5))
+    drop-shadow(0 0 18px rgba(255,220,120,0.42));
 }
 
-/* ─── ACTION BUTTONS ────────────────────────────────────────────────────── */
+.tray-brick:hover::before {
+  opacity: 1;
+}
+
+/* used state */
+.tray-brick.used {
+  opacity: 0.18;
+
+  transform: scale(0.72);
+
+  pointer-events: none;
+
+  filter:
+    grayscale(0.65)
+    brightness(0.7);
+}
+
+/* ───────────────── ACTION BUTTONS ───────────────── */
+
 .action-buttons {
   position: absolute;
-  bottom: clamp(12px, 2.5vh, 36px);
+
+  bottom: clamp(16px, 2vh, 34px);
   left: 50%;
   transform: translateX(-50%);
+
   z-index: 15;
+
   display: flex;
-  gap: clamp(8px, 1.4vw, 14px);
+  gap: clamp(10px, 1.2vw, 18px);
+
   flex-wrap: wrap;
+
   justify-content: center;
-  width: min(96vw, 720px);
+
+  width: min(96vw, 820px);
 }
+
+/* buttons */
+/* ───────────────── BUTTON HOVER EFFECT ───────────────── */
 
 .option-btn {
-  flex: 1;
-  min-width: clamp(140px, 20vw, 200px);
-  white-space: normal;
-  line-height: 1.35;
-  min-height: clamp(58px, 9vh, 80px);
-  border-radius: 22px;
-  font-size: clamp(0.78rem, 1.3vw, 1rem);
-  padding: clamp(10px, 1.5vh, 14px) clamp(12px, 2vw, 20px);
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow 0.25s ease,
+    filter 0.25s ease,
+    background 0.25s ease;
+
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.32),
+    0 4px 0 rgba(140,70,0,0.28),
+    inset 0 2px 0 rgba(255,255,255,0.24),
+    0 0 18px rgba(255,185,90,0.14);
 }
 
-/* ─── POPUP ─────────────────────────────────────────────────────────────── */
-.popup {
+/* animated glow sweep */
+.option-btn::after {
+  content: "";
+
   position: absolute;
+
+  top: -120%;
+  left: -40%;
+
+  width: 40%;
+  height: 320%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.28),
+      transparent
+    );
+
+  transform: rotate(18deg);
+
+  transition: left 0.6s ease;
+
+  pointer-events: none;
+}
+
+/* HOVER */
+.option-btn:hover {
+  transform: translateY(-6px) scale(1.04);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 16px 30px rgba(0,0,0,0.42),
+    0 6px 0 rgba(120,60,0,0.22),
+    inset 0 2px 0 rgba(255,255,255,0.3),
+    0 0 28px rgba(255,190,80,0.32);
+}
+
+/* glowing sweep animation */
+.option-btn:hover::after {
+  left: 130%;
+}
+
+/* CLICK */
+.option-btn:active {
+  transform: translateY(2px) scale(0.97);
+
+  box-shadow:
+    0 5px 12px rgba(0,0,0,0.28),
+    inset 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* NEGATIVE BUTTONS */
+.option-btn.negative:hover {
+  box-shadow:
+    0 16px 30px rgba(0,0,0,0.42),
+    0 0 26px rgba(255,90,70,0.35);
+
+  filter: brightness(1.06);
+}
+/*  POPUP  */
+#instruction-popup{
+  flex-direction: column;  
+}
+.popup {
+  position: fixed;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(88vw, 440px);
-  background: linear-gradient(160deg, #fffdf5, #fff8ec);
-  padding: clamp(24px, 4vh, 40px) clamp(22px, 4vw, 38px);
-  border-radius: 28px;
-  text-align: center;
-  z-index: 50;
+
+  width: fit-content;
+
+  padding: 0; 
+
+  background: transparent;
+
+  border: none;
+  box-shadow: none;
+
+  z-index: 999;
+
   display: none;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(255, 180, 60, 0.2);
-  border: 2px solid rgba(255, 160, 40, 0.18);
+
+  overflow: visible;
 }
 
 .popup.active-popup {
-  display: block;
-  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 
 @keyframes popIn {
@@ -499,26 +821,29 @@ img {
   }
 }
 
-.popup h2 {
-  font-family: var(--font-display);
-  margin-bottom: 10px;
-  font-size: clamp(1.3rem, 3vw, 1.75rem);
-  color: #3a1e00;
-  font-weight: 800;
+/* actual popup image */
+.popup img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 10px 30px rgba(0,0,0,0.45))
+    drop-shadow(0 0 18px rgba(255,210,120,0.22));
 }
 
-.popup p {
-  margin-bottom: 8px;
-  line-height: 1.65;
-  color: #5a4020;
-  font-size: clamp(0.88rem, 1.5vw, 1rem);
+.popup-title {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.35));
 }
-
-.popup .main-btn {
-  margin-top: 14px;
-}
-
-/* ─── SUCCESS SCREEN ────────────────────────────────────────────────────── */
+/*  SUCCESS SCREEN  */
 #success-screen {
   background: url("../assets/end-screen-bg.png") center / cover no-repeat;
   justify-content: center;
@@ -529,59 +854,30 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.38) 100%);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.38) 100%);
   pointer-events: none;
 }
 
-.success-content {
+.end-screen-image {
   position: relative;
   z-index: 2;
-  background: rgba(255, 253, 240, 0.92);
-  padding: clamp(32px, 6vh, 64px) clamp(28px, 6vw, 64px);
-  border-radius: var(--radius-card);
-  text-align: center;
-  max-width: min(90vw, 600px);
-  box-shadow: var(--shadow-lg);
-  animation: successReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-@keyframes successReveal {
-  from {
-    opacity: 0;
-    transform: scale(0.85) translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.success-content h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  font-weight: 800;
-  color: #3a1e00;
-  letter-spacing: 0.03em;
-}
-.end-screen-image{
-  width: clamp(520px, 80vw, 880px);
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+  width: clamp(260px, 72vw, 880px);
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
   animation: titleFloat 3s ease-in-out infinite;
 }
 
-/* ─── PARTICLES / FLOATERS ──────────────────────────────────────────────── */
+/* PARTICLES / FLOATERS  */
 .floating-word {
   position: fixed;
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   font-weight: 800;
   pointer-events: none;
   z-index: 9000;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 3px 12px rgba(0,0,0,0.25);
 }
 
-/* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
+/*  RESPONSIVE  */
 @media (max-width: 768px) {
   :root {
     --ground-bottom: 22vh;
@@ -590,35 +886,46 @@ img {
   }
 
   .encounter-area {
-    right: clamp(40px, 8vw, 80px);
+    right: clamp(30px, 6vw, 80px);
+    top: clamp(160px, 20vh, 280px);
   }
 
   .bridge-container {
-    width: 86vw;
+    width: 88vw;
+  }
+
+  .progress-wrapper {
+    width: clamp(150px, 38vw, 230px);
   }
 }
 
 @media (max-width: 480px) {
   #character img {
-    width: clamp(55px, 16vw, 90px);
+    width: clamp(55px, 16vw, 100px);
   }
 
   .house img {
     width: clamp(110px, 34vw, 200px);
   }
 
+  /* FIX: hide text on bricks at tiny sizes instead of font-size:0 (which breaks layout) */
   .brick {
-    font-size: 0;
+    font-size: clamp(0px, 1.8vw, 0.65rem);
+  }
+
+  .tray-brick {
+    font-size: clamp(0px, 1.8vw, 0.7rem);
   }
 
   .action-buttons .option-btn {
-    min-width: 100px;
-    font-size: 0.72rem;
+    min-width: 90px;
+    font-size: 0.7rem;
+    min-height: 46px;
   }
 
   .popup {
     width: 94vw;
-    padding: 22px 18px;
+    padding: 22px 16px;
   }
 }
 
@@ -632,19 +939,20 @@ img {
   }
 
   .action-buttons {
-    bottom: 6px;
+    bottom: 4px;
   }
 
   .brick-tray {
-    bottom: 68px;
+    bottom: 62px;
+  }
+
+  .progress-milestones {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
