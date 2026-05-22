@@ -32,58 +32,58 @@ const speechBubble = document.getElementById("speech-bubble");
 // GAME DATA 
 const encounters = [
   {
-    villager: "assets/uncle.webp",
-    comment: "You cannot achieve that!",
-    choices: ["😞 Maybe I should stop", "😊 I will still try", "😠 Be rude back"],
-    correct: 1,
+    villager: "assets/Characters/oldman.png",
+    comment: "You will fail!",
+    choices: ["😢 I quit.", "😡 Be quiet!", "💪 I'll try again!"],
+    correct: 2,
     value: "Hope",
     color: "#3498db"
   },
   {
-    villager: "assets/cruel-boy.webp",
-    comment: "Nobody will like this!",
-    choices: ["😔 Feel bad", "🌟 I will do my best", "😡 Argue"],
+    villager: "assets/Characters/boy-with-stick.png",
+    comment: "You're too weak!",
+    choices: ["😭 I can't do it.", "🌟 I can keep going.", "😠 You're mean!"],
     correct: 1,
     value: "Patience",
     color: "#2ecc71"
   },
   {
-    villager: "assets/cruel-uncle.webp",
-    comment: "You are too young!",
-    choices: ["😊 I can still learn", "😞 Walk away", "😠 Get angry"],
-    correct: 0,
+    villager: "assets/Characters/man-with-spade.png",
+    comment: "Everyone is faster\n than you!",
+    choices: ["😔 I'm too slow.", "🚶 Slow is okay.", "😡 I don't care!"],
+    correct: 1,
     value: "Smile",
     color: "#f39c12"
   },
   {
-    villager: "assets/lady.webp",
-    comment: "This will never work!",
-    choices: ["😡 Shout back", "😊 Keep going", "😞 Give up"],
-    correct: 1,
+    villager: "assets/Characters/lady-with-pot.png",
+    comment: "The bridge is scary!",
+    choices: ["🏃 I'm leaving!", "💥 I hate this!", "🌈 I can still try."],
+    correct: 2,
     value: "Kindness",
     color: "#e91e63"
   },
   {
-    villager: "assets/uncle-with-stick.webp",
-    comment: "Why are you\neven trying?",
-    choices: ["🌟 I believe in myself", "😔 Stop trying", "😠 Fight"],
-    correct: 0,
+    villager: "assets/Characters/lady.png",
+    comment: "People will laugh at you!",
+    choices: ["😞 Then I stop.", "⭐ I can learn!", "😠 I'll yell back!"],
+    correct: 1,
     value: "Courage",
     color: "#9b59b6"
   },
   {
-    villager: "assets/rude-uncle.webp",
-    comment: "You will\nfail anyway!",
-    choices: ["😔 Feel upset", "😊 I will continue", "😡 Yell back"],
+    villager: "assets/Characters/girl.png",
+    comment: "That jump is impossible!",
+    choices: ["💤 I give up.", "🌟 I'll practice!", "😡 You're wrong!"],
     correct: 1,
     value: "Trust",
     color: "#1abc9c"
   },
   {
-    villager: "assets/rude-girl.webp",
-    comment: "Impossible!\nYou can't do it!",
-    choices: ["🌟 I will keep trying", "😞 Quit", "😠 Get angry"],
-    correct: 0,
+    villager: "assets/Characters/little-boy.png",
+    comment: "The bridge is broken!",
+    choices: ["😭 It's over.", "🛠️ I'll find a way.", "👿 I'll break more!"],
+    correct: 1,
     value: "Joy",
     color: "#f1c40f"
   }
@@ -495,7 +495,7 @@ function walkCharacter() {
 
   tl.fromTo(character,
     { scale: 1, y: 0 },
-    { scale: 1.15, y: -20, duration: 0.3, ease: "back.out(2)", yoyo: true, repeat: 3 }
+    { scale: 1.8, y: -30, duration: 0.3, ease: "back.out(2)", yoyo: true, repeat: 3 }
   );
 
   tl.call(() => {

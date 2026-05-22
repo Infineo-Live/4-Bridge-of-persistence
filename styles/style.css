@@ -377,11 +377,11 @@ img {
 
 .speech-bubble {
   position: absolute;
-  top: -100px;
-  right: 100px;
+  top: -76px;
+  right: 76px;
   width: clamp(380px, 34vw, 520px);
   height: clamp(170px, 18vw, 240px);
-  background: url("../assets/speech-bubble.webp") center center / contain no-repeat;
+  background: url("../assets/Characters/speech-bubble.png") center center / contain no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -437,7 +437,7 @@ img {
 }
 
 #character img {
-  width: clamp(100px, 13vw, 360px);
+  width: clamp(100px, 13vw, 480px);
   filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
 }
 
@@ -508,7 +508,7 @@ img {
     1px -1px 0 #000, -1px 1px 0 #000,
     0 0 16px rgba(255,220,100,0.5);
   letter-spacing: 0.02em;
-  background: url("../assets/rock.webp") center / 100% 100% no-repeat !important;
+  background: url("../assets/Characters/rock.png") center / 100% 100% no-repeat !important;
   border-radius: 4px;
   border: none;
   filter:
