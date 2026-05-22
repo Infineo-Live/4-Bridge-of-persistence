@@ -80,7 +80,6 @@ img {
   overflow: hidden;
 }
 
-/* FIX: use display:flex explicitly so showScreen restores flex correctly */
 .screen.active {
   display: flex;
 }
@@ -201,7 +200,6 @@ img {
   pointer-events: auto;
 }
 
-/*  PROGRESS BAR (top-right) — ENHANCED  */
 /*  PROGRESS BAR — CENTERED TOP  */
 .top-ui {
   position: absolute;
@@ -217,42 +215,31 @@ img {
   flex-direction: column;
   gap: 8px;
   width: 100%;
-
-  background: linear-gradient(
-    160deg,
-    rgba(15, 8, 2, 0.92),
-    rgba(35, 18, 4, 0.88)
-  );
+  background: linear-gradient(160deg, rgba(15,8,2,0.92), rgba(35,18,4,0.88));
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-radius: 24px;
   padding: clamp(12px, 1.8vh, 18px) clamp(18px, 2.8vw, 28px);
-  border: 1.5px solid rgba(255, 200, 80, 0.28);
+  border: 1.5px solid rgba(255,200,80,0.28);
   box-shadow:
-    0 8px 36px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    inset 0 1px 0 rgba(255, 230, 120, 0.16),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    0 8px 36px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,230,120,0.16),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
 }
 
-/*  top row: icon · title · count  */
 .progress-label {
   font-family: var(--font-display);
   color: #ffd780;
   font-weight: 800;
-  font-size: clamp(1.2rem, 1.8vw, 1.4srem);
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  text-shadow: 0 1px 8px rgba(255, 160, 0, 0.55);
+  text-shadow: 0 1px 8px rgba(255,160,0,0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-}
-
-@keyframes iconPulse {
-  0%, 100% { transform: scale(1);    filter: brightness(1);   }
-  50%       { transform: scale(1.18); filter: brightness(1.35); }
 }
 
 .progress-label .prog-title {
@@ -260,13 +247,12 @@ img {
   text-align: center;
 }
 
-/* brick counter badge */
 .progress-label .prog-count {
   font-size: clamp(1rem, 1.2vw, 1rem);
   font-weight: 900;
   color: #ffe0a0;
-  background: rgba(255, 180, 40, 0.18);
-  border: 1px solid rgba(255, 200, 60, 0.30);
+  background: rgba(255,180,40,0.18);
+  border: 1px solid rgba(255,200,60,0.30);
   border-radius: 20px;
   padding: 2px 9px;
   letter-spacing: 0.05em;
@@ -274,52 +260,39 @@ img {
   transition: color 0.3s ease, background 0.3s ease;
 }
 
-/* ── track ── */
 .progress-bar {
   width: 100%;
   height: clamp(14px, 2vh, 20px);
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.55);
   border-radius: var(--radius-pill);
   overflow: hidden;
-  border: 1.5px solid rgba(255, 170, 40, 0.22);
+  border: 1.5px solid rgba(255,170,40,0.22);
   box-shadow:
-    inset 0 3px 8px rgba(0, 0, 0, 0.65),
-    inset 0 -1px 3px rgba(255, 200, 60, 0.08);
+    inset 0 3px 8px rgba(0,0,0,0.65),
+    inset 0 -1px 3px rgba(255,200,60,0.08);
   position: relative;
 }
 
-/* ── fill ── */
 #progress-fill {
   width: 0%;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg,
-    #f77f00 0%,
-    #facc15 28%,
-    #86efac 62%,
-    #22c55e 100%
-  );
-  transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: linear-gradient(90deg, #f77f00 0%, #facc15 28%, #86efac 62%, #22c55e 100%);
+  transition: width 0.7s cubic-bezier(0.34,1.56,0.64,1);
   box-shadow:
-    0 0 12px rgba(80, 220, 130, 0.70),
-    0 0 28px rgba(250, 200, 40, 0.38);
+    0 0 12px rgba(80,220,130,0.70),
+    0 0 28px rgba(250,200,40,0.38);
   position: relative;
   overflow: hidden;
 }
 
-/* shimmer sweep */
 #progress-fill::after {
   content: "";
   position: absolute;
   top: 0; left: -70%;
   width: 55%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.50),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50), transparent);
   animation: shimmer 1.6s ease-in-out infinite;
   border-radius: inherit;
 }
@@ -329,7 +302,6 @@ img {
   100% { left: 130%; }
 }
 
-/* ── milestone dots ── */
 .progress-milestones {
   display: flex;
   justify-content: space-between;
@@ -342,11 +314,11 @@ img {
   width: clamp(7px, 1vw, 10px);
   height: clamp(7px, 1vw, 10px);
   border-radius: 50%;
-  background: rgba(255, 210, 100, 0.18);
-  border: 1.5px solid rgba(255, 210, 100, 0.30);
+  background: rgba(255,210,100,0.18);
+  border: 1.5px solid rgba(255,210,100,0.30);
   transition:
     background 0.35s ease,
-    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
     border-color 0.35s ease,
     box-shadow 0.35s ease;
   flex-shrink: 0;
@@ -357,9 +329,9 @@ img {
   border-color: #ffe87a;
   transform: scale(1.35);
   box-shadow:
-    0 0 8px rgba(255, 215, 60, 0.80),
-    0 0 16px rgba(255, 200, 40, 0.40);
-  animation: dotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    0 0 8px rgba(255,215,60,0.80),
+    0 0 16px rgba(255,200,40,0.40);
+  animation: dotPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
 }
 
 @keyframes dotPop {
@@ -367,27 +339,28 @@ img {
   60%  { transform: scale(1.55); }
   100% { transform: scale(1.35); }
 }
-/*  ENCOUNTER AREA  */
+
+/* =========================
+   ENCOUNTER AREA
+   — baseline values tuned for 1920×1200
+========================= */
 .encounter-area {
   position: absolute;
-  top: clamp(290px, 32vh, 520px);
-  right: clamp(60px, 10vw, 180px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0;
+  top: 280px;
+  right: 30px;
   z-index: 15;
 }
 
 .villager-container {
   width: clamp(90px, 13vw, 190px);
-  flex-shrink: 0;
+  position: absolute;
+  top: 0px;
+  right: 50px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   animation: villagerBob 2.8s ease-in-out infinite;
   transform-origin: bottom center;
-  position: relative;
   z-index: 2;
 }
 
@@ -397,15 +370,18 @@ img {
   display: block;
 }
 
-/* SPEECH BUBBLE — sits above the villager */
-/* SPEECH BUBBLE */
+@keyframes villagerBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-5px) rotate(1.5deg); }
+}
+
 .speech-bubble {
-  position: relative;
-  order: -1;
+  position: absolute;
+  top: -100px;
+  right: 100px;
   width: clamp(380px, 34vw, 520px);
   height: clamp(170px, 18vw, 240px);
-  background: url("../assets/speech-bubble.webp")
-    center center / contain no-repeat;
+  background: url("../assets/speech-bubble.webp") center center / contain no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -414,9 +390,8 @@ img {
     clamp(55px, 4vw, 75px)
     clamp(35px, 3vw, 45px);
   box-sizing: border-box;
-  margin-bottom: -18px;
   animation: bubbleFloat 3s ease-in-out infinite;
-  z-index: 3;
+  z-index: 20;
 }
 
 @keyframes bubbleFloat {
@@ -439,7 +414,6 @@ img {
   justify-content: center;
   transform: translateY(-6px);
 }
-
 
 .speech-bubble::after { display: none; }
 
@@ -500,10 +474,9 @@ img {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  /* FIX: gap:0 + slight negative margin on bricks for seamless look */
   gap: 0;
   width: 100%;
-}            
+}
 
 /* EMPTY SLOT */
 .brick-slot {
@@ -511,7 +484,7 @@ img {
   height: clamp(72px, 10vh, 115px);
   border-radius: 8px;
   border: 2px dashed rgba(255,240,200,0.45);
-  background: rgba(20, 10, 0, 0.55);
+  background: rgba(20,10,0,0.55);
   backdrop-filter: blur(2px);
   opacity: 1;
   position: relative;
@@ -529,32 +502,24 @@ img {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(0.8rem, 1.2vw, 1.1rem);
-
   text-shadow:
-    0 0 4px #000,
-    0 2px 6px #000,
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
+    0 0 4px #000, 0 2px 6px #000,
+    1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000,
     0 0 16px rgba(255,220,100,0.5);
-
   letter-spacing: 0.02em;
-
   background: url("../assets/rock.webp") center / 100% 100% no-repeat !important;
-
   border-radius: 4px;
   border: none;
-
   filter:
     drop-shadow(0 6px 14px rgba(0,0,0,0.7))
     drop-shadow(0 0 14px rgba(255,210,100,0.35))
     brightness(1.3)
     saturate(1.2);
-
   animation: brickPop 0.35s ease both;
   z-index: 999;
 }
+
 .brick::after {
   content: "";
   position: absolute;
@@ -567,12 +532,10 @@ img {
 @keyframes brickPop {
   0%   { transform: scale(0.5) translateY(20px); opacity: 0; }
   70%  { transform: scale(1.08) translateY(-4px); }
-  100% { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-/*  BRICK TRAY */
 /*  BRICK TRAY  */
-
 .brick-tray {
   position: absolute;
   bottom: clamp(105px, 13vh, 170px);
@@ -584,14 +547,9 @@ img {
     clamp(12px, 1.5vh, 16px)
     clamp(18px, 2vw, 26px);
   border-radius: 30px;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(42, 24, 8, 0.82),
-      rgba(15, 8, 2, 0.92)
-    );
+  background: linear-gradient(to bottom, rgba(42,24,8,0.82), rgba(15,8,2,0.92));
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 220, 140, 0.22);
+  border: 1px solid rgba(255,220,140,0.22);
   box-shadow:
     0 12px 34px rgba(0,0,0,0.45),
     inset 0 1px 0 rgba(255,245,210,0.08),
@@ -602,12 +560,9 @@ img {
   scrollbar-width: none;
 }
 
-.brick-tray::-webkit-scrollbar {
-  display: none;
-}
+.brick-tray::-webkit-scrollbar { display: none; }
 
 /*  TRAY BRICKS  */
-
 .tray-brick {
   width: clamp(95px, 10.5vw, 135px);
   height: clamp(62px, 7vh, 84px);
@@ -621,18 +576,12 @@ img {
   font-weight: 900;
   font-size: clamp(0.88rem, 1.25vw, 1.18rem);
   letter-spacing: 0.03em;
-  background:
-    url("../assets/rock.webp")
-    center / 100% 100%
-    no-repeat;
+  background: url("../assets/rock.webp") center / 100% 100% no-repeat;
   border: none;
   text-shadow:
-    0 0 4px #000,
-    0 2px 8px #000,
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
+    0 0 4px #000, 0 2px 8px #000,
+    1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000,
     0 0 20px rgba(255,225,100,0.65);
   filter:
     drop-shadow(0 8px 16px rgba(0,0,0,0.6))
@@ -655,71 +604,34 @@ img {
     brightness(1.35)
     saturate(1.2);
 }
-/* magical glow */
+
 .tray-brick::before {
   content: "";
   position: absolute;
   inset: -8%;
   border-radius: 16px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,220,120,0.22),
-      transparent 72%
-    );
+  background: radial-gradient(circle, rgba(255,220,120,0.22), transparent 72%);
   opacity: 0.9;
   z-index: -1;
   transition: opacity 0.25s ease;
 }
 
-/* inner shine */
 .tray-brick::after {
   content: "";
   position: absolute;
   inset: 14%;
   border-radius: 12px;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.18),
-      transparent
-    );
+  background: linear-gradient(to bottom, rgba(255,255,255,0.18), transparent);
   pointer-events: none;
 }
 
-/* hover */
-.tray-brick:hover {
-  transform: translateY(-10px) scale(1.12);
+.tray-brick:hover::before { opacity: 1; }
 
-  filter:
-    drop-shadow(0 10px 20px rgba(0,0,0,0.5))
-    drop-shadow(0 0 18px rgba(255,220,120,0.42));
-}
-
-.tray-brick:hover::before {
-  opacity: 1;
-}
-
-/* used state */
 .tray-brick.used {
   opacity: 0.18;
   transform: scale(0.72);
   pointer-events: none;
-  filter:
-    grayscale(0.65)
-    brightness(0.7);
-}
-
-@media (max-width: 480px) {
-  .brick {
-    font-size: clamp(0.65rem, 2.4vw, 0.8rem);
-  }
-
-  .tray-brick {
-    width: clamp(75px, 19vw, 105px);
-    height: clamp(50px, 6.5vh, 68px);
-    font-size: clamp(0.65rem, 2.4vw, 0.82rem);
-  }
+  filter: grayscale(0.65) brightness(0.7);
 }
 
 /*  ACTION BUTTONS  */
@@ -753,21 +665,18 @@ img {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  /* layered 3-D look */
   background: linear-gradient(160deg, #ffcf6b, #ff8c00);
   box-shadow:
     0 6px 0 #b85c00,
     0 8px 18px rgba(0,0,0,0.38),
     inset 0 2px 0 rgba(255,255,255,0.30),
     0 0 18px rgba(255,185,90,0.18);
-
   transition:
     transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
     box-shadow 0.2s ease,
     filter 0.2s ease;
 }
 
-/* shine sweep */
 .option-btn::before {
   content: "";
   position: absolute;
@@ -779,7 +688,6 @@ img {
   pointer-events: none;
 }
 
-/* emoji / icon badge in top-left corner */
 .option-btn::after {
   content: attr(data-icon);
   position: absolute;
@@ -791,7 +699,6 @@ img {
   transition: transform 0.2s ease;
 }
 
-/* push text right when icon present */
 .option-btn[data-icon] {
   padding-left: clamp(34px, 4.5vw, 52px);
   text-align: left;
@@ -822,7 +729,6 @@ img {
   filter: brightness(0.95);
 }
 
-/* NEGATIVE variant — red tint */
 .option-btn.negative {
   background: linear-gradient(160deg, #ff7070, #c0392b);
   box-shadow:
@@ -832,14 +738,6 @@ img {
     0 0 18px rgba(255,80,60,0.18);
 }
 
-.option-btn.negative:hover {
-  box-shadow:
-    0 8px 0 #6a0f0f,
-    0 14px 28px rgba(0,0,0,0.42),
-    0 0 28px rgba(255,90,70,0.40);
-}
-
-/* POSITIVE variant — green tint */
 .option-btn.positive {
   background: linear-gradient(160deg, #6ee87a, #1e8f3c);
   box-shadow:
@@ -849,44 +747,28 @@ img {
     0 0 18px rgba(60,200,90,0.18);
 }
 
-.option-btn.positive:hover {
-  box-shadow:
-    0 8px 0 #0f4a1e,
-    0 14px 28px rgba(0,0,0,0.42),
-    0 0 28px rgba(50,220,90,0.38);
-}
-
-/* disabled */
 .option-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
+
 /*  POPUP  */
-#instruction-popup{
-  flex-direction: column;  
-}
+#instruction-popup { flex-direction: column; }
+
 .popup {
   position: fixed;
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   width: fit-content;
-
-  padding: 0; 
-
+  padding: 0;
   background: transparent;
-
   border: none;
   box-shadow: none;
-
   z-index: 999;
-
   display: none;
-
   overflow: visible;
 }
 
@@ -894,31 +776,19 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-
   animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 
 @keyframes popIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -46%) scale(0.88);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.88); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-/* actual popup image */
 .popup img {
   width: 100%;
   height: auto;
-
   display: block;
-
   object-fit: contain;
-
   filter:
     drop-shadow(0 10px 30px rgba(0,0,0,0.45))
     drop-shadow(0 0 18px rgba(255,210,120,0.22));
@@ -932,6 +802,7 @@ img {
   background: transparent;
   filter: drop-shadow(0 10px 25px rgba(0,0,0,0.35));
 }
+
 /*  SUCCESS SCREEN  */
 #success-screen {
   background: url("../assets/end-screen-bg.webp") center / cover no-repeat;
@@ -955,7 +826,7 @@ img {
   animation: titleFloat 3s ease-in-out infinite;
 }
 
-/* PARTICLES / FLOATERS  */
+/*  PARTICLES  */
 .floating-word {
   position: fixed;
   font-family: var(--font-display);
@@ -966,70 +837,110 @@ img {
   text-shadow: 0 3px 12px rgba(0,0,0,0.25);
 }
 
-/*  RESPONSIVE  */
-@media (max-width: 768px) {
-  :root {
-    --ground-bottom: 22vh;
-    --char-bottom: 22vh;
-    --house-bottom: 18vh;
-  }
+/* ═══════════════════════════════════════════
+   RESPONSIVE — all offsets scale relative
+   to the 1920×1200 baseline above.
 
-  .encounter-area {
-    right: clamp(30px, 6vw, 80px);
-    top: clamp(160px, 20vh, 280px);
-  }
+   Strategy: use a CSS scale factor derived
+   from viewport width so every px value
+   shrinks/grows proportionally.
+═══════════════════════════════════════════ */
 
-  .bridge-container {
-    width: 88vw;
-  }
-  .progress-wrapper {
-    width: clamp(150px, 38vw, 230px);
-  }
+/* ── 1680 × 1050  (~88% of baseline) ── */
+@media (max-width: 1680px) {
+  .encounter-area { top: 245px; right: 26px; }
+  .speech-bubble  { top: -88px; right: 88px; }
 }
 
+/* ── 1440 × 900  (~75% of baseline) ── */
+@media (max-width: 1440px) {
+  .encounter-area { top: 210px; right: 22px; }
+  .speech-bubble  {
+    top: -76px;
+    right: 76px;
+    width: clamp(300px, 34vw, 460px);
+    height: clamp(140px, 18vw, 210px);
+  }
+  .villager-container { right: 42px; }
+  #mean-comment { font-size: clamp(0.9rem, 1.3vw, 1.4rem); }
+}
+
+/* ── 1280 × 800  (~67% of baseline) ── */
+@media (max-width: 1280px) {
+  .encounter-area { top: 188px; right: 18px; }
+  .speech-bubble  {
+    top: -68px;
+    right: 68px;
+    width: clamp(260px, 34vw, 400px);
+    height: clamp(120px, 17vw, 190px);
+  }
+  .villager-container {
+    right: 36px;
+    width: clamp(80px, 12vw, 160px);
+  }
+  #mean-comment { font-size: clamp(0.82rem, 1.2vw, 1.25rem); }
+
+  .bridge-container { width: clamp(220px, 52vw, 580px); }
+  .action-buttons   { width: min(96vw, 780px); }
+}
+
+/* ── 1024 × 768  (~53% of baseline) ── */
+@media (max-width: 1024px) {
+  :root {
+    --ground-bottom: 30vh;
+    --bridge-bottom: 22vh;
+  }
+  .encounter-area { top: 150px; right: 14px; }
+  .speech-bubble  {
+    top: -55px;
+    right: 55px;
+    width: clamp(220px, 36vw, 360px);
+    height: clamp(100px, 16vw, 170px);
+    padding: 14px 44px 28px;
+  }
+  .villager-container {
+    right: 28px;
+    width: clamp(70px, 11vw, 130px);
+  }
+  #mean-comment { font-size: clamp(0.75rem, 1.15vw, 1.1rem); }
+  .bridge-container { width: 80vw; }
+  .action-buttons   { width: 96vw; flex-wrap: wrap; }
+}
+
+/* ── Short screens (height < 800px, e.g. 1366×768) ── */
+@media (max-height: 800px) and (min-width: 1024px) {
+  .encounter-area { top: 160px; }
+  .brick-tray     { bottom: clamp(85px, 11vh, 130px); }
+  .action-buttons { bottom: clamp(10px, 1.5vh, 22px); }
+}
+
+/* ── Very short landscape (height < 600px) ── */
+@media (max-height: 600px) and (orientation: landscape) {
+  :root { --ground-bottom: 20vh; }
+  .encounter-area  { top: 80px; }
+  .speech-bubble   { height: clamp(90px, 13vw, 150px); top: -44px; }
+  .brick-tray      { bottom: 68px; }
+  .action-buttons  { bottom: 6px; }
+  .progress-milestones { display: none; }
+}
+
+/* ── 480px and below (small brick text) ── */
 @media (max-width: 480px) {
-  #character img {
-    width: clamp(55px, 16vw, 100px);
-  }
-  .house img {
-    width: clamp(110px, 34vw, 200px);
-  }
-  /* FIX: hide text on bricks at tiny sizes instead of font-size:0 (which breaks layout) */
-  .brick {
-    font-size: clamp(0px, 1.8vw, 0.65rem);
-  }
+  .brick     { font-size: clamp(0.65rem, 2.4vw, 0.8rem); }
   .tray-brick {
-    font-size: clamp(0px, 1.8vw, 0.7rem);
+    width: clamp(75px, 19vw, 105px);
+    height: clamp(50px, 6.5vh, 68px);
+    font-size: clamp(0.65rem, 2.4vw, 0.82rem);
   }
   .action-buttons .option-btn {
     min-width: 90px;
     font-size: 0.7rem;
     min-height: 46px;
   }
-  .popup {
-    width: 94vw;
-    padding: 22px 16px;
-  }
+  .popup { width: 94vw; padding: 22px 16px; }
 }
 
-@media (max-height: 500px) and (orientation: landscape) {
-  :root {
-    --ground-bottom: 16vh;
-  }
-  .encounter-area {
-    top: 8px;
-  }
-  .action-buttons {
-    bottom: 4px;
-  }
-  .brick-tray {
-    bottom: 62px;
-  }
-  .progress-milestones {
-    display: none;
-  }
-}
-
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
