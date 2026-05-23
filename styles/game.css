@@ -33,11 +33,11 @@
  ───────────────────────────────────────── */
 .top-ui {
   position: absolute;
-  top: clamp(10px, 1.8cqh, 20px);
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
-  width: min(94cqw, 520px);
+  width: 520px;
 }
 
 .progress-wrapper {
@@ -49,7 +49,7 @@
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-radius: 24px;
-  padding: clamp(10px, 1.6cqh, 18px) clamp(16px, 2.5cqw, 28px);
+  padding: 16px 28px;
   border: 1.5px solid rgba(255, 200, 80, .28);
   box-shadow:
     0 8px 36px rgba(0, 0, 0, .55),
@@ -62,7 +62,7 @@
   font-family: var(--font-display);
   color: #ffd780;
   font-weight: 800;
-  font-size: clamp(0.85rem, 1.4cqw, 1.4rem);
+  font-size: 1.4rem;
   letter-spacing: 0.10em;
   text-transform: uppercase;
   text-shadow: 0 1px 8px rgba(255, 160, 0, .55);
@@ -78,7 +78,7 @@
 }
 
 .progress-label .prog-count {
-  font-size: clamp(0.75rem, 1cqw, 1rem);
+  font-size: 1rem;
   font-weight: 900;
   color: #ffe0a0;
   background: rgba(255, 180, 40, .18);
@@ -92,7 +92,7 @@
 
 .progress-bar {
   width: 100%;
-  height: clamp(12px, 1.8cqh, 20px);
+  height: 20px;
   background: rgba(0, 0, 0, .55);
   border-radius: var(--radius-pill);
   overflow: hidden;
@@ -147,8 +147,8 @@
 }
 
 .milestone-dot {
-  width: clamp(6px, .9cqw, 10px);
-  height: clamp(6px, .9cqw, 10px);
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 210, 100, .18);
   border: 1.5px solid rgba(255, 210, 100, .30);
@@ -243,15 +243,7 @@
   justify-content: center;
   /* top/bottom padding: clear the bubble image border
      left padding larger: speech tail is on the right  */
-  padding:
-    clamp(16px, 2cqw, 28px)
-    /* top    */
-    clamp(20px, 2cqw, 32px)
-    /* right  */
-    clamp(30px, 3cqw, 46px)
-    /* bottom (tail area) */
-    clamp(20px, 2cqw, 32px);
-  /* left   */
+  padding: 24px 28px 40px 28px;
   box-sizing: border-box;
   animation: bubbleFloat 3s ease-in-out infinite;
   z-index: 20;
@@ -271,7 +263,7 @@
 #mean-comment {
   width: 82%;
   font-family: var(--font-display);
-  font-size: clamp(0.82rem, 1.15cqw, 1.3rem);
+  font-size: 20px;
   font-weight: 800;
   color: #3a2800;
   text-align: center;
@@ -304,27 +296,27 @@
 /* CHARACTER */
 #character {
   position: absolute;
-  left: clamp(60px, 9cqw, 180px);
-  bottom: clamp(80px, 11cqh, 150px);
+  left: 180px;
+  bottom: 110px;
   z-index: 10;
   transform-origin: bottom center;
 }
 
 #character img {
-  width: clamp(100px, 12cqw, 220px);
+  width: 220px;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .35));
 }
 
 /* HOUSE */
 .house {
   position: absolute;
-  right: clamp(8px, 1.5cqw, 40px);
-  bottom: clamp(40px, 6cqh, 80px);
+  right: 40px;
+  bottom: 50px;
   z-index: 10;
 }
 
 .house img {
-  width: clamp(200px, 26cqw, 500px);
+  width: 500px;
   height: auto;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .3));
 }
@@ -334,7 +326,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: clamp(40px, 6cqh, 80px);
+  bottom: 50px;
   width: var(--bridge-w);
   height: var(--bridge-h);
   display: flex;
@@ -374,7 +366,7 @@
   color: #fff8e8;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.62rem, 1cqw, 1.1rem);
+  font-size: 1.1rem;
   text-shadow:
     0 0 4px #000, 0 2px 6px #000,
     1px 1px 0 #000, -1px -1px 0 #000,
@@ -420,13 +412,12 @@
  ───────────────────────────────────────── */
 .brick-tray {
   position: absolute;
-  bottom: clamp(110px, 14cqh, 160px);
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: clamp(8px, .9cqw, 16px);
-  padding:
-    clamp(10px, 1.4cqh, 16px) clamp(14px, 1.8cqw, 26px);
+  gap: 16px;
+  padding: 14px 24px;
   border-radius: 30px;
   background: linear-gradient(to bottom, rgba(42, 24, 8, .82), rgba(15, 8, 2, .92));
   backdrop-filter: blur(18px);
@@ -436,7 +427,7 @@
     inset 0 1px 0 rgba(255, 245, 210, .08),
     0 0 22px rgba(255, 190, 90, .08);
   z-index: 20;
-  max-width: 96cqw;
+  max-width: 900px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -447,8 +438,8 @@
 
 /* TRAY BRICKS */
 .tray-brick {
-  width: clamp(72px, 8.5cqw, 135px);
-  height: clamp(48px, 6.2cqh, 84px);
+  width: 135px;
+  height: 84px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -457,7 +448,7 @@
   color: #fff9ea;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.68rem, 1cqw, 1.18rem);
+  font-size: 1.18rem;
   letter-spacing: 0.03em;
   background: url("../assets/rock.webp") center / 100% 100% no-repeat;
   border: none;
@@ -518,15 +509,15 @@
  ───────────────────────────────────────── */
 .action-buttons {
   position: absolute;
-  bottom: clamp(6px, 1cqh, 18px);
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
   display: flex;
-  gap: clamp(6px, 1cqw, 16px);
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
-  width: min(98cqw, 860px);
+  width: 860px;
   padding: 0 6px;
 }
 
@@ -536,7 +527,7 @@
 .floating-word {
   position: fixed;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2cqw, 2.2rem);
+  font-size: 2.2rem;
   font-weight: 800;
   pointer-events: none;
   z-index: 9000;

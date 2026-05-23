@@ -291,8 +291,9 @@ function moveCharacter(slotIndex) {
   if (!slot) return;
   const slotRect  = slot.getBoundingClientRect();
   const charRect  = character.getBoundingClientRect();
-  // Center character over the slot
-  const targetX = (slotRect.left + slotRect.width / 2) - (charRect.left + charRect.width / 2);
+  // Center character over the slot, corrected for viewport scale
+  const scale = getViewportScale();
+  const targetX = ((slotRect.left + slotRect.width / 2) - (charRect.left + charRect.width / 2)) / scale;
   const bounceTween = gsap.to(character, {
     y: -8, duration: 0.15, repeat: -1, yoyo: true, ease: "power1.inOut", paused: true
   });
@@ -461,7 +462,8 @@ function walkCharacter() {
   const houseImg   = document.querySelector(".house img");
   const charRect   = character.getBoundingClientRect();
   const houseRect  = houseImg.getBoundingClientRect();
-  const moveDistance = houseRect.left - charRect.left - charRect.width * 0.6;
+  const scale = getViewportScale();
+  const moveDistance = (houseRect.left - charRect.left - charRect.width * 0.6) / scale;
 
   const bounceTween = gsap.to(character, {
     y: -7, duration: 0.16, repeat: -1, yoyo: true,
@@ -533,3 +535,23 @@ function playSound(sound, volume = 1) {
 
 // Build enhanced progress UI as soon as DOM is ready
 buildProgressUI();
+
+// VIEWPORT SCALING (16:9 - 1920x1080)
+function getViewportScale() {
+  const viewport = document.getElementById("game-viewport");
+  if (!viewport) return 1;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  return Math.max(w / 1920, h / 1080);
+}
+
+function resizeViewport() {
+  const viewport = document.getElementById("game-viewport");
+  if (!viewport) return;
+  const scale = getViewportScale();
+  viewport.style.transform = `translate(-50%, -50%) scale(${scale})`;
+}
+
+// Attach event listener and run on load
+window.addEventListener("resize", resizeViewport);
+resizeViewport();
