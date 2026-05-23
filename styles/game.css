@@ -214,6 +214,7 @@
 }
 
 @keyframes villagerBob {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);
@@ -250,6 +251,7 @@
 }
 
 @keyframes bubbleFloat {
+
   0%,
   100% {
     transform: translateY(0) rotate(-1deg);
@@ -412,10 +414,12 @@
  ───────────────────────────────────────── */
 .brick-tray {
   position: absolute;
-  bottom: 13.9cqh;
+  bottom: 20.5cqh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.83cqw;
   padding: 1.3cqh 1.25cqw;
   border-radius: 30px;
@@ -438,7 +442,7 @@
 
 /* TRAY BRICKS */
 .tray-brick {
-  width: 7cqw;
+  width: 6.0cqw;
   height: 7.8cqh;
   flex-shrink: 0;
   display: flex;
@@ -509,7 +513,7 @@
  ───────────────────────────────────────── */
 .action-buttons {
   position: absolute;
-  bottom: 2.8cqh;
+  bottom: 10cqh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
