@@ -22,16 +22,16 @@
   z-index: 2;
   text-align: center;
   color: var(--clr-white);
-  padding: 48px;
+  padding: 4.4cqh 2.5cqw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
-  max-width: 1040px;
+  gap: 2.6cqh;
+  max-width: 54cqw;
 }
 
 .welcome-content img {
-  width: 920px;
+  width: 47.9cqw;
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .6));
   animation: titleFloat 3s ease-in-out infinite;
 }

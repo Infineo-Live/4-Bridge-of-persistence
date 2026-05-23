@@ -30,27 +30,27 @@
   --radius-btn: 50px;
 
   /* ── Ground / bridge / character anchors ──
-     Fixed values designed for 1920x1080 resolution. */
-  --ground-bottom: 410px;
-  --bridge-bottom: 324px;
-  --char-bottom: 110px;
-  --house-bottom: 50px;
+     Base units expressed in cqw and cqh relative to the container */
+  --ground-bottom: 38cqh;
+  --bridge-bottom: 30cqh;
+  --char-bottom: 10.2cqh;
+  --house-bottom: 4.6cqh;
 
   /* ── Encounter-area coordinates ── */
-  --enc-bottom: 450px;
-  --enc-right: 570px;
+  --enc-bottom: 41.7cqh;
+  --enc-right: 29.7cqw;
 
   /* villager */
-  --villager-w: 220px;
+  --villager-w: 11.5cqw;
 
   /* speech bubble */
-  --bubble-w: 360px;
-  --bubble-h: 210px;
+  --bubble-w: 18.75cqw;
+  --bubble-h: 19.4cqh;
 
   /* ── Bridge ── */
-  --bridge-w: 780px;
-  --bridge-h: 90px;
-  --slot-h: 100px;
+  --bridge-w: 40.6cqw;
+  --bridge-h: 8.3cqh;
+  --slot-h: 9.25cqh;
 }
 
 /* ─────────────────────────────────────────

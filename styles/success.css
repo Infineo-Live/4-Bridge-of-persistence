@@ -19,9 +19,9 @@
 .end-screen-image {
   position: relative;
   z-index: 2;
-  width: 780px;
+  width: 40.6cqw;
   margin-bottom: auto;
-  margin-top: 30px;
+  margin-top: 2.8cqh;
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
   animation: titleFloat 3s ease-in-out infinite;
 }

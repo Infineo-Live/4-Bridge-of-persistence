@@ -3,12 +3,12 @@
  ───────────────────────────────────────── */
 .main-btn {
   font-family: var(--font-display);
-  padding: 12px 32px;
+  padding: 1.1cqh 1.66cqw;
   border: none;
   border-radius: var(--radius-btn);
   background: linear-gradient(160deg, var(--clr-accent2), var(--clr-accent));
   color: var(--clr-white);
-  font-size: 1.15rem;
+  font-size: 1.05cqw;
   font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.04em;
@@ -42,10 +42,10 @@
 .option-btn {
   position: relative;
   overflow: hidden;
-  min-width: 220px;
-  min-height: 60px;
-  padding: 12px 24px;
-  font-size: 1.15rem;
+  min-width: 11.5cqw;
+  min-height: 5.5cqh;
+  padding: 1.1cqh 1.25cqw;
+  font-size: 1.05cqw;
   border-radius: var(--radius-btn);
   border: none;
   font-family: var(--font-display);
@@ -85,7 +85,7 @@
   content: attr(data-icon);
   position: absolute;
   top: 50%;
-  left: 18px;
+  left: 0.94cqw;
   transform: translateY(-50%);
   font-size: 1.25em;
   line-height: 1;
@@ -94,7 +94,7 @@
 }
 
 .option-btn[data-icon] {
-  padding-left: 52px;
+  padding-left: 2.7cqw;
   text-align: left;
 }
 
@@ -202,7 +202,7 @@
 
 .popup-title {
   display: block;
-  width: 800px;
+  width: 41.7cqw;
   height: auto;
   object-fit: contain;
   background: transparent;
