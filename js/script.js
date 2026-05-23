@@ -33,7 +33,7 @@ const speechBubble = document.getElementById("speech-bubble");
 const encounters = [
   {
     villager: "assets/Characters/oldman.png",
-    comment: "You'll never make it!",
+    comment: "You'll never\n make it!",
     choices: ["😢 I quit.", "😡 Shut up!", "💪 I'll try!"],
     correct: 2,
     value: "Hope",
@@ -41,7 +41,7 @@ const encounters = [
   },
   {
     villager: "assets/Characters/boy-with-stick.png",
-    comment: "It's too hard for you!",
+    comment: "It's too hard\n for you!",
     choices: ["🌟 I can do hard things!", "😭 You're right.", "😠 I hate this!"],
     correct: 0,
     value: "Patience",
@@ -49,7 +49,7 @@ const encounters = [
   },
   {
     villager: "assets/Characters/man-with-spade.png",
-    comment: "The game is impossible, you’ll fail.",
+    comment: "The game is impossible,\n you’ll fail.",
     choices: ["😔 I give up.", "😡 You'll fail too!", "🌈 Failing helps me learn!"],
     correct: 2,
     value: "Smile",
@@ -57,8 +57,8 @@ const encounters = [
   },
   {
     villager: "assets/Characters/lady-with-pot.png",
-    comment: "Nobody believes in you!",
-    choices: ["💛 I’ll find a way to succeed.", "😭 I can’t do it.", "😠 I’ll ruin it for everyone!"],
+    comment: "Nobody believes \nin you!",
+    choices: ["💛 I’ll find a way.", "😭 I can’t do it.", "😠 I’ll ruin it for everyone!"],
     correct: 0,
     value: "Kindness",
     color: "#e91e63"
@@ -73,7 +73,7 @@ const encounters = [
   },
   {
     villager: "assets/Characters/girl.png",
-    comment: "You'll fall and look silly!",
+    comment: "You'll fall and \nlook silly!",
     choices: ["😢 I'm too scared.", "😠 You're sillier!", "🌟 Brave people fall too!"],
     correct: 2,
     value: "Trust",
@@ -81,7 +81,7 @@ const encounters = [
   },
   {
     villager: "assets/Characters/little-boy.png",
-    comment: "You'll mess up at the end!",
+    comment: "You'll mess up at \nthe end!",
     choices: ["🏆 I won't stop now!", "😭 What if I do?", "😡 Stop watching!"],
     correct: 0,
     value: "Joy",
