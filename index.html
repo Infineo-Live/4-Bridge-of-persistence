@@ -13,8 +13,11 @@
 <body>
   <canvas id="firefly-canvas" class="firefly-canvas"></canvas>
   <img src="assets/Infineo-logo.webp" alt="logo" class="company-logo" />
-  <!-- SCREEN 1 - WELCOME -->
-  <section id="welcome-screen" class="screen active">
+  <div id="game-wrapper">
+    <div id="game-container">
+      <div id="game-viewport">
+        <!-- SCREEN 1 - WELCOME -->
+        <section id="welcome-screen" class="screen active">
     <div class="welcome-content">
       <img src="assets/title.webp" alt="title">
       <button id="start-btn" class="main-btn option-btn">
@@ -120,7 +123,10 @@
   <!-- SCREEN 3 - SUCCESS -->
   <section id="success-screen" class="screen">
     <img src="assets/end-game-title2.webp" alt="" class="end-screen-image">
-  </section>
+        </section>
+      </div>
+    </div>
+  </div>
   <!-- AUDIO -->
   <!-- Background Music -->
   <audio id="bg-music" src="assets/audio/bg-audio.mp3" loop></audio>

@@ -3,12 +3,12 @@
  ───────────────────────────────────────── */
 .main-btn {
   font-family: var(--font-display);
-  padding: clamp(11px, 1.5cqh, 16px) clamp(24px, 4cqw, 40px);
+  padding: 12px 32px;
   border: none;
   border-radius: var(--radius-btn);
   background: linear-gradient(160deg, var(--clr-accent2), var(--clr-accent));
   color: var(--clr-white);
-  font-size: clamp(0.85rem, 1.4cqw + .1rem, 1.2rem);
+  font-size: 1.15rem;
   font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.04em;
@@ -42,10 +42,10 @@
 .option-btn {
   position: relative;
   overflow: hidden;
-  min-width: clamp(100px, 16cqw, 220px);
-  min-height: clamp(40px, 5cqh, 60px);
-  padding: clamp(8px, 1.2cqh, 16px) clamp(14px, 2.2cqw, 32px);
-  font-size: clamp(0.85rem, 1.3cqw, 1.15rem);
+  min-width: 220px;
+  min-height: 60px;
+  padding: 12px 24px;
+  font-size: 1.15rem;
   border-radius: var(--radius-btn);
   border: none;
   font-family: var(--font-display);
@@ -85,7 +85,7 @@
   content: attr(data-icon);
   position: absolute;
   top: 50%;
-  left: clamp(10px, 1.5cqw, 18px);
+  left: 18px;
   transform: translateY(-50%);
   font-size: 1.25em;
   line-height: 1;
@@ -94,7 +94,7 @@
 }
 
 .option-btn[data-icon] {
-  padding-left: clamp(30px, 4cqw, 52px);
+  padding-left: 52px;
   text-align: left;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .popup {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -202,7 +202,7 @@
 
 .popup-title {
   display: block;
-  width: clamp(260px, 55cqw, 800px);
+  width: 800px;
   height: auto;
   object-fit: contain;
   background: transparent;
