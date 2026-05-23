@@ -939,7 +939,7 @@ img {
    SUCCESS SCREEN
 ───────────────────────────────────────── */
 #success-screen {
-  background: url("../assets/bg3.webp") center / cover no-repeat;
+  background: url("../assets/end-screen-bg.webp") center / cover no-repeat;
   justify-content: center;
   align-items: center;
 }
@@ -956,15 +956,10 @@ img {
 .end-screen-image {
   position: relative;
   z-index: 2;
-<<<<<<< HEAD
   width: clamp(270px, 67vw, 780px);
   margin-bottom: auto;
   margin-top: clamp(10px, 3vh, 30px);
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
-=======
-  width: clamp(220px, 60vw, 880px);
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .4));
->>>>>>> fc18c01cf427be7f3490a23f9de28051dd0e83ff
   animation: titleFloat 3s ease-in-out infinite;
 }
 
