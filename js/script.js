@@ -145,18 +145,15 @@ playBtn.addEventListener("click", () => {
 function loadEncounter() {
   const current = encounters[progress];
   if (!current) return;
-
   encounterText.innerText = current.comment;
   choice1Btn.innerText = current.choices[0];
   choice2Btn.innerText = current.choices[1];
   choice3Btn.innerText = current.choices[2];
-
   // FIX: reset button backgrounds properly before every encounter
   [choice1Btn, choice2Btn, choice3Btn].forEach(b => {
     gsap.set(b, { clearProps: "background,scale,opacity,y" });
     b.style.background = "";
   });
-
   gsap.to(villagerImg, {
     opacity: 0, duration: 0.15, onComplete: () => {
       villagerImg.src = current.villager;
@@ -292,17 +289,13 @@ function moveCharacter(slotIndex) {
   const slots = bridge.querySelectorAll(".brick-slot");
   const slot = slots[slotIndex];
   if (!slot) return;
-
   const slotRect  = slot.getBoundingClientRect();
   const charRect  = character.getBoundingClientRect();
-
   // Center character over the slot
   const targetX = (slotRect.left + slotRect.width / 2) - (charRect.left + charRect.width / 2);
-
   const bounceTween = gsap.to(character, {
     y: -8, duration: 0.15, repeat: -1, yoyo: true, ease: "power1.inOut", paused: true
   });
-
   gsap.to(character, {
     x: `+=${targetX}`,
     duration: 0.55,

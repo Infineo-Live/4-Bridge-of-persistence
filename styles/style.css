@@ -1,7 +1,12 @@
 /* GOOGLE FONTS IMPORT */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
 
-/*  CSS VARIABLES  */
+/* ═══════════════════════════════════════════
+   CSS VARIABLES
+   Baseline = 1440 × 900 (15-inch laptop).
+   All fluid values are tuned so that screen
+   looks identical to the original at 1440px.
+═══════════════════════════════════════════ */
 :root {
   --font-display: 'Baloo 2', cursive;
   --font-body: 'Nunito', sans-serif;
@@ -16,20 +21,51 @@
   --clr-text: #2d2d2d;
   --clr-text-soft: #555555;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.14);
-  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.20);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.26);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, .14);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, .20);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, .26);
 
   --radius-pill: 9999px;
   --radius-card: 24px;
   --radius-btn: 50px;
 
-  --ground-bottom: 36vh;
-  --bridge-bottom: 26.5vh;
-  --char-bottom: 28vh;
-  --house-bottom: 22vh;
+  /* ── Ground / bridge / character anchors ──
+     expressed in dvh so they scale with
+     viewport height automatically.           */
+  --ground-bottom: 38dvh;
+  --bridge-bottom: 30dvh;
+  --char-bottom: 32dvh;
+  --house-bottom: 28dvh;
+
+  /* ── Encounter-area fluid offsets ──
+     Villager stands at the RIGHT cliff edge.
+     On the screenshot the cliff edge is ≈ 8vw
+     from the right of the screen.
+     Speech bubble floats left of the villager,
+     over the gap / water.                     */
+  /* encounter-area: bottom-anchored so villager stands on cliff */
+  --enc-bottom: clamp(38vh, 44vh, 50vh);
+  /* cliff top from bottom     */
+  /* villager placed at center-right, away from house (~28vw from right) */
+  --enc-right: clamp(24vh, 30vh, 32vh);
+
+  /* villager */
+  --villager-w: clamp(130px, 14vw, 220px);
+
+  /* speech bubble */
+  --bubble-w: clamp(220px, 20vw, 360px);
+  --bubble-h: clamp(130px, 12vw, 210px);
+
+  /* ── Bridge ── */
+  --bridge-w: clamp(300px, 52vw, 780px);
+  /* wider, more central      */
+  --bridge-h: clamp(55px, 7.5vh, 90px);
+  --slot-h: clamp(60px, 8.5vh, 100px);
 }
 
+/* ─────────────────────────────────────────
+   RESET
+───────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -57,12 +93,14 @@ img {
   display: block;
 }
 
-/*  COMPANY LOGO  */
+/* ─────────────────────────────────────────
+   COMPANY LOGO
+───────────────────────────────────────── */
 .company-logo {
   position: fixed;
   top: clamp(10px, 2vh, 18px);
   left: clamp(12px, 2vw, 22px);
-  width: clamp(40px, 4vw, 70px);
+  width: clamp(60px, 7.5vw, 140px);
   height: auto;
   z-index: 9999;
   object-fit: contain;
@@ -70,7 +108,9 @@ img {
   pointer-events: none;
 }
 
-/*  SCREENS  */
+/* ─────────────────────────────────────────
+   SCREENS
+───────────────────────────────────────── */
 .screen {
   width: 100vw;
   height: 100vh;
@@ -84,7 +124,9 @@ img {
   display: flex;
 }
 
-/*  FIREFLIES  */
+/* ─────────────────────────────────────────
+   FIREFLIES
+───────────────────────────────────────── */
 .firefly-canvas {
   position: fixed;
   inset: 0;
@@ -95,7 +137,9 @@ img {
   transition: opacity 0.4s ease;
 }
 
-/*  WELCOME SCREEN  */
+/* ─────────────────────────────────────────
+   WELCOME SCREEN
+───────────────────────────────────────── */
 #welcome-screen {
   background: url("../assets/bg2.webp") center / cover no-repeat;
   justify-content: center;
@@ -106,7 +150,8 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.5) 100%);
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, .08) 0%, rgba(0, 0, 0, .5) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -125,17 +170,26 @@ img {
 }
 
 .welcome-content img {
-  width: clamp(280px, 75vw, 920px);
-  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.6));
+  width: clamp(240px, 65vw, 920px);
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .6));
   animation: titleFloat 3s ease-in-out infinite;
 }
 
 @keyframes titleFloat {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
-/*  BUTTONS  */
+/* ─────────────────────────────────────────
+   BUTTONS (shared)
+───────────────────────────────────────── */
 .main-btn {
   font-family: var(--font-display);
   padding: clamp(11px, 1.5vh, 16px) clamp(24px, 4vw, 40px);
@@ -143,12 +197,12 @@ img {
   border-radius: var(--radius-btn);
   background: linear-gradient(160deg, var(--clr-accent2), var(--clr-accent));
   color: var(--clr-white);
-  font-size: clamp(0.9rem, 1.5vw + 0.1rem, 1.2rem);
+  font-size: clamp(0.85rem, 1.4vw + .1rem, 1.2rem);
   font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.04em;
-  box-shadow: 0 4px 18px rgba(255,123,0,0.45);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  box-shadow: 0 4px 18px rgba(255, 123, 0, .45);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   white-space: nowrap;
@@ -156,7 +210,7 @@ img {
 
 .main-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 28px rgba(255,123,0,0.55);
+  box-shadow: 0 8px 28px rgba(255, 123, 0, .55);
 }
 
 .main-btn:active {
@@ -171,7 +225,9 @@ img {
   box-shadow: none;
 }
 
-/*  GAME SCREEN  */
+/* ─────────────────────────────────────────
+   GAME SCREEN
+───────────────────────────────────────── */
 #game-screen {
   background: url("../assets/game-bg.webp") center center / cover no-repeat;
   flex-direction: column;
@@ -180,7 +236,6 @@ img {
   overflow: hidden;
 }
 
-/*  GAME CONTENT  */
 #game-content {
   position: absolute;
   inset: 0;
@@ -200,10 +255,12 @@ img {
   pointer-events: auto;
 }
 
-/*  PROGRESS BAR — CENTERED TOP  */
+/* ─────────────────────────────────────────
+   PROGRESS BAR — top-center
+───────────────────────────────────────── */
 .top-ui {
   position: absolute;
-  top: clamp(12px, 2vh, 20px);
+  top: clamp(10px, 1.8vh, 20px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -215,27 +272,27 @@ img {
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  background: linear-gradient(160deg, rgba(15,8,2,0.92), rgba(35,18,4,0.88));
+  background: linear-gradient(160deg, rgba(15, 8, 2, .92), rgba(35, 18, 4, .88));
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-radius: 24px;
-  padding: clamp(12px, 1.8vh, 18px) clamp(18px, 2.8vw, 28px);
-  border: 1.5px solid rgba(255,200,80,0.28);
+  padding: clamp(10px, 1.6vh, 18px) clamp(16px, 2.5vw, 28px);
+  border: 1.5px solid rgba(255, 200, 80, .28);
   box-shadow:
-    0 8px 36px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(255,255,255,0.04),
-    inset 0 1px 0 rgba(255,230,120,0.16),
-    inset 0 -1px 0 rgba(0,0,0,0.3);
+    0 8px 36px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(255, 255, 255, .04),
+    inset 0 1px 0 rgba(255, 230, 120, .16),
+    inset 0 -1px 0 rgba(0, 0, 0, .3);
 }
 
 .progress-label {
   font-family: var(--font-display);
   color: #ffd780;
   font-weight: 800;
-  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  font-size: clamp(0.85rem, 1.4vw, 1.4rem);
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  text-shadow: 0 1px 8px rgba(255,160,0,0.55);
+  text-shadow: 0 1px 8px rgba(255, 160, 0, .55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,28 +305,28 @@ img {
 }
 
 .progress-label .prog-count {
-  font-size: clamp(1rem, 1.2vw, 1rem);
+  font-size: clamp(0.75rem, 1vw, 1rem);
   font-weight: 900;
   color: #ffe0a0;
-  background: rgba(255,180,40,0.18);
-  border: 1px solid rgba(255,200,60,0.30);
+  background: rgba(255, 180, 40, .18);
+  border: 1px solid rgba(255, 200, 60, .30);
   border-radius: 20px;
   padding: 2px 9px;
   letter-spacing: 0.05em;
   white-space: nowrap;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color .3s ease, background .3s ease;
 }
 
 .progress-bar {
   width: 100%;
-  height: clamp(14px, 2vh, 20px);
-  background: rgba(0,0,0,0.55);
+  height: clamp(12px, 1.8vh, 20px);
+  background: rgba(0, 0, 0, .55);
   border-radius: var(--radius-pill);
   overflow: hidden;
-  border: 1.5px solid rgba(255,170,40,0.22);
+  border: 1.5px solid rgba(255, 170, 40, .22);
   box-shadow:
-    inset 0 3px 8px rgba(0,0,0,0.65),
-    inset 0 -1px 3px rgba(255,200,60,0.08);
+    inset 0 3px 8px rgba(0, 0, 0, .65),
+    inset 0 -1px 3px rgba(255, 200, 60, .08);
   position: relative;
 }
 
@@ -278,10 +335,10 @@ img {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #f77f00 0%, #facc15 28%, #86efac 62%, #22c55e 100%);
-  transition: width 0.7s cubic-bezier(0.34,1.56,0.64,1);
+  transition: width .7s cubic-bezier(.34, 1.56, .64, 1);
   box-shadow:
-    0 0 12px rgba(80,220,130,0.70),
-    0 0 28px rgba(250,200,40,0.38);
+    0 0 12px rgba(80, 220, 130, .70),
+    0 0 28px rgba(250, 200, 40, .38);
   position: relative;
   overflow: hidden;
 }
@@ -289,17 +346,23 @@ img {
 #progress-fill::after {
   content: "";
   position: absolute;
-  top: 0; left: -70%;
+  top: 0;
+  left: -70%;
   width: 55%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .50), transparent);
   animation: shimmer 1.6s ease-in-out infinite;
   border-radius: inherit;
 }
 
 @keyframes shimmer {
-  0%   { left: -70%; }
-  100% { left: 130%; }
+  0% {
+    left: -70%;
+  }
+
+  100% {
+    left: 130%;
+  }
 }
 
 .progress-milestones {
@@ -311,16 +374,16 @@ img {
 }
 
 .milestone-dot {
-  width: clamp(7px, 1vw, 10px);
-  height: clamp(7px, 1vw, 10px);
+  width: clamp(6px, .9vw, 10px);
+  height: clamp(6px, .9vw, 10px);
   border-radius: 50%;
-  background: rgba(255,210,100,0.18);
-  border: 1.5px solid rgba(255,210,100,0.30);
+  background: rgba(255, 210, 100, .18);
+  border: 1.5px solid rgba(255, 210, 100, .30);
   transition:
-    background 0.35s ease,
-    transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    background .35s ease,
+    transform .35s cubic-bezier(.34, 1.56, .64, 1),
+    border-color .35s ease,
+    box-shadow .35s ease;
   flex-shrink: 0;
 }
 
@@ -329,33 +392,46 @@ img {
   border-color: #ffe87a;
   transform: scale(1.35);
   box-shadow:
-    0 0 8px rgba(255,215,60,0.80),
-    0 0 16px rgba(255,200,40,0.40);
-  animation: dotPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    0 0 8px rgba(255, 215, 60, .80),
+    0 0 16px rgba(255, 200, 40, .40);
+  animation: dotPop .4s cubic-bezier(.34, 1.56, .64, 1);
 }
 
 @keyframes dotPop {
-  0%   { transform: scale(0.6); }
-  60%  { transform: scale(1.55); }
-  100% { transform: scale(1.35); }
+  0% {
+    transform: scale(0.6);
+  }
+
+  60% {
+    transform: scale(1.55);
+  }
+
+  100% {
+    transform: scale(1.35);
+  }
 }
 
-/* =========================
+/* ─────────────────────────────────────────
    ENCOUNTER AREA
-   — baseline values tuned for 1920×1200
-========================= */
+   .encounter-area is the anchor for both
+   the villager and the speech bubble.
+   Villager is at (0,0) of the container.
+   Speech bubble is positioned relative to
+   the villager — always top-left of it.
+───────────────────────────────────────── */
 .encounter-area {
   position: absolute;
-  top: 280px;
-  right: 30px;
+  /* Bottom-anchored so villager feet sit on the cliff top */
+  bottom: var(--enc-bottom);
+  right: var(--enc-right);
   z-index: 15;
+  width: var(--villager-w);
 }
 
 .villager-container {
-  width: clamp(90px, 13vw, 190px);
-  position: absolute;
-  top: 0px;
-  right: 50px;
+  width: var(--villager-w);
+  position: relative;
+  /* in-flow, at top of encounter-area */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -371,53 +447,86 @@ img {
 }
 
 @keyframes villagerBob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%       { transform: translateY(-5px) rotate(1.5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(1.5deg);
+  }
 }
 
+/* Speech bubble — anchored to villager's top-left corner.
+   right:100% puts its right edge flush with villager's left edge.
+   We then nudge it up with a negative top.                       */
 .speech-bubble {
   position: absolute;
-  top: -76px;
-  right: 76px;
-  width: clamp(380px, 34vw, 520px);
-  height: clamp(170px, 18vw, 240px);
+  /* Anchored to villager: tail points right toward him,
+     bubble floats to his upper-left                    */
+  bottom: 88%;
+  /* just above villager's head        */
+  right: 20%;
+  /* starts just left of villager center */
+  width: var(--bubble-w);
+  height: var(--bubble-h);
   background: url("../assets/Characters/speech-bubble.png") center center / contain no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* top/bottom padding: clear the bubble image border
+     left padding larger: speech tail is on the right  */
   padding:
-    clamp(18px, 2vw, 26px)
-    clamp(55px, 4vw, 75px)
-    clamp(35px, 3vw, 45px);
+    clamp(16px, 2vw, 28px)
+    /* top    */
+    clamp(20px, 2vw, 32px)
+    /* right  */
+    clamp(30px, 3vw, 46px)
+    /* bottom (tail area) */
+    clamp(20px, 2vw, 32px);
+  /* left   */
   box-sizing: border-box;
   animation: bubbleFloat 3s ease-in-out infinite;
   z-index: 20;
 }
 
 @keyframes bubbleFloat {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%       { transform: translateY(-6px) rotate(1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
 }
 
 #mean-comment {
-  width: 72%;
+  width: 82%;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.6rem);
+  font-size: clamp(0.82rem, 1.15vw, 1.3rem);
   font-weight: 800;
   color: #3a2800;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.25;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  white-space: pre-line;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(-6px);
+  transform: translateY(-8px);
 }
 
-.speech-bubble::after { display: none; }
+.speech-bubble::after {
+  display: none;
+}
 
-/*  GAME AREA  */
+/* ─────────────────────────────────────────
+   GAME AREA  (character + bridge + house)
+───────────────────────────────────────── */
 .game-area {
   position: absolute;
   left: 0;
@@ -430,29 +539,29 @@ img {
 /* CHARACTER */
 #character {
   position: absolute;
-  left: clamp(120px, 13vw, 200px);
-  bottom: 100px;
+  left: clamp(60px, 9vw, 180px);
+  bottom: clamp(80px, 11vh, 150px);
   z-index: 10;
   transform-origin: bottom center;
 }
 
 #character img {
-  width: clamp(100px, 13vw, 480px);
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+  width: clamp(100px, 12vw, 220px);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .35));
 }
 
 /* HOUSE */
 .house {
   position: absolute;
-  right: clamp(10px, 2vw, 40px);
-  bottom: 100px;
+  right: clamp(8px, 1.5vw, 40px);
+  bottom: clamp(40px, 6vh, 80px);
   z-index: 10;
 }
 
 .house img {
-  width: clamp(180px, 28vw, 580px);
+  width: clamp(200px, 26vw, 500px);
   height: auto;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .3));
 }
 
 /* BRIDGE */
@@ -460,9 +569,9 @@ img {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: clamp(60px, 6vh, 60px);
-  width: clamp(240px, 50vw, 680px);
-  height: clamp(60px, 9vh, 100px);
+  bottom: clamp(40px, 6vh, 80px);
+  width: var(--bridge-w);
+  height: var(--bridge-h);
   display: flex;
   align-items: flex-end;
   z-index: 8;
@@ -478,13 +587,12 @@ img {
   width: 100%;
 }
 
-/* EMPTY SLOT */
 .brick-slot {
   flex: 1;
-  height: clamp(72px, 10vh, 115px);
+  height: var(--slot-h);
   border-radius: 8px;
-  border: 2px dashed rgba(255,240,200,0.45);
-  background: rgba(20,10,0,0.55);
+  border: 2px dashed rgba(255, 240, 200, .45);
+  background: rgba(20, 10, 0, .55);
   backdrop-filter: blur(2px);
   opacity: 1;
   position: relative;
@@ -501,22 +609,19 @@ img {
   color: #fff8e8;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+  font-size: clamp(0.62rem, 1vw, 1.1rem);
   text-shadow:
     0 0 4px #000, 0 2px 6px #000,
     1px 1px 0 #000, -1px -1px 0 #000,
     1px -1px 0 #000, -1px 1px 0 #000,
-    0 0 16px rgba(255,220,100,0.5);
+    0 0 16px rgba(255, 220, 100, .5);
   letter-spacing: 0.02em;
   background: url("../assets/Characters/rock.png") center / 100% 100% no-repeat !important;
   border-radius: 4px;
   border: none;
   filter:
-    drop-shadow(0 6px 14px rgba(0,0,0,0.7))
-    drop-shadow(0 0 14px rgba(255,210,100,0.35))
-    brightness(1.3)
-    saturate(1.2);
-  animation: brickPop 0.35s ease both;
+    drop-shadow(0 6px 14px rgba(0, 0, 0, .7)) drop-shadow(0 0 14px rgba(255, 210, 100, .35)) brightness(1.3) saturate(1.2);
+  animation: brickPop .35s ease both;
   z-index: 999;
 }
 
@@ -525,47 +630,60 @@ img {
   position: absolute;
   inset: 8%;
   border-radius: 12px;
-  background: radial-gradient(circle, rgba(255,230,150,0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 230, 150, .22) 0%, transparent 70%);
   pointer-events: none;
 }
 
 @keyframes brickPop {
-  0%   { transform: scale(0.5) translateY(20px); opacity: 0; }
-  70%  { transform: scale(1.08) translateY(-4px); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(.5) translateY(20px);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.08) translateY(-4px);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/*  BRICK TRAY  */
+/* ─────────────────────────────────────────
+   BRICK TRAY
+───────────────────────────────────────── */
 .brick-tray {
   position: absolute;
-  bottom: clamp(105px, 13vh, 170px);
+  bottom: clamp(110px, 14vh, 160px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: clamp(10px, 1vw, 16px);
+  gap: clamp(8px, .9vw, 16px);
   padding:
-    clamp(12px, 1.5vh, 16px)
-    clamp(18px, 2vw, 26px);
+    clamp(10px, 1.4vh, 16px) clamp(14px, 1.8vw, 26px);
   border-radius: 30px;
-  background: linear-gradient(to bottom, rgba(42,24,8,0.82), rgba(15,8,2,0.92));
+  background: linear-gradient(to bottom, rgba(42, 24, 8, .82), rgba(15, 8, 2, .92));
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,220,140,0.22);
+  border: 1px solid rgba(255, 220, 140, .22);
   box-shadow:
-    0 12px 34px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,245,210,0.08),
-    0 0 22px rgba(255,190,90,0.08);
+    0 12px 34px rgba(0, 0, 0, .45),
+    inset 0 1px 0 rgba(255, 245, 210, .08),
+    0 0 22px rgba(255, 190, 90, .08);
   z-index: 20;
-  max-width: 94vw;
+  max-width: 96vw;
   overflow-x: auto;
   scrollbar-width: none;
 }
 
-.brick-tray::-webkit-scrollbar { display: none; }
+.brick-tray::-webkit-scrollbar {
+  display: none;
+}
 
-/*  TRAY BRICKS  */
+/* TRAY BRICKS */
 .tray-brick {
-  width: clamp(95px, 10.5vw, 135px);
-  height: clamp(62px, 7vh, 84px);
+  width: clamp(72px, 8.5vw, 135px);
+  height: clamp(48px, 6.2vh, 84px);
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -574,7 +692,7 @@ img {
   color: #fff9ea;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.88rem, 1.25vw, 1.18rem);
+  font-size: clamp(0.68rem, 1vw, 1.18rem);
   letter-spacing: 0.03em;
   background: url("../assets/rock.webp") center / 100% 100% no-repeat;
   border: none;
@@ -582,16 +700,13 @@ img {
     0 0 4px #000, 0 2px 8px #000,
     1px 1px 0 #000, -1px -1px 0 #000,
     1px -1px 0 #000, -1px 1px 0 #000,
-    0 0 20px rgba(255,225,100,0.65);
+    0 0 20px rgba(255, 225, 100, .65);
   filter:
-    drop-shadow(0 8px 16px rgba(0,0,0,0.6))
-    drop-shadow(0 0 14px rgba(255,210,100,0.3))
-    brightness(1.25)
-    saturate(1.15);
+    drop-shadow(0 8px 16px rgba(0, 0, 0, .6)) drop-shadow(0 0 14px rgba(255, 210, 100, .3)) brightness(1.25) saturate(1.15);
   transition:
-    transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
-    filter 0.24s ease,
-    opacity 0.24s ease;
+    transform .24s cubic-bezier(.34, 1.56, .64, 1),
+    filter .24s ease,
+    opacity .24s ease;
   cursor: pointer;
   overflow: visible;
 }
@@ -599,10 +714,7 @@ img {
 .tray-brick:hover {
   transform: translateY(-12px) scale(1.14);
   filter:
-    drop-shadow(0 12px 22px rgba(0,0,0,0.65))
-    drop-shadow(0 0 22px rgba(255,220,120,0.55))
-    brightness(1.35)
-    saturate(1.2);
+    drop-shadow(0 12px 22px rgba(0, 0, 0, .65)) drop-shadow(0 0 22px rgba(255, 220, 120, .55)) brightness(1.35) saturate(1.2);
 }
 
 .tray-brick::before {
@@ -610,10 +722,10 @@ img {
   position: absolute;
   inset: -8%;
   border-radius: 16px;
-  background: radial-gradient(circle, rgba(255,220,120,0.22), transparent 72%);
+  background: radial-gradient(circle, rgba(255, 220, 120, .22), transparent 72%);
   opacity: 0.9;
   z-index: -1;
-  transition: opacity 0.25s ease;
+  transition: opacity .25s ease;
 }
 
 .tray-brick::after {
@@ -621,46 +733,51 @@ img {
   position: absolute;
   inset: 14%;
   border-radius: 12px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.18), transparent);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .18), transparent);
   pointer-events: none;
 }
 
-.tray-brick:hover::before { opacity: 1; }
+.tray-brick:hover::before {
+  opacity: 1;
+}
 
 .tray-brick.used {
   opacity: 0.18;
   transform: scale(0.72);
   pointer-events: none;
-  filter: grayscale(0.65) brightness(0.7);
+  filter: grayscale(.65) brightness(.7);
 }
 
-/*  ACTION BUTTONS  */
+/* ─────────────────────────────────────────
+   ACTION BUTTONS
+───────────────────────────────────────── */
 .action-buttons {
   position: absolute;
-  bottom: clamp(14px, 2vh, 30px);
+  bottom: clamp(6px, 1vh, 18px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
   display: flex;
-  gap: clamp(8px, 1.2vw, 16px);
+  gap: clamp(6px, 1vw, 16px);
   flex-wrap: wrap;
   justify-content: center;
-  width: min(96vw, 860px);
-  padding: 0 8px;
+  width: min(98vw, 860px);
+  padding: 0 6px;
 }
 
 .option-btn {
   position: relative;
   overflow: hidden;
-  min-width: clamp(120px, 18vw, 220px);
-  min-height: clamp(44px, 5.5vh, 60px);
-  padding: clamp(10px, 1.4vh, 16px) clamp(16px, 2.5vw, 32px);
-  font-size: clamp(0.82rem, 1.2vw + 0.1rem, 1.05rem);
+  min-width: clamp(100px, 16vw, 220px);
+  min-height: clamp(40px, 5vh, 60px);
+  padding: clamp(8px, 1.2vh, 16px) clamp(14px, 2.2vw, 32px);
+  font-size: clamp(0.85rem, 1.3vw, 1.15rem);
   border-radius: var(--radius-btn);
   border: none;
   font-family: var(--font-display);
   font-weight: 800;
   color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 0 8px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.04em;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -668,39 +785,42 @@ img {
   background: linear-gradient(160deg, #ffcf6b, #ff8c00);
   box-shadow:
     0 6px 0 #b85c00,
-    0 8px 18px rgba(0,0,0,0.38),
-    inset 0 2px 0 rgba(255,255,255,0.30),
-    0 0 18px rgba(255,185,90,0.18);
+    0 8px 18px rgba(0, 0, 0, .38),
+    inset 0 2px 0 rgba(255, 255, 255, .30),
+    0 0 18px rgba(255, 185, 90, .18);
   transition:
-    transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+    transform .2s cubic-bezier(.34, 1.56, .64, 1),
+    box-shadow .2s ease,
+    filter .2s ease;
 }
 
 .option-btn::before {
   content: "";
   position: absolute;
-  top: -80%; left: -60%;
-  width: 45%; height: 260%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+  top: -80%;
+  left: -60%;
+  width: 45%;
+  height: 260%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
   transform: rotate(18deg);
-  transition: left 0.55s ease;
+  transition: left .55s ease;
   pointer-events: none;
 }
 
 .option-btn::after {
   content: attr(data-icon);
   position: absolute;
-  top: 50%; left: clamp(10px, 1.5vw, 18px);
+  top: 50%;
+  left: clamp(10px, 1.5vw, 18px);
   transform: translateY(-50%);
   font-size: 1.25em;
   line-height: 1;
   pointer-events: none;
-  transition: transform 0.2s ease;
+  transition: transform .2s ease;
 }
 
 .option-btn[data-icon] {
-  padding-left: clamp(34px, 4.5vw, 52px);
+  padding-left: clamp(30px, 4vw, 52px);
   text-align: left;
 }
 
@@ -709,42 +829,44 @@ img {
   filter: brightness(1.08);
   box-shadow:
     0 8px 0 #995000,
-    0 14px 28px rgba(0,0,0,0.42),
-    inset 0 2px 0 rgba(255,255,255,0.34),
-    0 0 28px rgba(255,190,80,0.38);
+    0 14px 28px rgba(0, 0, 0, .42),
+    inset 0 2px 0 rgba(255, 255, 255, .34),
+    0 0 28px rgba(255, 190, 80, .38);
 }
 
-.option-btn:hover::before { left: 130%; }
+.option-btn:hover::before {
+  left: 130%;
+}
 
 .option-btn:hover::after {
   transform: translateY(-50%) scale(1.18) rotate(-6deg);
 }
 
 .option-btn:active {
-  transform: translateY(3px) scale(0.97);
+  transform: translateY(3px) scale(.97);
   box-shadow:
     0 2px 0 #b85c00,
-    0 4px 10px rgba(0,0,0,0.28),
-    inset 0 3px 6px rgba(0,0,0,0.18);
-  filter: brightness(0.95);
+    0 4px 10px rgba(0, 0, 0, .28),
+    inset 0 3px 6px rgba(0, 0, 0, .18);
+  filter: brightness(.95);
 }
 
 .option-btn.negative {
   background: linear-gradient(160deg, #ff7070, #c0392b);
   box-shadow:
     0 6px 0 #7b1010,
-    0 8px 18px rgba(0,0,0,0.38),
-    inset 0 2px 0 rgba(255,255,255,0.22),
-    0 0 18px rgba(255,80,60,0.18);
+    0 8px 18px rgba(0, 0, 0, .38),
+    inset 0 2px 0 rgba(255, 255, 255, .22),
+    0 0 18px rgba(255, 80, 60, .18);
 }
 
 .option-btn.positive {
   background: linear-gradient(160deg, #6ee87a, #1e8f3c);
   box-shadow:
     0 6px 0 #145c26,
-    0 8px 18px rgba(0,0,0,0.38),
-    inset 0 2px 0 rgba(255,255,255,0.22),
-    0 0 18px rgba(60,200,90,0.18);
+    0 8px 18px rgba(0, 0, 0, .38),
+    inset 0 2px 0 rgba(255, 255, 255, .22),
+    0 0 18px rgba(60, 200, 90, .18);
 }
 
 .option-btn:disabled {
@@ -754,8 +876,12 @@ img {
   box-shadow: none;
 }
 
-/*  POPUP  */
-#instruction-popup { flex-direction: column; }
+/* ─────────────────────────────────────────
+   POPUP
+───────────────────────────────────────── */
+#instruction-popup {
+  flex-direction: column;
+}
 
 .popup {
   position: fixed;
@@ -776,12 +902,19 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation: popIn .4s cubic-bezier(.34, 1.56, .64, 1) both;
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: translate(-50%, -46%) scale(0.88); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .popup img {
@@ -790,22 +923,23 @@ img {
   display: block;
   object-fit: contain;
   filter:
-    drop-shadow(0 10px 30px rgba(0,0,0,0.45))
-    drop-shadow(0 0 18px rgba(255,210,120,0.22));
+    drop-shadow(0 10px 30px rgba(0, 0, 0, .45)) drop-shadow(0 0 18px rgba(255, 210, 120, .22));
 }
 
 .popup-title {
   display: block;
-  width: 100%;
+  width: clamp(260px, 55vw, 800px);
   height: auto;
   object-fit: contain;
   background: transparent;
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, .35));
 }
 
-/*  SUCCESS SCREEN  */
+/* ─────────────────────────────────────────
+   SUCCESS SCREEN
+───────────────────────────────────────── */
 #success-screen {
-  background: url("../assets/end-screen-bg.webp") center / cover no-repeat;
+  background: url("../assets/bg3.webp") center / cover no-repeat;
   justify-content: center;
   align-items: center;
 }
@@ -814,137 +948,233 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.38) 100%);
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, .05) 0%, rgba(0, 0, 0, .38) 100%);
   pointer-events: none;
 }
 
 .end-screen-image {
   position: relative;
   z-index: 2;
+<<<<<<< HEAD
   width: clamp(270px, 67vw, 780px);
   margin-bottom: auto;
   margin-top: clamp(10px, 3vh, 30px);
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
+=======
+  width: clamp(220px, 60vw, 880px);
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .4));
+>>>>>>> fc18c01cf427be7f3490a23f9de28051dd0e83ff
   animation: titleFloat 3s ease-in-out infinite;
 }
 
-/*  PARTICLES  */
+/* ─────────────────────────────────────────
+   FLOATING WORD PARTICLES
+───────────────────────────────────────── */
 .floating-word {
   position: fixed;
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-size: clamp(1rem, 2vw, 2.2rem);
   font-weight: 800;
   pointer-events: none;
   z-index: 9000;
-  text-shadow: 0 3px 12px rgba(0,0,0,0.25);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, .25);
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — all offsets scale relative
-   to the 1920×1200 baseline above.
-
-   Strategy: use a CSS scale factor derived
-   from viewport width so every px value
-   shrinks/grows proportionally.
+   RESPONSIVE OVERRIDES
+   These only fine-tune layout at breakpoints
+   where fluid values alone aren't enough.
+   Baseline (1440px) needs no overrides at all.
 ═══════════════════════════════════════════ */
 
-/* ── 1680 × 1050  (~88% of baseline) ── */
-@media (max-width: 1680px) {
-  .encounter-area { top: 245px; right: 26px; }
-  .speech-bubble  { top: -88px; right: 88px; }
-}
-
-/* ── 1440 × 900  (~75% of baseline) ── */
-@media (max-width: 1440px) {
-  .encounter-area { top: 210px; right: 22px; }
-  .speech-bubble  {
-    top: -76px;
-    right: 76px;
-    width: clamp(300px, 34vw, 460px);
-    height: clamp(140px, 18vw, 210px);
+/* ── Large desktop 1600-1920px (covers 1855×939 DevTools viewport) ── */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  :root {
+    --enc-bottom: clamp(24vh, 38vh, 32vh);
+    --enc-right: clamp(8vw, 12vw, 15vw);
+    --bubble-w: clamp(280px, 24vw, 440px);
+    --bubble-h: clamp(135px, 12vw, 215px);
+    --villager-w: clamp(130px, 13vw, 210px);
+    --bridge-w: clamp(520px, 52vw, 820px);
+    --slot-h: clamp(58px, 8vh, 95px);
   }
-  .villager-container { right: 42px; }
-  #mean-comment { font-size: clamp(0.9rem, 1.3vw, 1.4rem); }
 }
 
-/* ── 1280 × 800  (~67% of baseline) ── */
+/* ── 4K / very large ≥ 1920px ── */
+@media (min-width: 1920px) {
+  :root {
+    --enc-bottom: clamp(42vh, 48vh, 54vh);
+    --enc-right: clamp(24vw, 28vw, 34vw);
+    --bubble-w: clamp(260px, 20vw, 400px);
+    --bubble-h: clamp(140px, 12vw, 230px);
+    --villager-w: clamp(100px, 9vw, 180px);
+    --bridge-w: clamp(580px, 52vw, 960px);
+  }
+}
+
+/* ── 1280px ── */
 @media (max-width: 1280px) {
-  .encounter-area { top: 188px; right: 18px; }
-  .speech-bubble  {
-    top: -68px;
-    right: 68px;
-    width: clamp(260px, 34vw, 400px);
-    height: clamp(120px, 17vw, 190px);
+  :root {
+    --enc-bottom: clamp(36vh, 42vh, 48vh);
+    --enc-right: clamp(18vw, 23vw, 28vw);
+    --bubble-w: clamp(190px, 20vw, 320px);
+    --bubble-h: clamp(115px, 12vw, 190px);
+    --villager-w: clamp(75px, 9.5vw, 130px);
+    --bridge-w: clamp(300px, 52vw, 640px);
   }
-  .villager-container {
-    right: 36px;
-    width: clamp(80px, 12vw, 160px);
-  }
-  #mean-comment { font-size: clamp(0.82rem, 1.2vw, 1.25rem); }
-
-  .bridge-container { width: clamp(220px, 52vw, 580px); }
-  .action-buttons   { width: min(96vw, 780px); }
 }
 
-/* ── 1024 × 768  (~53% of baseline) ── */
+/* ── 1024px tablets / small laptops ── */
 @media (max-width: 1024px) {
   :root {
-    --ground-bottom: 30vh;
-    --bridge-bottom: 22vh;
+    --ground-bottom: 30dvh;
+    --bridge-bottom: 22dvh;
+    --enc-bottom: clamp(34vh, 40vh, 46vh);
+    --enc-right: clamp(16vw, 21vw, 26vw);
+    --bubble-w: clamp(165px, 19vw, 270px);
+    --bubble-h: clamp(100px, 11vw, 165px);
+    --villager-w: clamp(60px, 8.5vw, 110px);
+    --bridge-w: 72vw;
   }
-  .encounter-area { top: 150px; right: 14px; }
-  .speech-bubble  {
-    top: -55px;
-    right: 55px;
-    width: clamp(220px, 36vw, 360px);
-    height: clamp(100px, 16vw, 170px);
-    padding: 14px 44px 28px;
+
+  .action-buttons {
+    flex-wrap: wrap;
+    width: 97vw;
   }
-  .villager-container {
-    right: 28px;
-    width: clamp(70px, 11vw, 130px);
-  }
-  #mean-comment { font-size: clamp(0.75rem, 1.15vw, 1.1rem); }
-  .bridge-container { width: 80vw; }
-  .action-buttons   { width: 96vw; flex-wrap: wrap; }
 }
 
-/* ── Short screens (height < 800px, e.g. 1366×768) ── */
-@media (max-height: 800px) and (min-width: 1024px) {
-  .encounter-area { top: 160px; }
-  .brick-tray     { bottom: clamp(85px, 11vh, 130px); }
-  .action-buttons { bottom: clamp(10px, 1.5vh, 22px); }
+/* ── 768px  (portrait tablet) ── */
+@media (max-width: 768px) {
+  :root {
+    --ground-bottom: 28dvh;
+    --enc-bottom: clamp(30vh, 36vh, 42vh);
+    --enc-right: clamp(14vw, 19vw, 24vw);
+    --bubble-w: clamp(140px, 22vw, 240px);
+    --bubble-h: clamp(88px, 11vw, 150px);
+    --villager-w: clamp(50px, 8vw, 90px);
+    --bridge-w: 80vw;
+  }
+
+  .progress-milestones {
+    display: none;
+  }
+
+  /* too cramped */
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+    bottom: clamp(6px, 1.2vh, 16px);
+    gap: 6px;
+    width: 95vw;
+  }
+
+  .option-btn {
+    width: 90vw;
+    min-height: 44px;
+  }
+
+  .brick-tray {
+    bottom: clamp(160px, 22vh, 220px);
+  }
 }
 
-/* ── Very short landscape (height < 600px) ── */
-@media (max-height: 600px) and (orientation: landscape) {
-  :root { --ground-bottom: 20vh; }
-  .encounter-area  { top: 80px; }
-  .speech-bubble   { height: clamp(90px, 13vw, 150px); top: -44px; }
-  .brick-tray      { bottom: 68px; }
-  .action-buttons  { bottom: 6px; }
-  .progress-milestones { display: none; }
-}
-
-/* ── 480px and below (small brick text) ── */
+/* ── 480px  (large phone landscape / small phone) ── */
 @media (max-width: 480px) {
-  .brick     { font-size: clamp(0.65rem, 2.4vw, 0.8rem); }
+  :root {
+    --ground-bottom: 26dvh;
+    --enc-bottom: clamp(26vh, 32vh, 38vh);
+    --enc-right: clamp(12vw, 17vw, 22vw);
+    --bubble-w: clamp(115px, 20vw, 200px);
+    --bubble-h: clamp(74px, 10vw, 130px);
+    --villager-w: clamp(44px, 7.5vw, 70px);
+    --bridge-w: 88vw;
+  }
+
   .tray-brick {
-    width: clamp(75px, 19vw, 105px);
-    height: clamp(50px, 6.5vh, 68px);
-    font-size: clamp(0.65rem, 2.4vw, 0.82rem);
+    width: clamp(58px, 15vw, 90px);
+    height: clamp(38px, 6vh, 58px);
+    font-size: clamp(0.55rem, 2vw, 0.75rem);
   }
-  .action-buttons .option-btn {
-    min-width: 90px;
-    font-size: 0.7rem;
-    min-height: 46px;
+
+  .brick {
+    font-size: clamp(0.5rem, 1.8vw, 0.72rem);
   }
-  .popup { width: 94vw; padding: 22px 16px; }
+
+  .option-btn {
+    font-size: 0.72rem;
+    min-height: 42px;
+    padding: 8px 14px;
+  }
+
+  .popup-title {
+    width: 90vw;
+  }
+
+  .action-buttons {
+    bottom: 6px;
+  }
+
+  .brick-tray {
+    bottom: clamp(150px, 24vh, 200px);
+  }
+}
+
+/* ── Short viewports  (height < 800px, wide screen, e.g. 1366×768) ── */
+@media (max-height: 800px) and (min-width: 1024px) {
+  :root {
+    --ground-bottom: 32dvh;
+  }
+
+  .encounter-area {
+    top: clamp(120px, 16vh, 180px);
+  }
+
+  .brick-tray {
+    bottom: clamp(75px, 10vh, 120px);
+  }
+
+  .action-buttons {
+    bottom: clamp(8px, 1.4vh, 20px);
+  }
+}
+
+/* ── Very short landscape (height < 600px — phones rotated) ── */
+@media (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --ground-bottom: 20dvh;
+  }
+
+  .brick-tray {
+    bottom: 58px;
+  }
+
+  .action-buttons {
+    bottom: 4px;
+    gap: 4px;
+  }
+
+  .progress-milestones {
+    display: none;
+  }
+
+  .top-ui {
+    top: 6px;
+  }
+
+  .progress-wrapper {
+    padding: 8px 14px;
+    gap: 4px;
+  }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
