@@ -33,57 +33,57 @@ const speechBubble = document.getElementById("speech-bubble");
 const encounters = [
   {
     villager: "assets/Characters/oldman.png",
-    comment: "You will fail!",
-    choices: ["😢 I quit.", "😡 Be quiet!", "💪 I'll try again!"],
+    comment: "You'll never make it!",
+    choices: ["😢 I quit.", "😡 Shut up!", "💪 I'll try!"],
     correct: 2,
     value: "Hope",
     color: "#3498db"
   },
   {
     villager: "assets/Characters/boy-with-stick.png",
-    comment: "You're too weak!",
-    choices: ["😭 I can't do it.", "🌟 I can keep going.", "😠 You're mean!"],
-    correct: 1,
+    comment: "It's too hard for you!",
+    choices: ["🌟 I can do hard things!", "😭 You're right.", "😠 I hate this!"],
+    correct: 0,
     value: "Patience",
     color: "#2ecc71"
   },
   {
     villager: "assets/Characters/man-with-spade.png",
-    comment: "Everyone is faster\n than you!",
-    choices: ["😔 I'm too slow.", "🚶 Slow is okay.", "😡 I don't care!"],
-    correct: 1,
+    comment: "The game is impossible, you’ll fail.",
+    choices: ["😔 I give up.", "😡 You'll fail too!", "🌈 Failing helps me learn!"],
+    correct: 2,
     value: "Smile",
     color: "#f39c12"
   },
   {
     villager: "assets/Characters/lady-with-pot.png",
-    comment: "The bridge is scary!",
-    choices: ["🏃 I'm leaving!", "💥 I hate this!", "🌈 I can still try."],
-    correct: 2,
+    comment: "Nobody believes in you!",
+    choices: ["💛 I’ll find a way to succeed.", "😭 I can’t do it.", "😠 I’ll ruin it for everyone!"],
+    correct: 0,
     value: "Kindness",
     color: "#e91e63"
   },
   {
     villager: "assets/Characters/lady.png",
-    comment: "People will laugh at you!",
-    choices: ["😞 Then I stop.", "⭐ I can learn!", "😠 I'll yell back!"],
-    correct: 1,
+    comment: "You're so slow!",
+    choices: ["😞 I'll stop then.", "😡 You're mean!", "🐢 Slow and steady wins!"],
+    correct: 2,
     value: "Courage",
     color: "#9b59b6"
   },
   {
     villager: "assets/Characters/girl.png",
-    comment: "That jump is impossible!",
-    choices: ["💤 I give up.", "🌟 I'll practice!", "😡 You're wrong!"],
-    correct: 1,
+    comment: "You'll fall and look silly!",
+    choices: ["😢 I'm too scared.", "😠 You're sillier!", "🌟 Brave people fall too!"],
+    correct: 2,
     value: "Trust",
     color: "#1abc9c"
   },
   {
     villager: "assets/Characters/little-boy.png",
-    comment: "The bridge is broken!",
-    choices: ["😭 It's over.", "🛠️ I'll find a way.", "👿 I'll break more!"],
-    correct: 1,
+    comment: "You'll mess up at the end!",
+    choices: ["🏆 I won't stop now!", "😭 What if I do?", "😡 Stop watching!"],
+    correct: 0,
     value: "Joy",
     color: "#f1c40f"
   }
