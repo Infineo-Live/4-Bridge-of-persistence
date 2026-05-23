@@ -1116,26 +1116,43 @@ img {
   }
 }
 
-/* ── Short viewports  (height < 800px, wide screen, e.g. 1366×768) ── */
-@media (max-height: 800px) and (min-width: 1024px) {
+/* ── Short viewports  (1366×768 / 1400×800 fix) ── */
+@media (max-height: 820px) and (min-width: 1024px) {
   :root {
-    --ground-bottom: 32dvh;
+    /* LOWER the whole village */
+    --ground-bottom: 14dvh;
+    /* adjust villager position */
+    --enc-bottom: 2vh;
+  }
+  .game-area {
+    bottom: var(--ground-bottom);
+  }
+  .house {
+    bottom: 0;
   }
 
-  .encounter-area {
-    top: clamp(120px, 16vh, 180px);
+  .bridge-container {
+    bottom: 8px;
+  }
+
+  #character {
+    bottom: 32px;
   }
 
   .brick-tray {
-    bottom: clamp(75px, 10vh, 120px);
+    bottom: 95px;
   }
 
   .action-buttons {
-    bottom: clamp(8px, 1.4vh, 20px);
+    bottom: 10px;
+  }
+
+  .encounter-area {
+    bottom: var(--enc-bottom);
+    top: auto;
   }
 }
 
-/* ── Very short landscape (height < 600px — phones rotated) ── */
 @media (max-height: 600px) and (orientation: landscape) {
   :root {
     --ground-bottom: 20dvh;
