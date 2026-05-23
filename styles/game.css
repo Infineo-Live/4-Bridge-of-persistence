@@ -199,7 +199,6 @@
 .villager-container {
   width: var(--villager-w);
   position: relative;
-  /* in-flow, at top of encounter-area */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -360,7 +359,7 @@
 /* PLACED BRICK */
 .brick {
   position: absolute;
-  inset: -4px;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -374,7 +373,7 @@
     1px -1px 0 #000, -1px 1px 0 #000,
     0 0 16px rgba(255, 220, 100, .5);
   letter-spacing: 0.02em;
-  background: url("../assets/Characters/rock.png") center / 100% 100% no-repeat !important;
+  background: url("../assets/Characters/rock.png") center / cover no-repeat;
   border-radius: 4px;
   border: none;
   filter:
