@@ -44,23 +44,23 @@
      Speech bubble floats left of the villager,
      over the gap / water.                     */
   /* encounter-area: bottom-anchored so villager stands on cliff */
-  --enc-bottom: clamp(38vh, 44vh, 50vh);
+  --enc-bottom: clamp(38%, 44%, 50%);
   /* cliff top from bottom     */
   /* villager placed at center-right, away from house (~28vw from right) */
-  --enc-right: clamp(24vh, 30vh, 32vh);
+  --enc-right: clamp(24%, 30%, 32%);
 
   /* villager */
-  --villager-w: clamp(130px, 14vw, 220px);
+  --villager-w: clamp(130px, 14cqw, 220px);
 
   /* speech bubble */
-  --bubble-w: clamp(220px, 20vw, 360px);
-  --bubble-h: clamp(130px, 12vw, 210px);
+  --bubble-w: clamp(220px, 20cqw, 360px);
+  --bubble-h: clamp(130px, 12cqh, 210px);
 
   /* ── Bridge ── */
-  --bridge-w: clamp(300px, 52vw, 780px);
+  --bridge-w: clamp(300px, 52cqw, 780px);
   /* wider, more central      */
-  --bridge-h: clamp(55px, 7.5vh, 90px);
-  --slot-h: clamp(60px, 8.5vh, 100px);
+  --bridge-h: clamp(55px, 7.5cqh, 90px);
+  --slot-h: clamp(60px, 8.5cqh, 100px);
 }
 
 /* ─────────────────────────────────────────
@@ -98,9 +98,9 @@ img {
 ───────────────────────────────────────── */
 .company-logo {
   position: fixed;
-  top: clamp(10px, 2vh, 18px);
-  left: clamp(12px, 2vw, 22px);
-  width: clamp(60px, 7.5vw, 140px);
+  top: clamp(10px, 2cqh, 18px);
+  left: clamp(12px, 2cqw, 22px);
+  width: clamp(60px, 7.5cqw, 140px);
   height: auto;
   z-index: 9999;
   object-fit: contain;
@@ -161,16 +161,16 @@ img {
   z-index: 2;
   text-align: center;
   color: var(--clr-white);
-  padding: clamp(20px, 4vw, 48px);
+  padding: clamp(20px, 4cqw, 48px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(14px, 2.5vh, 28px);
-  max-width: min(90vw, 1040px);
+  gap: clamp(14px, 2.5cqh, 28px);
+  max-width: min(90cqw, 1040px);
 }
 
 .welcome-content img {
-  width: clamp(240px, 65vw, 920px);
+  width: clamp(240px, 65cqw, 920px);
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .6));
   animation: titleFloat 3s ease-in-out infinite;
 }
@@ -192,12 +192,12 @@ img {
 ───────────────────────────────────────── */
 .main-btn {
   font-family: var(--font-display);
-  padding: clamp(11px, 1.5vh, 16px) clamp(24px, 4vw, 40px);
+  padding: clamp(11px, 1.5cqh, 16px) clamp(24px, 4cqw, 40px);
   border: none;
   border-radius: var(--radius-btn);
   background: linear-gradient(160deg, var(--clr-accent2), var(--clr-accent));
   color: var(--clr-white);
-  font-size: clamp(0.85rem, 1.4vw + .1rem, 1.2rem);
+  font-size: clamp(0.85rem, 1.4cqw + .1rem, 1.2rem);
   font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.04em;
@@ -260,11 +260,11 @@ img {
 ───────────────────────────────────────── */
 .top-ui {
   position: absolute;
-  top: clamp(10px, 1.8vh, 20px);
+  top: clamp(10px, 1.8cqh, 20px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
-  width: min(94vw, 520px);
+  width: min(94cqw, 520px);
 }
 
 .progress-wrapper {
@@ -276,7 +276,7 @@ img {
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-radius: 24px;
-  padding: clamp(10px, 1.6vh, 18px) clamp(16px, 2.5vw, 28px);
+  padding: clamp(10px, 1.6cqh, 18px) clamp(16px, 2.5cqw, 28px);
   border: 1.5px solid rgba(255, 200, 80, .28);
   box-shadow:
     0 8px 36px rgba(0, 0, 0, .55),
@@ -289,7 +289,7 @@ img {
   font-family: var(--font-display);
   color: #ffd780;
   font-weight: 800;
-  font-size: clamp(0.85rem, 1.4vw, 1.4rem);
+  font-size: clamp(0.85rem, 1.4cqw, 1.4rem);
   letter-spacing: 0.10em;
   text-transform: uppercase;
   text-shadow: 0 1px 8px rgba(255, 160, 0, .55);
@@ -305,7 +305,7 @@ img {
 }
 
 .progress-label .prog-count {
-  font-size: clamp(0.75rem, 1vw, 1rem);
+  font-size: clamp(0.75rem, 1cqw, 1rem);
   font-weight: 900;
   color: #ffe0a0;
   background: rgba(255, 180, 40, .18);
@@ -319,7 +319,7 @@ img {
 
 .progress-bar {
   width: 100%;
-  height: clamp(12px, 1.8vh, 20px);
+  height: clamp(12px, 1.8cqh, 20px);
   background: rgba(0, 0, 0, .55);
   border-radius: var(--radius-pill);
   overflow: hidden;
@@ -374,8 +374,8 @@ img {
 }
 
 .milestone-dot {
-  width: clamp(6px, .9vw, 10px);
-  height: clamp(6px, .9vw, 10px);
+  width: clamp(6px, .9cqw, 10px);
+  height: clamp(6px, .9cqw, 10px);
   border-radius: 50%;
   background: rgba(255, 210, 100, .18);
   border: 1.5px solid rgba(255, 210, 100, .30);
@@ -478,13 +478,13 @@ img {
   /* top/bottom padding: clear the bubble image border
      left padding larger: speech tail is on the right  */
   padding:
-    clamp(16px, 2vw, 28px)
+    clamp(16px, 2cqw, 28px)
     /* top    */
-    clamp(20px, 2vw, 32px)
+    clamp(20px, 2cqw, 32px)
     /* right  */
-    clamp(30px, 3vw, 46px)
+    clamp(30px, 3cqw, 46px)
     /* bottom (tail area) */
-    clamp(20px, 2vw, 32px);
+    clamp(20px, 2cqw, 32px);
   /* left   */
   box-sizing: border-box;
   animation: bubbleFloat 3s ease-in-out infinite;
@@ -506,7 +506,7 @@ img {
 #mean-comment {
   width: 82%;
   font-family: var(--font-display);
-  font-size: clamp(0.82rem, 1.15vw, 1.3rem);
+  font-size: clamp(0.82rem, 1.15cqw, 1.3rem);
   font-weight: 800;
   color: #3a2800;
   text-align: center;
@@ -539,27 +539,27 @@ img {
 /* CHARACTER */
 #character {
   position: absolute;
-  left: clamp(60px, 9vw, 180px);
-  bottom: clamp(80px, 11vh, 150px);
+  left: clamp(60px, 9cqw, 180px);
+  bottom: clamp(80px, 11cqh, 150px);
   z-index: 10;
   transform-origin: bottom center;
 }
 
 #character img {
-  width: clamp(100px, 12vw, 220px);
+  width: clamp(100px, 12cqw, 220px);
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .35));
 }
 
 /* HOUSE */
 .house {
   position: absolute;
-  right: clamp(8px, 1.5vw, 40px);
-  bottom: clamp(40px, 6vh, 80px);
+  right: clamp(8px, 1.5cqw, 40px);
+  bottom: clamp(40px, 6cqh, 80px);
   z-index: 10;
 }
 
 .house img {
-  width: clamp(200px, 26vw, 500px);
+  width: clamp(200px, 26cqw, 500px);
   height: auto;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .3));
 }
@@ -569,7 +569,7 @@ img {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: clamp(40px, 6vh, 80px);
+  bottom: clamp(40px, 6cqh, 80px);
   width: var(--bridge-w);
   height: var(--bridge-h);
   display: flex;
@@ -609,7 +609,7 @@ img {
   color: #fff8e8;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.62rem, 1vw, 1.1rem);
+  font-size: clamp(0.62rem, 1cqw, 1.1rem);
   text-shadow:
     0 0 4px #000, 0 2px 6px #000,
     1px 1px 0 #000, -1px -1px 0 #000,
@@ -655,13 +655,13 @@ img {
 ───────────────────────────────────────── */
 .brick-tray {
   position: absolute;
-  bottom: clamp(110px, 14vh, 160px);
+  bottom: clamp(110px, 14cqh, 160px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: clamp(8px, .9vw, 16px);
+  gap: clamp(8px, .9cqw, 16px);
   padding:
-    clamp(10px, 1.4vh, 16px) clamp(14px, 1.8vw, 26px);
+    clamp(10px, 1.4cqh, 16px) clamp(14px, 1.8cqw, 26px);
   border-radius: 30px;
   background: linear-gradient(to bottom, rgba(42, 24, 8, .82), rgba(15, 8, 2, .92));
   backdrop-filter: blur(18px);
@@ -671,7 +671,7 @@ img {
     inset 0 1px 0 rgba(255, 245, 210, .08),
     0 0 22px rgba(255, 190, 90, .08);
   z-index: 20;
-  max-width: 96vw;
+  max-width: 96cqw;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -682,8 +682,8 @@ img {
 
 /* TRAY BRICKS */
 .tray-brick {
-  width: clamp(72px, 8.5vw, 135px);
-  height: clamp(48px, 6.2vh, 84px);
+  width: clamp(72px, 8.5cqw, 135px);
+  height: clamp(48px, 6.2cqh, 84px);
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -692,7 +692,7 @@ img {
   color: #fff9ea;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(0.68rem, 1vw, 1.18rem);
+  font-size: clamp(0.68rem, 1cqw, 1.18rem);
   letter-spacing: 0.03em;
   background: url("../assets/rock.webp") center / 100% 100% no-repeat;
   border: none;
@@ -753,25 +753,25 @@ img {
 ───────────────────────────────────────── */
 .action-buttons {
   position: absolute;
-  bottom: clamp(6px, 1vh, 18px);
+  bottom: clamp(6px, 1cqh, 18px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
   display: flex;
-  gap: clamp(6px, 1vw, 16px);
+  gap: clamp(6px, 1cqw, 16px);
   flex-wrap: wrap;
   justify-content: center;
-  width: min(98vw, 860px);
+  width: min(98cqw, 860px);
   padding: 0 6px;
 }
 
 .option-btn {
   position: relative;
   overflow: hidden;
-  min-width: clamp(100px, 16vw, 220px);
-  min-height: clamp(40px, 5vh, 60px);
-  padding: clamp(8px, 1.2vh, 16px) clamp(14px, 2.2vw, 32px);
-  font-size: clamp(0.85rem, 1.3vw, 1.15rem);
+  min-width: clamp(100px, 16cqw, 220px);
+  min-height: clamp(40px, 5cqh, 60px);
+  padding: clamp(8px, 1.2cqh, 16px) clamp(14px, 2.2cqw, 32px);
+  font-size: clamp(0.85rem, 1.3cqw, 1.15rem);
   border-radius: var(--radius-btn);
   border: none;
   font-family: var(--font-display);
@@ -811,7 +811,7 @@ img {
   content: attr(data-icon);
   position: absolute;
   top: 50%;
-  left: clamp(10px, 1.5vw, 18px);
+  left: clamp(10px, 1.5cqw, 18px);
   transform: translateY(-50%);
   font-size: 1.25em;
   line-height: 1;
@@ -820,7 +820,7 @@ img {
 }
 
 .option-btn[data-icon] {
-  padding-left: clamp(30px, 4vw, 52px);
+  padding-left: clamp(30px, 4cqw, 52px);
   text-align: left;
 }
 
@@ -928,7 +928,7 @@ img {
 
 .popup-title {
   display: block;
-  width: clamp(260px, 55vw, 800px);
+  width: clamp(260px, 55cqw, 800px);
   height: auto;
   object-fit: contain;
   background: transparent;
@@ -956,9 +956,9 @@ img {
 .end-screen-image {
   position: relative;
   z-index: 2;
-  width: clamp(270px, 67vw, 780px);
+  width: clamp(270px, 67cqw, 780px);
   margin-bottom: auto;
-  margin-top: clamp(10px, 3vh, 30px);
+  margin-top: clamp(10px, 3cqh, 30px);
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
   animation: titleFloat 3s ease-in-out infinite;
 }
@@ -969,7 +969,7 @@ img {
 .floating-word {
   position: fixed;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2vw, 2.2rem);
+  font-size: clamp(1rem, 2cqw, 2.2rem);
   font-weight: 800;
   pointer-events: none;
   z-index: 9000;
@@ -986,37 +986,37 @@ img {
 /* ── Large desktop 1600-1920px (covers 1855×939 DevTools viewport) ── */
 @media (min-width: 1600px) and (max-width: 1919px) {
   :root {
-    --enc-bottom: clamp(24vh, 38vh, 32vh);
-    --enc-right: clamp(8vw, 12vw, 15vw);
-    --bubble-w: clamp(280px, 24vw, 440px);
-    --bubble-h: clamp(135px, 12vw, 215px);
-    --villager-w: clamp(130px, 13vw, 210px);
-    --bridge-w: clamp(520px, 52vw, 820px);
-    --slot-h: clamp(58px, 8vh, 95px);
+    --enc-bottom: clamp(24%, 38%, 32%);
+    --enc-right: clamp(8%, 12%, 15%);
+    --bubble-w: clamp(280px, 24cqw, 440px);
+    --bubble-h: clamp(135px, 12cqh, 215px);
+    --villager-w: clamp(130px, 13cqw, 210px);
+    --bridge-w: clamp(520px, 52cqw, 820px);
+    --slot-h: clamp(58px, 8cqh, 95px);
   }
 }
 
 /* ── 4K / very large ≥ 1920px ── */
 @media (min-width: 1920px) {
   :root {
-    --enc-bottom: clamp(42vh, 48vh, 54vh);
-    --enc-right: clamp(24vw, 28vw, 34vw);
-    --bubble-w: clamp(260px, 20vw, 400px);
-    --bubble-h: clamp(140px, 12vw, 230px);
-    --villager-w: clamp(100px, 9vw, 180px);
-    --bridge-w: clamp(580px, 52vw, 960px);
+    --enc-bottom: clamp(42%, 48%, 54%);
+    --enc-right: clamp(24%, 28%, 34%);
+    --bubble-w: clamp(260px, 20cqw, 400px);
+    --bubble-h: clamp(140px, 12cqh, 230px);
+    --villager-w: clamp(100px, 9cqw, 180px);
+    --bridge-w: clamp(580px, 52cqw, 960px);
   }
 }
 
 /* ── 1280px ── */
 @media (max-width: 1280px) {
   :root {
-    --enc-bottom: clamp(36vh, 42vh, 48vh);
-    --enc-right: clamp(18vw, 23vw, 28vw);
-    --bubble-w: clamp(190px, 20vw, 320px);
-    --bubble-h: clamp(115px, 12vw, 190px);
-    --villager-w: clamp(75px, 9.5vw, 130px);
-    --bridge-w: clamp(300px, 52vw, 640px);
+    --enc-bottom: clamp(36%, 42%, 48%);
+    --enc-right: clamp(18%, 23%, 28%);
+    --bubble-w: clamp(190px, 20cqw, 320px);
+    --bubble-h: clamp(115px, 12cqh, 190px);
+    --villager-w: clamp(75px, 9.5cqw, 130px);
+    --bridge-w: clamp(300px, 52cqw, 640px);
   }
 }
 
@@ -1025,17 +1025,17 @@ img {
   :root {
     --ground-bottom: 30dvh;
     --bridge-bottom: 22dvh;
-    --enc-bottom: clamp(34vh, 40vh, 46vh);
-    --enc-right: clamp(16vw, 21vw, 26vw);
-    --bubble-w: clamp(165px, 19vw, 270px);
-    --bubble-h: clamp(100px, 11vw, 165px);
-    --villager-w: clamp(60px, 8.5vw, 110px);
-    --bridge-w: 72vw;
+    --enc-bottom: clamp(34%, 40%, 46%);
+    --enc-right: clamp(16%, 21%, 26%);
+    --bubble-w: clamp(165px, 19cqw, 270px);
+    --bubble-h: clamp(100px, 11cqh, 165px);
+    --villager-w: clamp(60px, 8.5cqw, 110px);
+    --bridge-w: 72cqw;
   }
 
   .action-buttons {
     flex-wrap: wrap;
-    width: 97vw;
+    width: 97cqw;
   }
 }
 
@@ -1043,12 +1043,12 @@ img {
 @media (max-width: 768px) {
   :root {
     --ground-bottom: 28dvh;
-    --enc-bottom: clamp(30vh, 36vh, 42vh);
-    --enc-right: clamp(14vw, 19vw, 24vw);
-    --bubble-w: clamp(140px, 22vw, 240px);
-    --bubble-h: clamp(88px, 11vw, 150px);
-    --villager-w: clamp(50px, 8vw, 90px);
-    --bridge-w: 80vw;
+    --enc-bottom: clamp(30%, 36%, 42%);
+    --enc-right: clamp(14%, 19%, 24%);
+    --bubble-w: clamp(140px, 22cqw, 240px);
+    --bubble-h: clamp(88px, 11cqh, 150px);
+    --villager-w: clamp(50px, 8cqw, 90px);
+    --bridge-w: 80cqw;
   }
 
   .progress-milestones {
@@ -1060,18 +1060,18 @@ img {
   .action-buttons {
     flex-direction: column;
     align-items: center;
-    bottom: clamp(6px, 1.2vh, 16px);
+    bottom: clamp(6px, 1.2cqh, 16px);
     gap: 6px;
-    width: 95vw;
+    width: 95cqw;
   }
 
   .option-btn {
-    width: 90vw;
+    width: 90cqw;
     min-height: 44px;
   }
 
   .brick-tray {
-    bottom: clamp(160px, 22vh, 220px);
+    bottom: clamp(160px, 22cqh, 220px);
   }
 }
 
@@ -1079,22 +1079,22 @@ img {
 @media (max-width: 480px) {
   :root {
     --ground-bottom: 26dvh;
-    --enc-bottom: clamp(26vh, 32vh, 38vh);
-    --enc-right: clamp(12vw, 17vw, 22vw);
-    --bubble-w: clamp(115px, 20vw, 200px);
-    --bubble-h: clamp(74px, 10vw, 130px);
-    --villager-w: clamp(44px, 7.5vw, 70px);
-    --bridge-w: 88vw;
+    --enc-bottom: clamp(26%, 32%, 38%);
+    --enc-right: clamp(12%, 17%, 22%);
+    --bubble-w: clamp(115px, 20cqw, 200px);
+    --bubble-h: clamp(74px, 10cqh, 130px);
+    --villager-w: clamp(44px, 7.5cqw, 70px);
+    --bridge-w: 88cqw;
   }
 
   .tray-brick {
-    width: clamp(58px, 15vw, 90px);
-    height: clamp(38px, 6vh, 58px);
-    font-size: clamp(0.55rem, 2vw, 0.75rem);
+    width: clamp(58px, 15cqw, 90px);
+    height: clamp(38px, 6cqh, 58px);
+    font-size: clamp(0.55rem, 2cqw, 0.75rem);
   }
 
   .brick {
-    font-size: clamp(0.5rem, 1.8vw, 0.72rem);
+    font-size: clamp(0.5rem, 1.8cqw, 0.72rem);
   }
 
   .option-btn {
@@ -1104,7 +1104,7 @@ img {
   }
 
   .popup-title {
-    width: 90vw;
+    width: 90cqw;
   }
 
   .action-buttons {
@@ -1122,7 +1122,7 @@ img {
     /* LOWER the whole village */
     --ground-bottom: 14dvh;
     /* adjust villager position */
-    --enc-bottom: 2vh;
+    --enc-bottom: 2%;
   }
   .game-area {
     bottom: var(--ground-bottom);
