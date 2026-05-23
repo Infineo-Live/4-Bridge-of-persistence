@@ -1,0 +1,138 @@
+/* GOOGLE FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* ═══════════════════════════════════════════
+   CSS VARIABLES
+   Baseline = 1440 × 900 (15-inch laptop).
+   All fluid values are tuned so that screen
+   looks identical to the original at 1440px.
+ ═══════════════════════════════════════════ */
+:root {
+  --font-display: 'Baloo 2', cursive;
+  --font-body: 'Nunito', sans-serif;
+
+  --clr-accent: #ff7b00;
+  --clr-accent2: #ffb347;
+  --clr-good: #2ea043;
+  --clr-good-lt: #56d364;
+  --clr-bad: #b91c1c;
+  --clr-bad-lt: #f85149;
+  --clr-white: #ffffff;
+  --clr-text: #2d2d2d;
+  --clr-text-soft: #555555;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, .14);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, .20);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, .26);
+
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --radius-btn: 50px;
+
+  /* ── Ground / bridge / character anchors ──
+     expressed in dvh so they scale with
+     viewport height automatically.           */
+  --ground-bottom: 38dvh;
+  --bridge-bottom: 30dvh;
+  --char-bottom: 32dvh;
+  --house-bottom: 28dvh;
+
+  /* ── Encounter-area fluid offsets ──
+     Villager stands at the RIGHT cliff edge.
+     On the screenshot the cliff edge is ≈ 8vw
+     from the right of the screen.
+     Speech bubble floats left of the villager,
+     over the gap / water.                     */
+  /* encounter-area: bottom-anchored so villager stands on cliff */
+  --enc-bottom: clamp(38%, 44%, 50%);
+  /* cliff top from bottom     */
+  /* villager placed at center-right, away from house (~28vw from right) */
+  --enc-right: clamp(24%, 30%, 32%);
+
+  /* villager */
+  --villager-w: clamp(130px, 14cqw, 220px);
+
+  /* speech bubble */
+  --bubble-w: clamp(220px, 20cqw, 360px);
+  --bubble-h: clamp(130px, 12cqh, 210px);
+
+  /* ── Bridge ── */
+  --bridge-w: clamp(300px, 52cqw, 780px);
+  /* wider, more central      */
+  --bridge-h: clamp(55px, 7.5cqh, 90px);
+  --slot-h: clamp(60px, 8.5cqh, 100px);
+}
+
+/* ─────────────────────────────────────────
+   RESET
+ ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  overflow: hidden;
+  background: #1a0e05;
+  color: var(--clr-text);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─────────────────────────────────────────
+   COMPANY LOGO
+ ───────────────────────────────────────── */
+.company-logo {
+  position: fixed;
+  top: clamp(10px, 2cqh, 18px);
+  left: clamp(12px, 2cqw, 22px);
+  width: clamp(60px, 7.5cqw, 140px);
+  height: auto;
+  z-index: 9999;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────
+   SCREENS
+ ───────────────────────────────────────── */
+.screen {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ─────────────────────────────────────────
+   FIREFLIES
+ ───────────────────────────────────────── */
+.firefly-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+}

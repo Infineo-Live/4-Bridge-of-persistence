@@ -1,0 +1,545 @@
+/* ─────────────────────────────────────────
+   GAME SCREEN
+ ───────────────────────────────────────── */
+#game-screen {
+  background: url("../assets/game-bg.webp") center center / cover no-repeat;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#game-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden-game {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.show-game {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ─────────────────────────────────────────
+   PROGRESS BAR — top-center
+ ───────────────────────────────────────── */
+.top-ui {
+  position: absolute;
+  top: clamp(10px, 1.8cqh, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(94cqw, 520px);
+}
+
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  background: linear-gradient(160deg, rgba(15, 8, 2, .92), rgba(35, 18, 4, .88));
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-radius: 24px;
+  padding: clamp(10px, 1.6cqh, 18px) clamp(16px, 2.5cqw, 28px);
+  border: 1.5px solid rgba(255, 200, 80, .28);
+  box-shadow:
+    0 8px 36px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(255, 255, 255, .04),
+    inset 0 1px 0 rgba(255, 230, 120, .16),
+    inset 0 -1px 0 rgba(0, 0, 0, .3);
+}
+
+.progress-label {
+  font-family: var(--font-display);
+  color: #ffd780;
+  font-weight: 800;
+  font-size: clamp(0.85rem, 1.4cqw, 1.4rem);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(255, 160, 0, .55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.progress-label .prog-title {
+  flex: 1;
+  text-align: center;
+}
+
+.progress-label .prog-count {
+  font-size: clamp(0.75rem, 1cqw, 1rem);
+  font-weight: 900;
+  color: #ffe0a0;
+  background: rgba(255, 180, 40, .18);
+  border: 1px solid rgba(255, 200, 60, .30);
+  border-radius: 20px;
+  padding: 2px 9px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: color .3s ease, background .3s ease;
+}
+
+.progress-bar {
+  width: 100%;
+  height: clamp(12px, 1.8cqh, 20px);
+  background: rgba(0, 0, 0, .55);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 170, 40, .22);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, .65),
+    inset 0 -1px 3px rgba(255, 200, 60, .08);
+  position: relative;
+}
+
+#progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f77f00 0%, #facc15 28%, #86efac 62%, #22c55e 100%);
+  transition: width .7s cubic-bezier(.34, 1.56, .64, 1);
+  box-shadow:
+    0 0 12px rgba(80, 220, 130, .70),
+    0 0 28px rgba(250, 200, 40, .38);
+  position: relative;
+  overflow: hidden;
+}
+
+#progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .50), transparent);
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -70%;
+  }
+
+  100% {
+    left: 130%;
+  }
+}
+
+.progress-milestones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  margin-top: -3px;
+}
+
+.milestone-dot {
+  width: clamp(6px, .9cqw, 10px);
+  height: clamp(6px, .9cqw, 10px);
+  border-radius: 50%;
+  background: rgba(255, 210, 100, .18);
+  border: 1.5px solid rgba(255, 210, 100, .30);
+  transition:
+    background .35s ease,
+    transform .35s cubic-bezier(.34, 1.56, .64, 1),
+    border-color .35s ease,
+    box-shadow .35s ease;
+  flex-shrink: 0;
+}
+
+.milestone-dot.filled {
+  background: #ffd060;
+  border-color: #ffe87a;
+  transform: scale(1.35);
+  box-shadow:
+    0 0 8px rgba(255, 215, 60, .80),
+    0 0 16px rgba(255, 200, 40, .40);
+  animation: dotPop .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@keyframes dotPop {
+  0% {
+    transform: scale(0.6);
+  }
+
+  60% {
+    transform: scale(1.55);
+  }
+
+  100% {
+    transform: scale(1.35);
+  }
+}
+
+/* ─────────────────────────────────────────
+   ENCOUNTER AREA
+ ───────────────────────────────────────── */
+.encounter-area {
+  position: absolute;
+  /* Bottom-anchored so villager feet sit on the cliff top */
+  bottom: var(--enc-bottom);
+  right: var(--enc-right);
+  z-index: 15;
+  width: var(--villager-w);
+}
+
+.villager-container {
+  width: var(--villager-w);
+  position: relative;
+  /* in-flow, at top of encounter-area */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  animation: villagerBob 2.8s ease-in-out infinite;
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.villager-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes villagerBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(1.5deg);
+  }
+}
+
+/* Speech bubble — anchored to villager's top-left corner.
+   right:100% puts its right edge flush with villager's left edge.
+   We then nudge it up with a negative top.                       */
+.speech-bubble {
+  position: absolute;
+  /* Anchored to villager: tail points right toward him,
+     bubble floats to his upper-left                    */
+  bottom: 88%;
+  /* just above villager's head        */
+  right: 20%;
+  /* starts just left of villager center */
+  width: var(--bubble-w);
+  height: var(--bubble-h);
+  background: url("../assets/Characters/speech-bubble.png") center center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top/bottom padding: clear the bubble image border
+     left padding larger: speech tail is on the right  */
+  padding:
+    clamp(16px, 2cqw, 28px)
+    /* top    */
+    clamp(20px, 2cqw, 32px)
+    /* right  */
+    clamp(30px, 3cqw, 46px)
+    /* bottom (tail area) */
+    clamp(20px, 2cqw, 32px);
+  /* left   */
+  box-sizing: border-box;
+  animation: bubbleFloat 3s ease-in-out infinite;
+  z-index: 20;
+}
+
+@keyframes bubbleFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+#mean-comment {
+  width: 82%;
+  font-family: var(--font-display);
+  font-size: clamp(0.82rem, 1.15cqw, 1.3rem);
+  font-weight: 800;
+  color: #3a2800;
+  text-align: center;
+  line-height: 1.25;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-8px);
+}
+
+.speech-bubble::after {
+  display: none;
+}
+
+/* ─────────────────────────────────────────
+   GAME AREA  (character + bridge + house)
+ ───────────────────────────────────────── */
+.game-area {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--ground-bottom);
+  height: 0;
+  z-index: 5;
+}
+
+/* CHARACTER */
+#character {
+  position: absolute;
+  left: clamp(60px, 9cqw, 180px);
+  bottom: clamp(80px, 11cqh, 150px);
+  z-index: 10;
+  transform-origin: bottom center;
+}
+
+#character img {
+  width: clamp(100px, 12cqw, 220px);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .35));
+}
+
+/* HOUSE */
+.house {
+  position: absolute;
+  right: clamp(8px, 1.5cqw, 40px);
+  bottom: clamp(40px, 6cqh, 80px);
+  z-index: 10;
+}
+
+.house img {
+  width: clamp(200px, 26cqw, 500px);
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .3));
+}
+
+/* BRIDGE */
+.bridge-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(40px, 6cqh, 80px);
+  width: var(--bridge-w);
+  height: var(--bridge-h);
+  display: flex;
+  align-items: flex-end;
+  z-index: 8;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#bridge {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0;
+  width: 100%;
+}
+
+.brick-slot {
+  flex: 1;
+  height: var(--slot-h);
+  border-radius: 8px;
+  border: 2px dashed rgba(255, 240, 200, .45);
+  background: rgba(20, 10, 0, .55);
+  backdrop-filter: blur(2px);
+  opacity: 1;
+  position: relative;
+  overflow: visible;
+}
+
+/* PLACED BRICK */
+.brick {
+  position: absolute;
+  inset: -4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff8e8;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(0.62rem, 1cqw, 1.1rem);
+  text-shadow:
+    0 0 4px #000, 0 2px 6px #000,
+    1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000,
+    0 0 16px rgba(255, 220, 100, .5);
+  letter-spacing: 0.02em;
+  background: url("../assets/Characters/rock.png") center / 100% 100% no-repeat !important;
+  border-radius: 4px;
+  border: none;
+  filter:
+    drop-shadow(0 6px 14px rgba(0, 0, 0, .7)) drop-shadow(0 0 14px rgba(255, 210, 100, .35)) brightness(1.3) saturate(1.2);
+  animation: brickPop .35s ease both;
+  z-index: 999;
+}
+
+.brick::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 12px;
+  background: radial-gradient(circle, rgba(255, 230, 150, .22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes brickPop {
+  0% {
+    transform: scale(.5) translateY(20px);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.08) translateY(-4px);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────────────────────
+   BRICK TRAY
+ ───────────────────────────────────────── */
+.brick-tray {
+  position: absolute;
+  bottom: clamp(110px, 14cqh, 160px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(8px, .9cqw, 16px);
+  padding:
+    clamp(10px, 1.4cqh, 16px) clamp(14px, 1.8cqw, 26px);
+  border-radius: 30px;
+  background: linear-gradient(to bottom, rgba(42, 24, 8, .82), rgba(15, 8, 2, .92));
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 220, 140, .22);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, .45),
+    inset 0 1px 0 rgba(255, 245, 210, .08),
+    0 0 22px rgba(255, 190, 90, .08);
+  z-index: 20;
+  max-width: 96cqw;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.brick-tray::-webkit-scrollbar {
+  display: none;
+}
+
+/* TRAY BRICKS */
+.tray-brick {
+  width: clamp(72px, 8.5cqw, 135px);
+  height: clamp(48px, 6.2cqh, 84px);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #fff9ea;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(0.68rem, 1cqw, 1.18rem);
+  letter-spacing: 0.03em;
+  background: url("../assets/rock.webp") center / 100% 100% no-repeat;
+  border: none;
+  text-shadow:
+    0 0 4px #000, 0 2px 8px #000,
+    1px 1px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000,
+    0 0 20px rgba(255, 225, 100, .65);
+  filter:
+    drop-shadow(0 8px 16px rgba(0, 0, 0, .6)) drop-shadow(0 0 14px rgba(255, 210, 100, .3)) brightness(1.25) saturate(1.15);
+  transition:
+    transform .24s cubic-bezier(.34, 1.56, .64, 1),
+    filter .24s ease,
+    opacity .24s ease;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.tray-brick:hover {
+  transform: translateY(-12px) scale(1.14);
+  filter:
+    drop-shadow(0 12px 22px rgba(0, 0, 0, .65)) drop-shadow(0 0 22px rgba(255, 220, 120, .55)) brightness(1.35) saturate(1.2);
+}
+
+.tray-brick::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 16px;
+  background: radial-gradient(circle, rgba(255, 220, 120, .22), transparent 72%);
+  opacity: 0.9;
+  z-index: -1;
+  transition: opacity .25s ease;
+}
+
+.tray-brick::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 12px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .18), transparent);
+  pointer-events: none;
+}
+
+.tray-brick:hover::before {
+  opacity: 1;
+}
+
+.tray-brick.used {
+  opacity: 0.18;
+  transform: scale(0.72);
+  pointer-events: none;
+  filter: grayscale(.65) brightness(.7);
+}
+
+/* ─────────────────────────────────────────
+   ACTION BUTTONS
+ ───────────────────────────────────────── */
+.action-buttons {
+  position: absolute;
+  bottom: clamp(6px, 1cqh, 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  gap: clamp(6px, 1cqw, 16px);
+  flex-wrap: wrap;
+  justify-content: center;
+  width: min(98cqw, 860px);
+  padding: 0 6px;
+}
+
+/* ─────────────────────────────────────────
+   FLOATING WORD PARTICLES
+ ───────────────────────────────────────── */
+.floating-word {
+  position: fixed;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2cqw, 2.2rem);
+  font-weight: 800;
+  pointer-events: none;
+  z-index: 9000;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, .25);
+}
