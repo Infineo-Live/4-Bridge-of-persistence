@@ -131,6 +131,7 @@ img {
   pointer-events: auto; /* Ensure child elements are clickable */
   z-index: 10;
   overflow: hidden;
+  container-type: size; /* Fix cqw scaling */
 }
 
 .screen {

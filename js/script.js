@@ -324,16 +324,21 @@ function createBrick(slotIndex) {
 
   // Flying clone from tray to bridge
   if (trayBrick) {
+    const viewport = document.getElementById("game-viewport");
+    const vpRect = viewport.getBoundingClientRect();
+    const scale = getViewportScale();
+    
     const trayRect = trayBrick.getBoundingClientRect();
     const flyingBrick = trayBrick.cloneNode(true);
     flyingBrick.classList.remove("used");
-    document.body.appendChild(flyingBrick);
+    viewport.appendChild(flyingBrick);
+    
     Object.assign(flyingBrick.style, {
-      position:  "fixed",
-      left:      `${trayRect.left}px`,
-      top:       `${trayRect.top}px`,
-      width:     `${trayRect.width}px`,
-      height:    `${trayRect.height}px`,
+      position:  "absolute",
+      left:      `${(trayRect.left - vpRect.left) / scale}px`,
+      top:       `${(trayRect.top - vpRect.top) / scale}px`,
+      width:     `${trayRect.width / scale}px`,
+      height:    `${trayRect.height / scale}px`,
       zIndex:    "9998",
       margin:    "0",
       pointerEvents: "none"
@@ -348,13 +353,15 @@ function createBrick(slotIndex) {
 
     // Force layout
     void bridgeBrick.offsetWidth;
-    const bridgeRect = bridgeBrick.getBoundingClientRect();
+    // Fix: We must measure the slot's rect, not the animating bridgeBrick's rect,
+    // otherwise it returns the scaled/shifted rect from the 0% keyframe of brickPop.
+    const bridgeRect = slot.getBoundingClientRect();
 
     gsap.to(flyingBrick, {
-      left: bridgeRect.left,
-      top:  bridgeRect.top,
-      width:  bridgeRect.width,
-      height: bridgeRect.height,
+      left: (bridgeRect.left - vpRect.left) / scale,
+      top:  (bridgeRect.top - vpRect.top) / scale,
+      width:  bridgeRect.width / scale,
+      height: bridgeRect.height / scale,
       duration: 0.65,
       ease: "power3.out",
       onComplete: () => {
@@ -439,16 +446,18 @@ function buildProgressUI() {
 
 //  CHARACTER ANIMATIONS 
 function happyBounce() {
-  gsap.fromTo(character,
+  const boyImg = character.querySelector("img");
+  gsap.fromTo(boyImg,
     { y: 0, rotation: 0 },
     { y: -16, rotation: 5, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }
   );
 }
 
 function sadBounce() {
-  gsap.fromTo(character,
+  const boyImg = character.querySelector("img");
+  gsap.fromTo(boyImg,
     { rotation: 0 },
-    { rotation: -12, duration: 0.12, yoyo: true, repeat: 4, ease: "power2.inOut" }
+    { rotation: -12, duration: 0.12, yoyo: true, repeat: 5, ease: "power2.inOut" }
   );
 }
 
@@ -507,15 +516,20 @@ function walkCharacter() {
 
 //  FLOATING WORD PARTICLE 
 function spawnFloatingWord(text, anchorEl) {
+  const viewport = document.getElementById("game-viewport");
+  const vpRect = viewport.getBoundingClientRect();
+  const scale = getViewportScale();
   const rect = anchorEl.getBoundingClientRect();
+  
   const el = document.createElement("div");
   el.classList.add("floating-word");
   el.innerText = text;
-  el.style.left = `${rect.left + rect.width / 2 - 60}px`;
-  el.style.top  = `${rect.top}px`;
+  el.style.position = "absolute";
+  el.style.left = `${(rect.left - vpRect.left + rect.width / 2) / scale - 60}px`;
+  el.style.top  = `${(rect.top - vpRect.top) / scale}px`;
   el.style.color = "#fff";
   el.style.textShadow = "0 2px 8px rgba(255,180,0,0.7)";
-  document.body.appendChild(el);
+  viewport.appendChild(el);
 
   gsap.fromTo(el,
     { opacity: 1, y: 0, scale: 0.8 },
