@@ -38,14 +38,14 @@
 
   /* ── Encounter-area coordinates ── */
   --enc-bottom: 41.7cqh;
-  --enc-right: 29.7cqw;
+  --enc-right: 17.5cqw;
 
   /* villager */
   --villager-w: 11.5cqw;
 
   /* speech bubble */
-  --bubble-w: 27.75cqw;
-  --bubble-h: 26.4cqh;
+  --bubble-w: 15.0cqw;
+  --bubble-h: 15.0cqh;
 
   /* ── Bridge ── */
   --bridge-w: 40.6cqw;
@@ -128,10 +128,12 @@ img {
   width: 1920px;
   height: 1080px;
   transform-origin: center center;
-  pointer-events: auto; /* Ensure child elements are clickable */
+  pointer-events: auto;
+  /* Ensure child elements are clickable */
   z-index: 10;
   overflow: hidden;
-  container-type: size; /* Fix cqw scaling */
+  container-type: size;
+  /* Fix cqw scaling */
 }
 
 .screen {
