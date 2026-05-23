@@ -30,7 +30,19 @@
   }
 }
 
-/* ── 1280px ── */
+/* ── 1280px-1599px (between desktop sizes) ── */
+@media (min-width: 1281px) and (max-width: 1599px) {
+  :root {
+    --enc-bottom: clamp(36%, 40%, 44%);
+    --enc-right: clamp(18%, 22%, 26%);
+    --bubble-w: clamp(190px, 20cqw, 350px);
+    --bubble-h: clamp(115px, 12cqh, 205px);
+    --villager-w: clamp(75px, 10cqw, 160px);
+    --bridge-w: clamp(300px, 52cqw, 700px);
+  }
+}
+
+/* ── 1280px and below ── */
 @media (max-width: 1280px) {
   :root {
     --enc-bottom: clamp(36%, 42%, 48%);
