@@ -567,3 +567,50 @@ function resizeViewport() {
 // Attach event listener and run on load
 window.addEventListener("resize", resizeViewport);
 resizeViewport();
+
+// SECURITY LAYER
+const secureGameEnvironment = () => {
+    // 1. The Anti-Right-Click Curse
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // 2. The Shortcut Shatterer
+    document.addEventListener('keydown', (e) => {
+        const forbiddenKeys = ['F12'];
+        const isCommand = e.ctrlKey || e.metaKey;
+        const isShift = e.shiftKey;
+
+        if (
+            forbiddenKeys.includes(e.key) ||
+            (isCommand && isShift && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) ||
+            (isCommand && (e.key === 'U' || e.key === 'u'))
+        ) {
+            e.preventDefault();
+            console.warn("Nice try, Drac doesn't like voyeurs.");
+            return false;
+        }
+    });
+
+    // 3. The "Labyrinth Light" (Simple Debugger Check)
+    if (typeof console !== "undefined") {
+        setInterval(() => {
+            const start = performance.now();
+            debugger;
+            const end = performance.now();
+            if (end - start > 100) {
+                // Potential debugger open, but don't crash the CPU
+            }
+        }, 2000);
+    }
+
+    // 4. The Asset Shield (Prevent Dragging)
+    document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    });
+
+    // 5. Text Selection Block (Optional but helpful for asset protection)
+    document.addEventListener('selectstart', (e) => e.preventDefault());
+};
+
+secureGameEnvironment();
