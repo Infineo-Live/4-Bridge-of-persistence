@@ -345,7 +345,7 @@ function createBrick(slotIndex) {
     // Place real (hidden) brick in slot immediately
     const bridgeBrick = document.createElement("div");
     bridgeBrick.classList.add("brick");
-    bridgeBrick.innerText = encounters[slotIndex].value;
+    bridgeBrick.style.backgroundImage = 'url("assets/b-' + encounters[slotIndex].value.toLowerCase() + '.webp")';
     bridgeBrick.style.opacity = "0";
     slot.appendChild(bridgeBrick);
 
@@ -380,7 +380,7 @@ function createBrick(slotIndex) {
     // Fallback: place without animation
     const bridgeBrick = document.createElement("div");
     bridgeBrick.classList.add("brick");
-    bridgeBrick.innerText = encounters[slotIndex].value;
+    bridgeBrick.style.backgroundImage = 'url("assets/b-' + encounters[slotIndex].value.toLowerCase() + '.webp")';
     slot.appendChild(bridgeBrick);
   }
 }
@@ -391,7 +391,7 @@ function renderBrickTray() {
   encounters.forEach((enc, i) => {
     const brick = document.createElement("div");
     brick.classList.add("tray-brick");
-    brick.innerText = enc.value;
+    brick.style.backgroundImage = 'url("assets/b-' + enc.value.toLowerCase() + '.webp")';
     brick.dataset.index = i;
     brickTray.appendChild(brick);
   });

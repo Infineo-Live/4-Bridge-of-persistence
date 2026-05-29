@@ -58,31 +58,30 @@
   cursor: pointer;
   outline: none;
   display: block;
-  width: 10cqw;
+  width: 12cqw;
   max-width: 220px;
   margin-top: 3.5cqh;
   animation: startPulse 2s infinite ease-in-out;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   z-index: 10;
+  transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1), max-width 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.welcome-start-btn:hover {
+  width: 13cqw;
+  max-width: 238px;
+}
+
+.welcome-start-btn:active {
+  width: 11.5cqw;
+  max-width: 211px;
 }
 
 .welcome-start-btn img {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
-}
-
-.welcome-start-btn:hover img {
-  transform: scale(1.08);
-  filter: drop-shadow(0 10px 24px rgba(255, 140, 0, 0.55)) brightness(1.06);
-}
-
-.welcome-start-btn:active img {
-  transform: scale(0.96);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) brightness(0.94);
 }
 
 @keyframes startPulse {
