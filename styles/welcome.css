@@ -30,7 +30,7 @@
   max-width: 54cqw;
 }
 
-.welcome-content img {
+.welcome-content .welcome-title {
   width: 47.9cqw;
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .6));
   animation: titleFloat 3s ease-in-out infinite;
@@ -44,5 +44,48 @@
 
   50% {
     transform: translateY(-8px);
+  }
+}
+
+/* New Start Button with Image */
+.welcome-start-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  width: 16.5cqw;
+  max-width: 280px;
+  animation: startPulse 2s infinite ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  z-index: 10;
+}
+
+.welcome-start-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+}
+
+.welcome-start-btn:hover img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 10px 24px rgba(255, 140, 0, 0.55)) brightness(1.06);
+}
+
+.welcome-start-btn:active img {
+  transform: scale(0.96);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) brightness(0.94);
+}
+
+@keyframes startPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
   }
 }

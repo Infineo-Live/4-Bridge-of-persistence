@@ -32,7 +32,7 @@ const speechBubble = document.getElementById("speech-bubble");
 // GAME DATA 
 const encounters = [
   {
-    villager: "assets/Characters/oldman.png",
+    villager: "assets/Characters/oldman.webp",
     comment: "You'll never\n make it!",
     choices: ["😢 I quit.", "😡 Shut up!", "💪 I'll try!"],
     correct: 2,
@@ -40,7 +40,7 @@ const encounters = [
     color: "#3498db"
   },
   {
-    villager: "assets/Characters/boy-with-stick.png",
+    villager: "assets/Characters/boy-with-stick.webp",
     comment: "It's too hard\n for you!",
     choices: ["🌟 I can do hard things!", "😭 You're right.", "😠 I hate this!"],
     correct: 0,
@@ -48,7 +48,7 @@ const encounters = [
     color: "#2ecc71"
   },
   {
-    villager: "assets/Characters/man-with-spade.png",
+    villager: "assets/Characters/man-with-spade.webp",
     comment: "The game is impossible,\n you’ll fail.",
     choices: ["😔 I give up.", "😡 You'll fail too!", "🌈 Failing helps me learn!"],
     correct: 2,
@@ -56,7 +56,7 @@ const encounters = [
     color: "#f39c12"
   },
   {
-    villager: "assets/Characters/lady-with-pot.png",
+    villager: "assets/Characters/lady-with-pot.webp",
     comment: "Nobody believes \nin you!",
     choices: ["💛 I’ll find a way.", "😭 I can’t do it.", "😠 I’ll ruin it for everyone!"],
     correct: 0,
@@ -64,7 +64,7 @@ const encounters = [
     color: "#e91e63"
   },
   {
-    villager: "assets/Characters/lady.png",
+    villager: "assets/Characters/lady.webp",
     comment: "You're so slow!",
     choices: ["😞 I'll stop then.", "😡 You're mean!", "🐢 Slow and steady wins!"],
     correct: 2,
@@ -72,7 +72,7 @@ const encounters = [
     color: "#9b59b6"
   },
   {
-    villager: "assets/Characters/girl.png",
+    villager: "assets/Characters/girl.webp",
     comment: "You'll fall and \nlook silly!",
     choices: ["😢 I'm too scared.", "😠 You're sillier!", "🌟 Brave people fall too!"],
     correct: 2,
@@ -80,7 +80,7 @@ const encounters = [
     color: "#1abc9c"
   },
   {
-    villager: "assets/Characters/little-boy.png",
+    villager: "assets/Characters/little-boy.webp",
     comment: "You'll mess up at \nthe end!",
     choices: ["🏆 I won't stop now!", "😭 What if I do?", "😡 Stop watching!"],
     correct: 0,
