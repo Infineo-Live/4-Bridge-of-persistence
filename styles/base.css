@@ -51,6 +51,20 @@
   --bridge-w: 40.6cqw;
   --bridge-h: 8.3cqh;
   --slot-h: 9.25cqh;
+
+  /* ── Slot Guides Toggle ── 
+     To turn ON slot guides:
+       --slot-border: 2px dashed rgba(255, 240, 200, .45);
+       --slot-background: rgba(20, 10, 0, .55);
+       --slot-backdrop-filter: blur(2px);
+     To turn OFF slot guides:
+       --slot-border: none;
+       --slot-background: transparent;
+       --slot-backdrop-filter: none;
+  */
+  --slot-border: none;
+  --slot-background: transparent;
+  --slot-backdrop-filter: none;
 }
 
 /* ─────────────────────────────────────────

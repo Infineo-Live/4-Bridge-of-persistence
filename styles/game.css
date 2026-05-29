@@ -351,9 +351,9 @@
   flex: 1;
   height: var(--slot-h);
   border-radius: 8px;
-  border: 2px dashed rgba(255, 240, 200, .45);
-  background: rgba(20, 10, 0, .55);
-  backdrop-filter: blur(2px);
+  border: var(--slot-border);
+  background: var(--slot-background);
+  backdrop-filter: var(--slot-backdrop-filter);
   opacity: 1;
   position: relative;
   overflow: visible;
