@@ -31,13 +31,13 @@
 
   /* ── Ground / bridge / character anchors ──
      Base units expressed in cqw and cqh relative to the container */
-  --ground-bottom: 38cqh;
+  --ground-bottom: 34cqh;
   --bridge-bottom: 30cqh;
   --char-bottom: 10.2cqh;
   --house-bottom: 4.6cqh;
 
   /* ── Encounter-area coordinates ── */
-  --enc-bottom: 36.5cqh;
+  --enc-bottom: 37cqh;
   --enc-right: 17.5cqw;
 
   /* villager */
