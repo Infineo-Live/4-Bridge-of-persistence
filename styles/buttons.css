@@ -42,11 +42,17 @@
 .option-btn {
   position: relative;
   overflow: hidden;
-  min-width: 11.5cqw;
-  min-height: 5.5cqh;
-  padding: 1.1cqh 1.25cqw;
-  font-size: 1.05cqw;
-  border-radius: var(--radius-btn);
+  width: 14.5cqw;
+  height: 5.75cqw;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.2cqw;
+  font-size: 0.9cqw;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+  border-radius: 0;
   border: none;
   font-family: var(--font-display);
   font-weight: 800;
@@ -56,29 +62,13 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  background: linear-gradient(160deg, #ffcf6b, #ff8c00);
-  box-shadow:
-    0 6px 0 #b85c00,
-    0 8px 18px rgba(0, 0, 0, .38),
-    inset 0 2px 0 rgba(255, 255, 255, .30),
-    0 0 18px rgba(255, 185, 90, .18);
+  background: url('../assets/text-container.webp') center / contain no-repeat;
+  box-shadow: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
   transition:
     transform .2s cubic-bezier(.34, 1.56, .64, 1),
     box-shadow .2s ease,
     filter .2s ease;
-}
-
-.option-btn::before {
-  content: "";
-  position: absolute;
-  top: -80%;
-  left: -60%;
-  width: 45%;
-  height: 260%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
-  transform: rotate(18deg);
-  transition: left .55s ease;
-  pointer-events: none;
 }
 
 .option-btn::after {
@@ -99,17 +89,9 @@
 }
 
 .option-btn:hover {
-  transform: translateY(-5px) scale(1.04);
-  filter: brightness(1.08);
-  box-shadow:
-    0 8px 0 #995000,
-    0 14px 28px rgba(0, 0, 0, .42),
-    inset 0 2px 0 rgba(255, 255, 255, .34),
-    0 0 28px rgba(255, 190, 80, .38);
-}
-
-.option-btn:hover::before {
-  left: 130%;
+  transform: scale(1.08);
+  filter: drop-shadow(0 10px 24px rgba(255, 140, 0, 0.55)) brightness(1.06);
+  box-shadow: none;
 }
 
 .option-btn:hover::after {
@@ -117,31 +99,12 @@
 }
 
 .option-btn:active {
-  transform: translateY(3px) scale(.97);
-  box-shadow:
-    0 2px 0 #b85c00,
-    0 4px 10px rgba(0, 0, 0, .28),
-    inset 0 3px 6px rgba(0, 0, 0, .18);
-  filter: brightness(.95);
+  transform: scale(0.96);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) brightness(0.94);
+  box-shadow: none;
 }
 
-.option-btn.negative {
-  background: linear-gradient(160deg, #ff7070, #c0392b);
-  box-shadow:
-    0 6px 0 #7b1010,
-    0 8px 18px rgba(0, 0, 0, .38),
-    inset 0 2px 0 rgba(255, 255, 255, .22),
-    0 0 18px rgba(255, 80, 60, .18);
-}
 
-.option-btn.positive {
-  background: linear-gradient(160deg, #6ee87a, #1e8f3c);
-  box-shadow:
-    0 6px 0 #145c26,
-    0 8px 18px rgba(0, 0, 0, .38),
-    inset 0 2px 0 rgba(255, 255, 255, .22),
-    0 0 18px rgba(60, 200, 90, .18);
-}
 
 .option-btn:disabled {
   opacity: 0.4;
@@ -207,4 +170,39 @@
   object-fit: contain;
   background: transparent;
   filter: drop-shadow(0 10px 25px rgba(0, 0, 0, .35));
+}
+
+/* Continue/Play button with image inside popup */
+.game-continue-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  width: 10cqw;
+  max-width: 220px;
+  margin-top: -3.5cqh;
+  animation: startPulse 2s infinite ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  z-index: 10;
+}
+
+.game-continue-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+}
+
+.game-continue-btn:hover img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 10px 24px rgba(255, 140, 0, 0.55)) brightness(1.06);
+}
+
+.game-continue-btn:active img {
+  transform: scale(0.96);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) brightness(0.94);
 }

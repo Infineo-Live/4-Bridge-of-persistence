@@ -1,5 +1,5 @@
 // SCREEN REFERENCES 
-const welcomeScreen  = document.getElementById("welcome-screen");
+const welcomeScreen = document.getElementById("welcome-screen");
 const gameScreen = document.getElementById("game-screen");
 const successScreen = document.getElementById("success-screen");
 
@@ -42,7 +42,7 @@ const encounters = [
   {
     villager: "assets/Characters/boy-with-stick.webp",
     comment: "It's too hard\n for you!",
-    choices: ["🌟 I can do hard things!", "😭 You're right.", "😠 I hate this!"],
+    choices: ["🌟 I do hard things.!", "😭 You're right.", "😠 I hate this!"],
     correct: 0,
     value: "Patience",
     color: "#2ecc71"
@@ -50,7 +50,7 @@ const encounters = [
   {
     villager: "assets/Characters/man-with-spade.webp",
     comment: "The game is impossible,\n you’ll fail.",
-    choices: ["😔 I give up.", "😡 You'll fail too!", "🌈 Failing helps me learn!"],
+    choices: ["😔 I give up.", "😡 You'll fail too!", "🌈 I learn from failure!"],
     correct: 2,
     value: "Smile",
     color: "#f39c12"
@@ -116,7 +116,7 @@ startBtn.addEventListener("click", () => {
 
 //  CLOSE POPUP & BEGIN 
 playBtn.addEventListener("click", () => {
-   playSound(clickSound, 0.5);
+  playSound(clickSound, 0.5);
   gsap.to(popup, {
     scale: 0.88, opacity: 0, duration: 0.28, ease: "back.in(1.4)",
     onComplete: () => {
@@ -131,7 +131,7 @@ playBtn.addEventListener("click", () => {
       updateProgress();
 
       bgMusic.volume = 0.35;
-      bgMusic.play().catch(() => {});
+      bgMusic.play().catch(() => { });
 
       gsap.fromTo("#game-content",
         { opacity: 0, y: 16 },
@@ -197,9 +197,8 @@ function correctChoice(choiceIdx) {
   playSound(correctSound, 0.7);
   const btns = [choice1Btn, choice2Btn, choice3Btn];
 
-  // Flash correct btn green
+  // Flash correct btn scale
   gsap.to(btns[choiceIdx], {
-    background: "linear-gradient(160deg,#56d364,#2ea043)",
     scale: 1.06, duration: 0.18, yoyo: true, repeat: 1
   });
 
@@ -248,7 +247,6 @@ function wrongChoice(choiceIdx) {
   const btns = [choice1Btn, choice2Btn, choice3Btn];
 
   gsap.to(btns[choiceIdx], {
-    background: "linear-gradient(160deg,#f85149,#b91c1c)",
     scale: 0.94, duration: 0.12, yoyo: true, repeat: 1
   });
 
@@ -289,8 +287,8 @@ function moveCharacter(slotIndex) {
   const slots = bridge.querySelectorAll(".brick-slot");
   const slot = slots[slotIndex];
   if (!slot) return;
-  const slotRect  = slot.getBoundingClientRect();
-  const charRect  = character.getBoundingClientRect();
+  const slotRect = slot.getBoundingClientRect();
+  const charRect = character.getBoundingClientRect();
   // Center character over the slot, corrected for viewport scale
   const scale = getViewportScale();
   const targetX = ((slotRect.left + slotRect.width / 2) - (charRect.left + charRect.width / 2)) / scale;
@@ -301,7 +299,7 @@ function moveCharacter(slotIndex) {
     x: `+=${targetX}`,
     duration: 0.55,
     ease: "power2.out",
-    onStart:    () => bounceTween.play(),
+    onStart: () => bounceTween.play(),
     onComplete: () => {
       bounceTween.kill();
       gsap.set(character, { y: 0 });
@@ -327,20 +325,20 @@ function createBrick(slotIndex) {
     const viewport = document.getElementById("game-viewport");
     const vpRect = viewport.getBoundingClientRect();
     const scale = getViewportScale();
-    
+
     const trayRect = trayBrick.getBoundingClientRect();
     const flyingBrick = trayBrick.cloneNode(true);
     flyingBrick.classList.remove("used");
     viewport.appendChild(flyingBrick);
-    
+
     Object.assign(flyingBrick.style, {
-      position:  "absolute",
-      left:      `${(trayRect.left - vpRect.left) / scale}px`,
-      top:       `${(trayRect.top - vpRect.top) / scale}px`,
-      width:     `${trayRect.width / scale}px`,
-      height:    `${trayRect.height / scale}px`,
-      zIndex:    "9998",
-      margin:    "0",
+      position: "absolute",
+      left: `${(trayRect.left - vpRect.left) / scale}px`,
+      top: `${(trayRect.top - vpRect.top) / scale}px`,
+      width: `${trayRect.width / scale}px`,
+      height: `${trayRect.height / scale}px`,
+      zIndex: "9998",
+      margin: "0",
       pointerEvents: "none"
     });
 
@@ -359,8 +357,8 @@ function createBrick(slotIndex) {
 
     gsap.to(flyingBrick, {
       left: (bridgeRect.left - vpRect.left) / scale,
-      top:  (bridgeRect.top - vpRect.top) / scale,
-      width:  bridgeRect.width / scale,
+      top: (bridgeRect.top - vpRect.top) / scale,
+      width: bridgeRect.width / scale,
       height: bridgeRect.height / scale,
       duration: 0.65,
       ease: "power3.out",
@@ -465,12 +463,12 @@ function sadBounce() {
 function walkCharacter() {
   disableChoices(true);
 
-  gsap.to(".brick-tray",     { opacity: 0, y: 10, duration: 0.3 });
+  gsap.to(".brick-tray", { opacity: 0, y: 10, duration: 0.3 });
   gsap.to(".action-buttons", { opacity: 0, y: 10, duration: 0.3 });
 
-  const houseImg   = document.querySelector(".house img");
-  const charRect   = character.getBoundingClientRect();
-  const houseRect  = houseImg.getBoundingClientRect();
+  const houseImg = document.querySelector(".house img");
+  const charRect = character.getBoundingClientRect();
+  const houseRect = houseImg.getBoundingClientRect();
   const scale = getViewportScale();
   const moveDistance = (houseRect.left - charRect.left - charRect.width * 0.6) / scale;
 
@@ -485,7 +483,7 @@ function walkCharacter() {
     x: `+=${moveDistance}`,
     duration: 2.2,
     ease: "power1.inOut",
-    onStart:    () => bounceTween.play(),
+    onStart: () => bounceTween.play(),
     onComplete: () => {
       bounceTween.kill();
       gsap.set(character, { y: 0 });
@@ -520,13 +518,13 @@ function spawnFloatingWord(text, anchorEl) {
   const vpRect = viewport.getBoundingClientRect();
   const scale = getViewportScale();
   const rect = anchorEl.getBoundingClientRect();
-  
+
   const el = document.createElement("div");
   el.classList.add("floating-word");
   el.innerText = text;
   el.style.position = "absolute";
   el.style.left = `${(rect.left - vpRect.left + rect.width / 2) / scale - 60}px`;
-  el.style.top  = `${(rect.top - vpRect.top) / scale}px`;
+  el.style.top = `${(rect.top - vpRect.top) / scale}px`;
   el.style.color = "#fff";
   el.style.textShadow = "0 2px 8px rgba(255,180,0,0.7)";
   viewport.appendChild(el);
@@ -544,7 +542,7 @@ function playSound(sound, volume = 1) {
   sound.currentTime = 0;
   sound.volume = volume;
   sound.playbackRate = 0.95 + Math.random() * 0.1;
-  sound.play().catch(() => {});
+  sound.play().catch(() => { });
 }
 
 // Build enhanced progress UI as soon as DOM is ready

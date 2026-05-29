@@ -32,11 +32,14 @@
 
 .welcome-content .welcome-title {
   width: 47.9cqw;
+  position: relative;
+  top: 9cqh;
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, .6));
   animation: titleFloat 3s ease-in-out infinite;
 }
 
 @keyframes titleFloat {
+
   0%,
   100% {
     transform: translateY(0);
@@ -55,8 +58,9 @@
   cursor: pointer;
   outline: none;
   display: block;
-  width: 16.5cqw;
-  max-width: 280px;
+  width: 10cqw;
+  max-width: 220px;
+  margin-top: 3.5cqh;
   animation: startPulse 2s infinite ease-in-out;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -82,9 +86,12 @@
 }
 
 @keyframes startPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.035);
   }
